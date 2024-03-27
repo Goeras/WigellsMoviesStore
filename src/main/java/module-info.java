@@ -9,7 +9,7 @@ module org.dreamteam.wigellsmoviesstore {
 
     opens org.dreamteam.wigellsmoviesstore to javafx.fxml;
     exports org.dreamteam.wigellsmoviesstore;
-    exports Controllers;
-    opens Controllers to javafx.fxml;
+    exports org.dreamteam.wigellsmoviesstore.Controllers;
+    opens org.dreamteam.wigellsmoviesstore.Controllers to javafx.fxml;
 
 }
