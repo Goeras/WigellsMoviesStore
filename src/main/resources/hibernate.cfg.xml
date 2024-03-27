@@ -18,19 +18,19 @@
         <property name = "hbm2ddl.auto">update</property>
 
         <!--Vilka tabeller som ska mappas mot motsvarande tabell i databasen-->
-        <mapping class="org.dreamteam.wigellsmovies.Entitys.Actor"/>
-        <mapping class="org.dreamteam.wigellsmovies.Entitys.City"/>
-        <mapping class="org.dreamteam.wigellsmovies.Entitys.Country"/>
-        <mapping class="org.dreamteam.wigellsmovies.Entitys.Address"/>
-        <mapping class="org.dreamteam.wigellsmovies.Entitys.Customer"/>
-        <mapping class="org.dreamteam.wigellsmovies.Entitys.Film"/>
-        <mapping class="org.dreamteam.wigellsmovies.Entitys.Store"/>
-        <mapping class="org.dreamteam.wigellsmovies.Entitys.Inventory"/>
-        <mapping class="org.dreamteam.wigellsmovies.Entitys.Language"/>
-        <mapping class="org.dreamteam.wigellsmovies.Entitys.Rental"/>
-        <mapping class="org.dreamteam.wigellsmovies.Entitys.Category"/>
-        <mapping class="org.dreamteam.wigellsmovies.Entitys.Payment"/>
-        <mapping class="org.dreamteam.wigellsmovies.Entitys.Staff"/>
+        <mapping class="org.dreamteam.wigellsmoviesstore.Entitys.Actor"/>
+        <mapping class="org.dreamteam.wigellsmoviesstore.Entitys.City"/>
+        <mapping class="org.dreamteam.wigellsmoviesstore.Entitys.Country"/>
+        <mapping class="org.dreamteam.wigellsmoviesstore.Entitys.Address"/>
+        <mapping class="org.dreamteam.wigellsmoviesstore.Entitys.Customer"/>
+        <mapping class="org.dreamteam.wigellsmoviesstore.Entitys.Film"/>
+        <mapping class="org.dreamteam.wigellsmoviesstore.Entitys.Store"/>
+        <mapping class="org.dreamteam.wigellsmoviesstore.Entitys.Inventory"/>
+        <mapping class="org.dreamteam.wigellsmoviesstore.Entitys.Language"/>
+        <mapping class="org.dreamteam.wigellsmoviesstore.Entitys.Rental"/>
+        <mapping class="org.dreamteam.wigellsmoviesstore.Entitys.Category"/>
+        <mapping class="org.dreamteam.wigellsmoviesstore.Entitys.Payment"/>
+        <mapping class="org.dreamteam.wigellsmoviesstore.Entitys.Staff"/>
 
 
     </session-factory>

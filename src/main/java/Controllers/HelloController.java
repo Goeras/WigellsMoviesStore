@@ -1,4 +1,4 @@
-package org.dreamteam.wigellsmoviesstore;
+package Controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
