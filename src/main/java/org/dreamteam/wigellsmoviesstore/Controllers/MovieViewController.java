@@ -1,17 +1,37 @@
 package org.dreamteam.wigellsmoviesstore.Controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+import org.dreamteam.wigellsmoviesstore.Entitys.Film;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MovieViewController {
     @FXML
     private Label topLabel;
-    ViewManager viewManager;
+    @FXML
+    private TableView<Film> movieTable;
+    @FXML
+    private TableColumn<Film, Integer> idColumn;
+    @FXML
+    private TableColumn<Film, String> titleColumn;
+    @FXML
+    private TableColumn<Film, String> categoryColumn;
+    private ViewManager viewManager;
+    private ObservableList<Film> filmList;
 
     public void initialize(){
+
+        List<Film> list = new ArrayList<>();
+        filmList = FXCollections.observableList(list);
+        setTable(filmList);
         viewManager = new ViewManager();
     }
     @FXML
@@ -23,5 +43,18 @@ public class MovieViewController {
     }
     public void onUpdateFilmButton() throws IOException {
         viewManager.showUpdateFilmView((Stage) topLabel.getScene().getWindow());
+    }
+    public void setTable(ObservableList<Film> observableList){
+        //idColumn.setCellValueFactory(cellData -> cellData.getValue().getId());
+        //titleColumn.setCellValueFactory(cellData -> cellData.getValue().getTitle())
+        // categoryColumn.setCellValueFactory(cellData -> cellData.getValue().getCategory().getName());
+        movieTable.setItems(observableList);
+    }
+    public void onSearchAllButton(){
+        System.out.println("Hämta alla filmer via dao-manager");
+        movieTable.setItems(filmList);
+    }
+    public void onSearchByIdButton(){
+        System.out.println("Hämta korrekt film från DAO och lägg in den info vi vill ha");
     }
 }
