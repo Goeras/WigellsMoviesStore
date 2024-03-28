@@ -112,24 +112,6 @@ public class Address {
         this.lastUpdate = lastUpdate;
     }
 
-    public List<Customer> getCustomers() { return customers;}
-
-    public void setCustomers(List<Customer> customers) {this.customers = customers;}
-    public List<Store> getStores() {
-        return stores;
-    }
-
-    public void setStores(List<Store> stores) {
-        this.stores = stores;
-    }
-
-    public List<Staff> getStaffs() {
-        return staffs;
-    }
-
-    public void setStaffs(List<Staff> staffs) {
-        this.staffs = staffs;
-    }
 
     public City getCity() {
         return city;

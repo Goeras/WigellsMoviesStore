@@ -43,6 +43,8 @@ public class Customer {
     @JoinColumn(name = "address_id")
     private Address adress;
 
+
+
     @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "store_id")
     private Store store;
@@ -120,5 +122,21 @@ public class Customer {
 
     public void setLast_update(Timestamp last_update) {
         this.last_update = last_update;
+    }
+
+    public Address getAdress() {
+        return adress;
+    }
+
+    public void setAdress(Address adress) {
+        this.adress = adress;
+    }
+
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
     }
 }
