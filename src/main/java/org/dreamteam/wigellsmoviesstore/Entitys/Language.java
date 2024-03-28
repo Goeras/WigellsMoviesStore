@@ -3,6 +3,7 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.sql.Timestamp;
+import java.util.List;
 
 //TODO obs, i denna klass vill Geppe använda Set, istället för list. Så kan bli strul pga det
 /*
