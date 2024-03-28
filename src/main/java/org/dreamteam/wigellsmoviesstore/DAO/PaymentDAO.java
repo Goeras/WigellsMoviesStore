@@ -1,7 +1,6 @@
 
 package org.dreamteam.wigellsmoviesstore.DAO;
-
-import org.dreamteam.wigellsmoviesstore.Entitys.Language;
+import org.dreamteam.wigellsmoviesstore.Entitys.Payment;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -9,19 +8,19 @@ import org.hibernate.query.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LanguageDAO {
+public class PaymentDAO {
     private SessionFactory sessionFactory;
 
-    public LanguageDAO(){
+    public PaymentDAO(){
         this.sessionFactory = DatabaseSessionFactory.getSessionFactory();
     }
 
-    public void createLanguage(Language language) {
+    public void createPayment(Payment payment) {
         Session session = sessionFactory.openSession();
 
         try {
             session.beginTransaction();
-            session.persist(language);
+            session.persist(payment);
             session.getTransaction().commit();
         } catch (Exception e) {
             if (session.getTransaction() != null && session.getTransaction().isActive()) {
@@ -33,13 +32,13 @@ public class LanguageDAO {
         }
     }
 
-    public Language readLanguage(int id){
+    public Payment readPayment(int id){
         Session session = sessionFactory.openSession();
 
-        Language language = new Language();
+        Payment payment = new Payment();
         try{
             session.beginTransaction();
-            language = session.get(Language.class, id);
+            payment = session.get(Payment.class, id);
             session.getTransaction().commit();
         }
         catch (Exception e){
@@ -49,15 +48,15 @@ public class LanguageDAO {
             }
         }
         session.close();
-        return language;
+        return payment;
     }
-    public List<Language> readAllLanguages(){
+    public List<Payment> readAllPayments(){
         Session session = sessionFactory.openSession();
-        List<Language> languages = new ArrayList<>();
+        List<Payment> payments = new ArrayList<>();
         try{
             session.beginTransaction();
-            Query<Language> query = session.createQuery("FROM Language ", Language.class);
-            languages = query.list();
+            Query<Payment> query = session.createQuery("FROM Payment ", Payment.class);
+            payments = query.list();
             session.getTransaction().commit();
         }
         catch (Exception e){
@@ -67,14 +66,14 @@ public class LanguageDAO {
             session.close();
         }
 
-        return languages;
+        return payments;
     }
 
-    public void updateLanguage(Language language){
+    public void updatePayment(Payment payment){
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         try {
-            session.saveOrUpdate(language);
+            session.saveOrUpdate(payment);
             session.getTransaction().commit();
         }
         catch (Exception e){
@@ -85,12 +84,12 @@ public class LanguageDAO {
         }
     }
 
-    public void deleteAddress(Language language){
+    public void deletePayment(Payment payment){
         Session session = sessionFactory.openSession();
 
         try {
             session.beginTransaction();
-            session.remove(language);
+            session.remove(payment);
             session.getTransaction().commit();
         }
         catch (Exception e){
