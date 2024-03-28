@@ -3,6 +3,7 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "category")

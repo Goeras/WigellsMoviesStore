@@ -1,10 +1,7 @@
 package org.dreamteam.wigellsmoviesstore.Entitys;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.UpdateTimestamp;
-
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,11 +59,11 @@ public class Actor {
         this.lastName = lastName;
     }
 
-    public LocalDateTime getLastUpdate() {
+    public Timestamp getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(LocalDateTime lastUpdate) {
+    public void setLastUpdate(Timestamp lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
