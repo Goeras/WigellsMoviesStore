@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.dreamteam.wigellsmoviesstore.Controllers.MovieViewController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <VBox>
+        <HBox>
+            <Label fx:id="topLabel" text="Sök filmer" style="-fx-font-size: 20"/>
+        </HBox>
+        <HBox spacing="10">
+            <TextField/>
+            <Button text="OK"/>
+        </HBox>
+        <HBox spacing="10">
+            <Button text="Ny film" onAction="#onNewFilmButton"/>
+            <Button text="Uppdatera film" onAction="#onUpdateFilmButton"/>
+            <Button text="Tillbaka" onAction="#onBackButtonClick"/>
+        </HBox>
+    </VBox>
+</StackPane>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.dreamteam.wigellsmoviesstore.Controllers.CustomerViewController"
+            prefHeight="400.0" prefWidth="600.0">
+<VBox alignment="CENTER">
+    <Label fx:id="topLabel" text="Kundsidan"/>
+    <Button text="Ny kund" onAction="#onNewCustomerClick"/>
+    <Button text="Ändra kund" onAction="#onUpdateCustomerClick"/>
+    <Button text="Tillbaka" onAction="#onBackButtonClick"/>
+</VBox>
+</StackPane>

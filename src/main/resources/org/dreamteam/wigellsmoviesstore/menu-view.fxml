@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.dreamteam.wigellsmoviesstore.Controllers.MenuViewController"
+            prefHeight="400.0" prefWidth="600.0">
+<VBox alignment="CENTER" spacing="10">
+    <Label fx:id="menuLabel" text="Meny"/>
+    <Button text="back" onAction="#onBackButton"/>
+    <Button text="Sök kunder" onAction="#onCustomerButtonClick"/>
+    <Button text="Sök filmer" onAction="#onMovieButtonClick"/>
+    <Button text="Hyr ut film" onAction="#onPosButtonClick"/>
+    <Button text="Personal" onAction="#onStaffButtonClick"/>
+</VBox>
+</StackPane>
