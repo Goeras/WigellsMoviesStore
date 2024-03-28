@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 
+//TODO kan behöva se över "fetchtype" osv? Behöver dom ha cascade eller något dylikt?
+
 @Entity
 @Table(name = "payment")
 public class Payment {
