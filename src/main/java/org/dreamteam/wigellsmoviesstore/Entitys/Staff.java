@@ -15,10 +15,10 @@ public class Staff {
     @Column(name = "staff_id")
     private int id;
 
-    @Column(name = "first_name, length 45")
+    @Column(name = "first_name", length = 45)
     private String firstName;
 
-    @Column(name = "last_name, length 45")
+    @Column(name = "last_name", length = 45)
     private String lastName;
 
     @Column(name = "address_id")
