@@ -10,12 +10,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.dreamteam.wigellsmoviesstore.Entitys.Film;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.dreamteam.wigellsmoviesstore.IoConverter.stringToSimpleIntegerProperty;
-import static org.dreamteam.wigellsmoviesstore.IoConverter.stringToSimpleStringProperty;
+import static org.dreamteam.wigellsmoviesstore.IoConverter.*;
 
 public class MovieViewController {
     @FXML
@@ -39,6 +39,7 @@ public class MovieViewController {
         filmList = FXCollections.observableList(list);
         setTable(filmList);
         viewManager = new ViewManager();
+
     }
     @FXML
     private void onBackButtonClick() throws IOException {
@@ -51,10 +52,11 @@ public class MovieViewController {
         viewManager.showUpdateFilmView((Stage) topLabel.getScene().getWindow());
     }
     public void setTable(ObservableList<Film> observableList){
-        idColumn.setCellValueFactory(cellData -> stringToSimpleIntegerProperty((cellData.getValue().getFilmId()));
-        titleColumn.setCellValueFactory(cellData -> cellData.getValue().getTitle());
-        categoryColumn.setCellValueFactory(cellData -> cellData.getValue().getCategory().getName());
-        languageColumn.setCellValueFactory(cellData -> cellData.getValue().getLanguage());
+
+        idColumn.setCellValueFactory(cellData -> integerToSimpleIntegerProperty(cellData.getValue().getFilmId()));
+        titleColumn.setCellValueFactory(cellData -> stringToSimpleStringProperty(cellData.getValue().getTitle()));
+        //categoryColumn.setCellValueFactory(cellData -> cellData.getValue().getCategory().getName());
+        languageColumn.setCellValueFactory(cellData -> stringToSimpleStringProperty(cellData.getValue().getLanguage().getName()));
         movieTable.setItems(observableList);
     }
     public void onSearchAllButton(){
