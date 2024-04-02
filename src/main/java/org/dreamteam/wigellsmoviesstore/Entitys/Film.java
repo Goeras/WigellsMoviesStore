@@ -3,8 +3,10 @@ package org.dreamteam.wigellsmoviesstore.Entitys;
 import jakarta.persistence.*;
 import org.dreamteam.wigellsmoviesstore.Enums.FilmRating;
 
+
 import java.sql.Timestamp;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "film")
@@ -48,19 +50,24 @@ public class Film {
     @Column(name = "rating")
     private FilmRating rating;
 
-    @ElementCollection
-    @CollectionTable(name = "film_special_features", joinColumns = @JoinColumn(name = "film_id"))
-    @Column(name = "special_feature")
-    private Set<String> specialFeatures;
+
+    @Column(name = "special_features")
+    private String specialFeatures;
 
     @Column(name = "last_update")
     private Timestamp lastUpdate;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "film_category",
+            joinColumns = {@JoinColumn(name = "category_id")},
+            inverseJoinColumns = {@JoinColumn(name = "film_id")})
+    private List<Category> categoryList = new ArrayList<>();
 
     public Film() {
 
     }
 
-    public Film(int filmId, String title, String description, int releaseYear, Language language, Language originalLanguage, int rentalDuration, double rentalRate, int length, double replacementCost, FilmRating rating, Set<String> specialFeatures, Timestamp lastUpdate) {
+    public Film(int filmId, String title, String description, int releaseYear, Language language, Language originalLanguage, int rentalDuration, double rentalRate, int length, double replacementCost, FilmRating rating, String specialFeatures, Timestamp lastUpdate, List<Category> categoryList) {
         this.filmId = filmId;
         this.title = title;
         this.description = description;
@@ -74,6 +81,7 @@ public class Film {
         this.rating = rating;
         this.specialFeatures = specialFeatures;
         this.lastUpdate = lastUpdate;
+        this.categoryList = categoryList;
     }
 
     public int getFilmId() {
@@ -104,7 +112,7 @@ public class Film {
         return releaseYear;
     }
 
-    public void setReleaseYear(Short releaseYear) {
+    public void setReleaseYear(int releaseYear) {
         this.releaseYear = releaseYear;
     }
 
@@ -117,11 +125,11 @@ public class Film {
     }
 
 
-    public Language getOriginalLanguageId() {
+    public Language getOriginalLanguage() {
         return originalLanguage;
     }
 
-    public void setOriginalLanguageId(Language originalLanguage) {
+    public void setOriginalLanguage(Language originalLanguage) {
         this.originalLanguage = originalLanguage;
     }
 
@@ -130,7 +138,7 @@ public class Film {
         return rentalDuration;
     }
 
-    public void setRentalDuration(Short rentalDuration) {
+    public void setRentalDuration(int rentalDuration) {
         this.rentalDuration = rentalDuration;
     }
 
@@ -146,7 +154,7 @@ public class Film {
         return length;
     }
 
-    public void setLength(Short length) {
+    public void setLength(int length) {
         this.length = length;
     }
 
@@ -166,11 +174,11 @@ public class Film {
         this.rating = rating;
     }
 
-    public Set<String> getSpecialFeatures() {
+    public String getSpecialFeatures() {
         return specialFeatures;
     }
 
-    public void setSpecialFeatures(Set<String> specialFeatures) {
+    public void setSpecialFeatures(String specialFeatures) {
         this.specialFeatures = specialFeatures;
     }
 
@@ -180,5 +188,13 @@ public class Film {
 
     public void setLastUpdate(Timestamp lastUpdate) {
         this.lastUpdate = lastUpdate;
+    }
+
+    public List<Category> getCategoryList() {
+        return categoryList;
+    }
+
+    public void setCategoryList(List<Category> categoryList) {
+        this.categoryList = categoryList;
     }
 }
