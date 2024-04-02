@@ -12,7 +12,7 @@ public class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @Column(name = "staff_id")
+    @Column(name = "staff_id", columnDefinition = "TINYINT UNSIGNED")
     private int id;
 
     @Column(name = "first_name", length = 45)

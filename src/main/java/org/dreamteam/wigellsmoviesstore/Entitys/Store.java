@@ -10,11 +10,11 @@ public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @Column(name = "store_id")
+    @Column(name = "store_id", columnDefinition = "TINYINT UNSIGNED")
     private int id;
 
     @Column(name = "manager_staff_id")
-    private int managerStaffId;
+    private byte managerStaffId;
 
     /*@Column(name = "address_id")
     private int address_id;*/
@@ -41,11 +41,11 @@ public class Store {
         this.id = id;
     }
 
-    public int getManagerStaffId() {
+    public byte getManagerStaffId() {
         return managerStaffId;
     }
 
-    public void setManagerStaffId(int managerStaffId) {
+    public void setManagerStaffId(byte managerStaffId) {
         this.managerStaffId = managerStaffId;
     }
 

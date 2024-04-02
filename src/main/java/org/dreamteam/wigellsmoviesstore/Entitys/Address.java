@@ -15,7 +15,7 @@ public class Address {
     @Id
 
     @GeneratedValue
-    @Column(name = "address_id")
+    @Column(name = "address_id", columnDefinition = "SMALLINT UNSIGNED")
     private int id;
 
     @Column(name = "address", length = 50)

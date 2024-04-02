@@ -11,7 +11,6 @@ import java.util.Date;
 public class Rental {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "rental_id")
     private int rentalId;
 
@@ -20,10 +19,10 @@ public class Rental {
     private Date rentalDate;
 
     @Column(name = "inventory_id")
-    private int inventory_id;
+    private short inventory_id;
 
     @Column(name = "customer_id")
-    private int customer_id;
+    private short customer_id;
 
     /*@Column(name = "film_id")
     private int film_id;*/
@@ -33,7 +32,7 @@ public class Rental {
     private Date returnDate;
 
     @Column(name = "staff_id")
-    private int staff_id;
+    private short staff_id;
 
     @Column(name = "last_update")
     private Timestamp lastUpdate;
@@ -65,19 +64,19 @@ public class Rental {
         this.rentalDate = rentalDate;
     }
 
-    public int getInventory_id() {
+    public short getInventory_id() {
         return inventory_id;
     }
 
-    public void setInventory_id(int inventory_id) {
+    public void setInventory_id(short inventory_id) {
         this.inventory_id = inventory_id;
     }
 
-    public int getCustomer_id() {
+    public short getCustomer_id() {
         return customer_id;
     }
 
-    public void setCustomer_id(int customer_id) {
+    public void setCustomer_id(short customer_id) {
         this.customer_id = customer_id;
     }
 
@@ -97,11 +96,11 @@ public class Rental {
         this.returnDate = returnDate;
     }
 
-    public int getStaff_id() {
+    public short getStaff_id() {
         return staff_id;
     }
 
-    public void setStaff_id(int staff_id) {
+    public void setStaff_id(short staff_id) {
         this.staff_id = staff_id;
     }
 

@@ -12,7 +12,7 @@ public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "payment_id")
+    @Column(name = "payment_id", columnDefinition = "SMALLINT")
     private int id;
 
     @ManyToOne(fetch = FetchType.EAGER)
