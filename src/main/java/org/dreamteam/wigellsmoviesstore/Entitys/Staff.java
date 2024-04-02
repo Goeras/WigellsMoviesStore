@@ -21,8 +21,8 @@ public class Staff {
     @Column(name = "last_name", length = 45)
     private String lastName;
 
-    @Column(name = "address_id")
-    private int addressId;
+    /*@Column(name = "address_id")
+    private int addressId;*/
 
     @Lob
     @Column(name = "picture")
@@ -31,8 +31,8 @@ public class Staff {
     @Column(name = "email", length = 50)
     private String email;
 
-    @Column(name = "store_id")
-    private int storeId;
+    /*@Column(name = "store_id")
+    private int storeId;*/
 
     @Column(name = "active")
     private int active;
@@ -81,13 +81,13 @@ public class Staff {
         this.lastName = lastName;
     }
 
-    public int getAddressId() {
+    /*public int getAddressId() {
         return addressId;
     }
 
     public void setAddressId(int addressId) {
         this.addressId = addressId;
-    }
+    }*/
 
     public Blob getPicture() {
         return picture;
@@ -105,13 +105,13 @@ public class Staff {
         this.email = email;
     }
 
-    public int getStoreId() {
+    /*public int getStoreId() {
         return storeId;
     }
 
     public void setStoreId(int storeId) {
         this.storeId = storeId;
-    }
+    }*/
 
     public int getActive() {
         return active;

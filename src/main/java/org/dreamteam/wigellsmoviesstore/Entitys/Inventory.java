@@ -13,11 +13,11 @@ public class Inventory {
     @Column(name = "inventory_id")
     private int id;
 
-    @Column(name = "film_id")
-    private int film_id;
+    /*@Column(name = "film_id")
+    private int film_id;*/
 
-    @Column(name = "store_id")
-    private int store_id;
+    /*@Column(name = "store_id")
+    private int store_id;*/
 
     @Column(name = "last_update")
     private Timestamp lastUpdate;
@@ -41,21 +41,21 @@ public class Inventory {
         this.id = id;
     }
 
-    public int getFilm_id() {
+    /*public int getFilm_id() {
         return film_id;
     }
 
     public void setFilm_id(int film_id) {
         this.film_id = film_id;
-    }
+    }*/
 
-    public int getStore_id() {
+    /*public int getStore_id() {
         return store_id;
     }
 
     public void setStore_id(int store_id) {
         this.store_id = store_id;
-    }
+    }*/
 
     public Timestamp getLastUpdate() {
         return lastUpdate;

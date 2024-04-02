@@ -16,8 +16,8 @@ public class Store {
     @Column(name = "manager_staff_id")
     private int managerStaffId;
 
-    @Column(name = "address_id")
-    private int address_id;
+    /*@Column(name = "address_id")
+    private int address_id;*/
 
     @Column(name = "last_update")
     private Timestamp lastUpdate;
@@ -49,13 +49,13 @@ public class Store {
         this.managerStaffId = managerStaffId;
     }
 
-    public int getAddress_id() {
+   /* public int getAddress_id() {
         return address_id;
     }
 
     public void setAddress_id(int address_id) {
         this.address_id = address_id;
-    }
+    }*/
 
     public Timestamp getLastUpdate() {
         return lastUpdate;

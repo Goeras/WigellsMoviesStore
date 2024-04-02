@@ -14,8 +14,8 @@ public class Customer {
     @Column(name = "customer_id")
     private int id;
 
-    @Column(name = "store_id")
-    private int store_id;
+    /*@Column(name = "store_id")
+    private int store_id;*/
 
     @Column(name = "first_name", length = 45)
     private String firstName;
@@ -26,8 +26,8 @@ public class Customer {
     @Column(name = "email", length = 50)
     private String email;
 
-    @Column(name = "address_id")
-    private int addressId;
+    /*@Column(name = "address_id")
+    private int addressId;*/
 
     @Column(name = "active")
     private int active;
@@ -60,13 +60,13 @@ public class Customer {
         this.id = id;
     }
 
-    public int getStore_id() {
+    /*public int getStore_id() {
         return store_id;
     }
 
     public void setStore_id(int store_id) {
         this.store_id = store_id;
-    }
+    }*/
 
     public String getFirstName() {
         return firstName;
@@ -92,13 +92,13 @@ public class Customer {
         this.email = email;
     }
 
-    public int getAddressId() {
+   /* public int getAddressId() {
         return addressId;
     }
 
     public void setAddressId(int addressId) {
         this.addressId = addressId;
-    }
+    }*/
 
     public int getActive() {
         return active;

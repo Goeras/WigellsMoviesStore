@@ -25,8 +25,8 @@ public class Rental {
     @Column(name = "customer_id")
     private int customer_id;
 
-    @Column(name = "film_id")
-    private int film_id;
+    /*@Column(name = "film_id")
+    private int film_id;*/
 
     @Column(name = "return_date")
     @Temporal(TemporalType.TIMESTAMP)
@@ -81,13 +81,13 @@ public class Rental {
         this.customer_id = customer_id;
     }
 
-    public int getFilm_id() {
+    /*public int getFilm_id() {
         return film_id;
     }
 
     public void setFilm_id(int film_id) {
         this.film_id = film_id;
-    }
+    }*/
 
     public Date getReturnDate() {
         return returnDate;
