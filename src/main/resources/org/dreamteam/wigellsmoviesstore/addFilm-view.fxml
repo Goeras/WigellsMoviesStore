@@ -37,7 +37,7 @@
             <CheckBox fx:id="commentaries" text="Kommentarer"/>
         </VBox>
     </HBox>
-    <Button fx:id="saveButton" text="Spara film" onAction="#onSaveButtonClick"/>
+    <Button text="Spara film" onAction="#onSaveButtonClick"/>
     <Button text="Tillbaka" onAction="#onBackButtonClick"/>
 </VBox>
 </StackPane>

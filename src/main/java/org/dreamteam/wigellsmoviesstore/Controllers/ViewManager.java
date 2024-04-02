@@ -74,7 +74,7 @@ public class ViewManager {
     }
     public void showUpdateFilmView(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("updateFilm-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 400, 600);
         stage.setTitle("Uppdatera film!");
         stage.setScene(scene);
         stage.show();

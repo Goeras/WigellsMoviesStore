@@ -36,6 +36,10 @@
             </VBox>
         </HBox>
         <Button text="Se alla" onAction="#onSearchAllButton"/>
+        <HBox fx:id="filterBox" alignment="CENTER" spacing="10">
+            <TextField fx:id="filterField" promptText="Namnfilter"/>
+            <Button text="Filtrera på namn"/>
+        </HBox>
             <TableView fx:id="movieTable" maxWidth="300" maxHeight="200">
                 <columns>
                     <TableColumn fx:id="idColumn" text="Id"/>
