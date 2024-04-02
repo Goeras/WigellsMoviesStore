@@ -25,7 +25,7 @@ public class Language {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "language_id", length = 20)
+    @Column(name = "language_id", columnDefinition = "TINYINT UNSIGNED")
     private int id;
 
     @Column(name = "name")

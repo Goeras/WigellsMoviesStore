@@ -11,7 +11,7 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @Column(name = "customer_id")
+    @Column(name = "customer_id", columnDefinition = "SMALLINT UNSIGNED")
     private int id;
 
     /*@Column(name = "store_id")
@@ -42,8 +42,6 @@ public class Customer {
     @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "address_id")
     private Address adress;
-
-
 
     @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "store_id")

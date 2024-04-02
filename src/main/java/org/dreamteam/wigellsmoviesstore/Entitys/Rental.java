@@ -11,7 +11,6 @@ import java.util.Date;
 public class Rental {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "rental_id")
     private int rentalId;
 
@@ -19,10 +18,10 @@ public class Rental {
     @Temporal(TemporalType.TIMESTAMP)
     private Date rentalDate;
 
-    @Column(name = "inventory_id")
+    @Column(name = "inventory_id", columnDefinition = "MEDIUMINT UNSIGNED")
     private int inventory_id;
 
-    @Column(name = "customer_id")
+    @Column(name = "customer_id", columnDefinition = "SMALLINT UNSIGNED")
     private int customer_id;
 
     /*@Column(name = "film_id")
@@ -32,7 +31,7 @@ public class Rental {
     @Temporal(TemporalType.TIMESTAMP)
     private Date returnDate;
 
-    @Column(name = "staff_id")
+    @Column(name = "staff_id", columnDefinition = "TINYINT UNSIGNED")
     private int staff_id;
 
     @Column(name = "last_update")
