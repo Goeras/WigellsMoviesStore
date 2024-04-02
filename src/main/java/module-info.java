@@ -7,6 +7,7 @@ module org.dreamteam.wigellsmoviesstore {
     requires javafx.graphics;
 
 
+    opens org.dreamteam.wigellsmoviesstore.Entitys;
     opens org.dreamteam.wigellsmoviesstore to javafx.fxml;
     exports org.dreamteam.wigellsmoviesstore;
     exports org.dreamteam.wigellsmoviesstore.Controllers;
