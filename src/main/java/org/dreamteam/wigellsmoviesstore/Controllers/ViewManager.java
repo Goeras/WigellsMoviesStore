@@ -67,7 +67,7 @@ public class ViewManager {
     }
     public void showNewFilmView(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("addFilm-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 400, 600);
         stage.setTitle("Ny film!");
         stage.setScene(scene);
         stage.show();
