@@ -10,7 +10,7 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.dreamteam.wigellsmoviesstore.Controllers.MovieViewController"
             prefHeight="400.0" prefWidth="600.0">
-    <VBox alignment="CENTER" minWidth="400">
+    <VBox alignment="CENTER" minWidth="400" spacing="10">
 
         <HBox alignment="CENTER">
             <Label fx:id="topLabel" text="Sök filmer" style="-fx-font-size: 20"/>
@@ -18,14 +18,23 @@
         <HBox spacing="10" alignment="CENTER">
             <TextField fx:id="searchField" promptText="Artikelnummer"/>
             <Button text="OK" onAction="#onSearchByIdButton"/>
+            <Button text="Ny film" onAction="#onNewFilmButton"/>
         </HBox>
-        <VBox maxWidth="300">
-            <Label text="Titel"/>
-            <Label text="Hyrkostnad"/>
-            <Label text="Ersättningskostnad"/>
-            <Label text="Kategori"/>
-            <Button text="Uppdatera film" onAction="#onUpdateFilmButton"/>
-        </VBox>
+        <HBox maxWidth="300" spacing="10">
+            <VBox>
+                <Label text="Titel"/>
+                <Label text="Hyrkostnad"/>
+                <Label text="Ersättningskostnad"/>
+                <Label text="Kategori"/>
+                <Button text="Uppdatera information" onAction="#onUpdateFilmButton"/>
+            </VBox>
+            <VBox>
+                <Label text="Skådespelare"/>
+                <Label text="Release"/>
+                <Label text="Språk"/>
+                <Label text="Längd"/>
+            </VBox>
+        </HBox>
         <Button text="Se alla" onAction="#onSearchAllButton"/>
             <TableView fx:id="movieTable" maxWidth="300" maxHeight="200">
                 <columns>
@@ -36,7 +45,6 @@
                 </columns>
             </TableView>
         <HBox spacing="10" alignment="CENTER">
-        <Button text="Ny film" onAction="#onNewFilmButton"/>
         <Button text="Tillbaka" onAction="#onBackButtonClick"/>
         </HBox>
     </VBox>

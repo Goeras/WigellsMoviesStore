@@ -27,11 +27,12 @@ public class IoConverter {
         return new SimpleStringProperty(input);
     }
 
-    public static SimpleIntegerProperty stringToSimpleIntegerProperty(int input){
+    public static SimpleIntegerProperty integerToSimpleIntegerProperty(int input){
         return new SimpleIntegerProperty(input);
     }
 
-    public static SimpleDoubleProperty stringToSimpleDoubleProperty(double input){
+    public static SimpleDoubleProperty doubleToSimpleDoubleProperty(double input){
         return new SimpleDoubleProperty(input);
     }
+
 }
