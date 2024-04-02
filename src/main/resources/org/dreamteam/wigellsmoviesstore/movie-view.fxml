@@ -32,6 +32,7 @@
                     <TableColumn fx:id="idColumn" text="Id"/>
                     <TableColumn fx:id="titleColumn" text="Titel"/>
                     <TableColumn fx:id="categoryColumn" text="Kategori"/>
+                    <TableColumn fx:id="languageColumn" text="Språk"/>
                 </columns>
             </TableView>
         <HBox spacing="10" alignment="CENTER">
