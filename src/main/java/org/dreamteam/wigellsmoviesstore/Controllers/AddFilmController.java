@@ -25,7 +25,7 @@ public class AddFilmController {
     @FXML
     private ChoiceBox<Language> originalLanguage;
     @FXML
-    private ChoiceBox<FilmRating> ratingBox;
+    private ChoiceBox<String> ratingBox;
     @FXML
     private TextField title;
     @FXML
@@ -56,8 +56,11 @@ public class AddFilmController {
         ObservableList<Language> languageList1 = FXCollections.observableList(languageList);
         languageBox.setItems(languageList1);
         originalLanguage.setItems(languageList1);
-        List<FilmRating> filmRatings = new ArrayList<>();
-        ObservableList<FilmRating> filmratingList = FXCollections.observableList(filmRatings);
+        List<String> ratingList = new ArrayList<>();
+        ratingList.add("PG_13");
+        ratingList.add("PG");
+        ratingList.add("R");
+        ObservableList<String> filmratingList = FXCollections.observableList(ratingList);
         ratingBox.setItems(filmratingList);
     }
     @FXML
