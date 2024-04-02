@@ -23,21 +23,21 @@
             <TextField fx:id="releaseYear" promptText="Utgivningsår"/>
             <ChoiceBox fx:id="languageBox" value="Språk" minWidth="120"/>
             <ChoiceBox fx:id="originalLanguage" value="OriginalSpråk" minWidth="120"/>
-            <ChoiceBox fx:id="rating" value="Rating" minWidth="120"/>
+            <ChoiceBox fx:id="ratingBox" value="Rating" minWidth="120"/>
             <ChoiceBox fx:id="category" value="Kategori" minWidth="120"/>
         </VBox>
         <VBox spacing="2">
             <TextField fx:id="rentalDuration" promptText="Hyrperiod dagar"/>
             <TextField fx:id="length" promptText="Längd (minuter)"/>
-            <TextField fx:id="replacement_cost" promptText="Ersättningskostnad"/>
-            <TextField fx:id="rental_rate" promptText="Hyrkostnad"/>
+            <TextField fx:id="replacementCost" promptText="Ersättningskostnad"/>
+            <TextField fx:id="rentalRate" promptText="Hyrkostnad"/>
             <CheckBox fx:id="behindTheScenes" text="Behind The Scenes"/>
             <CheckBox fx:id="deletedScenes" text="Deleted Scenes"/>
             <CheckBox fx:id="trailers" text="Trailers"/>
-            <CheckBox fx:id="Commentaries" text="Kommentarer"/>
+            <CheckBox fx:id="commentaries" text="Kommentarer"/>
         </VBox>
     </HBox>
-    <Button fx:id="saveButton" text="Spara film"/>
+    <Button fx:id="saveButton" text="Spara film" onAction="#onSaveButtonClick"/>
     <Button text="Tillbaka" onAction="#onBackButtonClick"/>
 </VBox>
 </StackPane>
