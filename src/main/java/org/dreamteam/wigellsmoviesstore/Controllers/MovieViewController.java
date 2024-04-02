@@ -53,7 +53,7 @@ public class MovieViewController {
     }
     public void setTable(ObservableList<Film> observableList){
 
-        idColumn.setCellValueFactory(cellData -> integerToSimpleIntegerProperty(cellData.getValue().getFilmId()));
+        idColumn.setCellValueFactory(cellData -> integerToSimpleIntegerProperty(cellData.getValue().getFilmId()).asObject());
         titleColumn.setCellValueFactory(cellData -> stringToSimpleStringProperty(cellData.getValue().getTitle()));
         //categoryColumn.setCellValueFactory(cellData -> cellData.getValue().getCategory().getName());
         languageColumn.setCellValueFactory(cellData -> stringToSimpleStringProperty(cellData.getValue().getLanguage().getName()));
