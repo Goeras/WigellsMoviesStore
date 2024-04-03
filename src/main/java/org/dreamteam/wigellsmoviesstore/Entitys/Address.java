@@ -14,7 +14,7 @@ public class Address {
 
     @Id
 
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "address_id", columnDefinition = "SMALLINT UNSIGNED")
     private int id;
 
