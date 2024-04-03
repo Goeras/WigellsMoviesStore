@@ -9,6 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
 import org.dreamteam.wigellsmoviesstore.Entitys.Category;
 import org.dreamteam.wigellsmoviesstore.Entitys.Film;
 
@@ -62,7 +63,12 @@ public class MovieViewController {
         movieTable.setItems(observableList);
     }
     public void onSearchAllButton(){
-        System.out.println("Hämta alla filmer via dao-manager");
+        filmList.clear();
+
+        DAOmanager daoManager = new DAOmanager();
+        List<Film> filmsFromDatabase = daoManager.getFilmDAO().getAllFilms();
+        filmList.addAll(filmsFromDatabase);
+
         movieTable.setItems(filmList);
     }
     public void onSearchByIdButton(){
