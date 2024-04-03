@@ -27,9 +27,6 @@ public class Store {
     @OneToMany(mappedBy = "store", fetch = FetchType.EAGER)
     private List<Staff> staffList;
 
-    @OneToMany(mappedBy = "store")
-    private List<Rental> rentals;
-
     public Store() {
     }
 
@@ -79,11 +76,4 @@ public class Store {
         this.staffList = staffList;
     }
 
-    public List<Rental> getRentals() {
-        return rentals;
-    }
-
-    public void setRentals(List<Rental> rentals) {
-        this.rentals = rentals;
-    }
 }

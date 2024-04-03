@@ -65,8 +65,6 @@ public class Film {
             inverseJoinColumns = {@JoinColumn(name = "actor_id")})
     private List<Actor> actors = new ArrayList<>();
 
-    @OneToMany(mappedBy = "film")
-    private List<Rental> rentals;
 
     @OneToMany(mappedBy = "film")
     private List<Inventory> inventories;
@@ -212,14 +210,6 @@ public class Film {
 
     public void setActors(List<Actor> actors) {
         this.actors = actors;
-    }
-
-    public List<Rental> getRentals() {
-        return rentals;
-    }
-
-    public void setRentals(List<Rental> rentals) {
-        this.rentals = rentals;
     }
 
     public List<Inventory> getInventories() {

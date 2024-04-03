@@ -28,7 +28,7 @@ public class Language {
     @Column(name = "language_id", columnDefinition = "TINYINT UNSIGNED")
     private int id;
 
-    @Column(name = "name", length = 20)
+    @Column(name = "name", columnDefinition = "CHAR(20)")
     private String name;
 
     @Column(name = "last_update")
