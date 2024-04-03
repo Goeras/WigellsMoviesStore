@@ -6,12 +6,42 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<?import javafx.geometry.Insets?>
+<StackPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.dreamteam.wigellsmoviesstore.Controllers.AddStaffController"
-            prefHeight="400.0" prefWidth="600.0">
-<VBox>
-    <Label fx:id="topLabel" text="Ny personal"/>
-    <Button text="Tillbaka" onAction="#onBackButtonClick"/>
+            prefHeight="400.0" prefWidth="600.0"
+            stylesheets="@styles/styles.css">
+<VBox styleClass="background">
+    <padding>
+        <Insets topRightBottomLeft="10"/>
+    </padding>
+    <VBox styleClass="body">
+        <HBox styleClass="header">
+            <Label fx:id="topLabel" text="Ny personal"/>
+        </HBox>
+        <HBox styleClass="boxes">
+            <VBox>
+                <TextField promptText="Förnamn"/>
+                <TextField promptText="Efternamn"/>
+                <TextField promptText="Email"/>
+                <TextField promptText="Telefonnummer"/>
+                <TextField promptText="Användarnamn"/>
+                <PasswordField promptText="Lösen"/>
+                <PasswordField promptText="Upprepa Lösen"/>
+            </VBox>
+            <VBox>
+                <TextField promptText="Adress"/>
+                <TextField promptText="Adress"/>
+                <TextField promptText="Distrikt"/>
+                <TextField promptText="Postkod"/>
+                <TextField promptText="Stad"/>
+                <TextField promptText="Land"/>
+                <Button text="Ladda upp bild"/>
+            </VBox>
+        </HBox>
+
+        <Button text="Tillbaka" onAction="#onBackButtonClick"/>
+    </VBox>
 </VBox>
-</AnchorPane>
+</StackPane>
