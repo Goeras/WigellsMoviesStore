@@ -40,5 +40,8 @@ public class PosManager {
         String[] info = {Integer.toString(customer.getId()), (customer.getFirstName() + " " + customer.getLastName())};
         return info;
     }
+    public void newRental(){
+        System.out.println("Ny rental - vänta på entiteterna");
+    }
 
 }

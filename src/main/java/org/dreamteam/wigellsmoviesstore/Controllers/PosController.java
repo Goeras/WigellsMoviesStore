@@ -109,6 +109,7 @@ public class PosController {
     private void addToCart(){
         posManager.addFilmToCart(cart, filmIdField.getText());
         tableView.setItems(cart);
+        filmIdField.setText("");
     }
     @FXML
     private void searchFilm(){
@@ -118,5 +119,16 @@ public class PosController {
             filmIdLabel.setText(info[0]);
             filmTitleLabel.setText(info[1]);
         }
+    }
+    @FXML
+    private void onConfirmRentalButtons(){
+        posManager.newRental();
+
+        cart.removeAll(cart);
+        tableView.setItems(cart);
+        chosenCustName.setText("");
+        chosenCustId.setText("");
+        filmIdLabel.setText("");
+        filmTitleLabel.setText("");
     }
 }

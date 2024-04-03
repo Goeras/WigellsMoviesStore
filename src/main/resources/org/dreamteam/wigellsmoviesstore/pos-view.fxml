@@ -52,8 +52,8 @@
                 </columns>
             </TableView>
             <HBox styleClass="hboxes">
-                <Button text="Swish" styleClass="swishButton"/>
-                <Button text="Kort" styleClass="cardButton"/>
+                <Button text="Swish" styleClass="swishButton" onAction="#onConfirmRentalButtons"/>
+                <Button text="Kort" styleClass="cardButton" onAction="#onConfirmRentalButtons"/>
             </HBox>
             <HBox styleClass="hboxes">
                 <Button text="Tillbaka" onAction="#onBackButtonClick"/>
