@@ -16,8 +16,6 @@ import java.util.List;
 public class PosManager {
     DAOmanager daOmanager = new DAOmanager();
 
-    public void createNewRental(){
-    }
     public String calculateReturnDate(int duration){
         LocalDate localDate = LocalDate.now();
         LocalDate returnDate = LocalDate.now();
@@ -35,6 +33,15 @@ public class PosManager {
         Film film = daOmanager.getFilmDAO().getFilmById(filmId);
         String[] strings = {Integer.toString(film.getFilmId()), film.getTitle()};
         return strings;
+    }
+    public String[] searchCustomer(String id){
+        int custId = IoConverter.stringToInteger(id);
+        Customer customer = daOmanager.getCustomerDAO().readCustomer(custId);
+        String[] info = {Integer.toString(customer.getId()), (customer.getFirstName() + " " + customer.getLastName())};
+        return info;
+    }
+    public void newRental(){
+        System.out.println("Ny rental - vänta på entiteterna");
     }
 
 }

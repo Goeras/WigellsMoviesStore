@@ -18,17 +18,17 @@
             </HBox>
             <VBox styleClass="boxes">
                 <HBox fx:id="searchCustomer">
-                    <TextField promptText="Kundnummer"/>
-                    <Button text="Sök"/>
+                    <TextField fx:id="searchCustomerField" promptText="Kundnummer"/>
+                    <Button text="Sök" onAction="#onSearchCustomerButton"/>
                 </HBox>
                 <HBox fx:id="confirmCustomer">
-                    <Label text="Kund id"/>
-                    <Label text="Kundnamn"/>
+                    <Label fx:id="confirmCustId" text="Kund id"/>
+                    <Label fx:id="confirmCustName" text="Kundnamn"/>
                     <Button text="OK" onAction="#onConfirmCustomerButton"/>
                 </HBox>
                 <HBox fx:id="chosenCustInfo" visible="false" managed="false">
-                    <Label text="Kund id"/>
-                    <Label text="Kundnamn"/>
+                    <Label fx:id="chosenCustId" text="Kund id"/>
+                    <Label fx:id="chosenCustName" text="Kundnamn"/>
                     <Button text="Byt kund" onAction="#onChangeCustomerButton"/>
                 </HBox>
             </VBox>
@@ -52,8 +52,8 @@
                 </columns>
             </TableView>
             <HBox styleClass="hboxes">
-                <Button text="Swish" styleClass="swishButton"/>
-                <Button text="Kort" styleClass="cardButton"/>
+                <Button text="Swish" styleClass="swishButton" onAction="#onConfirmRentalButtons"/>
+                <Button text="Kort" styleClass="cardButton" onAction="#onConfirmRentalButtons"/>
             </HBox>
             <HBox styleClass="hboxes">
                 <Button text="Tillbaka" onAction="#onBackButtonClick"/>
