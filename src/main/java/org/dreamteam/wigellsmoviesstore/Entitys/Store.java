@@ -84,4 +84,9 @@ public class Store {
     public void setStaff(Staff staff) {
         this.staff = staff;
     }
+
+    @Override
+    public String toString() {
+        return "Store " + this.id;
+    }
 }
