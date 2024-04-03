@@ -1,9 +1,6 @@
 package org.dreamteam.wigellsmoviesstore.Entitys;
 
 import jakarta.persistence.*;
-import org.dreamteam.wigellsmoviesstore.Enums.FilmRating;
-
-
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,9 +43,8 @@ public class Film {
     @Column(name = "replacement_cost")
     private double replacementCost;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "rating")
-    private FilmRating rating;
+    private String rating;
 
 
     @Column(name = "special_features")
@@ -67,7 +63,7 @@ public class Film {
 
     }
 
-    public Film(int filmId, String title, String description, int releaseYear, Language language, Language originalLanguage, int rentalDuration, double rentalRate, int length, double replacementCost, FilmRating rating, String specialFeatures, Timestamp lastUpdate, List<Category> categoryList) {
+    public Film(int filmId, String title, String description, int releaseYear, Language language, Language originalLanguage, int rentalDuration, double rentalRate, int length, double replacementCost, String rating, String specialFeatures, Timestamp lastUpdate, List<Category> categoryList) {
         this.filmId = filmId;
         this.title = title;
         this.description = description;
@@ -166,11 +162,11 @@ public class Film {
         this.replacementCost = replacementCost;
     }
 
-    public FilmRating getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(FilmRating rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 
