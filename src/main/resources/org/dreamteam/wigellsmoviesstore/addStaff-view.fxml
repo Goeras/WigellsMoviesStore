@@ -7,11 +7,12 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
 <StackPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.dreamteam.wigellsmoviesstore.Controllers.AddStaffController"
-            prefHeight="400.0" prefWidth="600.0"
-            stylesheets="@styles/styles.css">
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="org.dreamteam.wigellsmoviesstore.Controllers.AddStaffController"
+           prefHeight="400.0" prefWidth="600.0"
+           stylesheets="@styles/styles.css">
 <VBox styleClass="background">
     <padding>
         <Insets topRightBottomLeft="10"/>
@@ -29,6 +30,7 @@
                 <TextField promptText="Användarnamn"/>
                 <PasswordField promptText="Lösen"/>
                 <PasswordField promptText="Upprepa Lösen"/>
+                <Button text="Spara medarbetare"/>
             </VBox>
             <VBox>
                 <TextField promptText="Adress"/>
@@ -37,7 +39,8 @@
                 <TextField promptText="Postkod"/>
                 <TextField promptText="Stad"/>
                 <TextField promptText="Land"/>
-                <Button text="Ladda upp bild"/>
+                <Button text="Ladda upp bild" onAction="#onUploadPictureButtonClick"/>
+                <ImageView fx:id="imageView"/>
             </VBox>
         </HBox>
 
