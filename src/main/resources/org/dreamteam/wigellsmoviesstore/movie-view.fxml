@@ -24,17 +24,17 @@
         </HBox>
         <HBox>
             <VBox>
-                <Label text="Titel"/>
-                <Label text="Hyrkostnad"/>
-                <Label text="Ersättningskostnad"/>
-                <Label text="Kategori"/>
+                <Label fx:id="titleLabel" text="Titel"/>
+                <Label fx:id="rentalCostLabel" text="Hyrkostnad"/>
+                <Label fx:id="replacementFeeLabel" text="Ersättningskostnad"/>
+                <Label fx:id="categoryLabel" text="Kategori"/>
                 <Button text="Uppdatera information" onAction="#onUpdateFilmButton"/>
             </VBox>
             <VBox>
-                <Label text="Skådespelare"/>
-                <Label text="Release"/>
-                <Label text="Språk"/>
-                <Label text="Längd"/>
+                <Label fx:id="actorLabel" text="Skådespelare"/>
+                <Label fx:id="releaseLabel" text="Release"/>
+                <Label fx:id="languageLabel" text="Språk"/>
+                <Label fx:id="lengthLabel" text="Längd"/>
             </VBox>
         </HBox>
         </VBox>

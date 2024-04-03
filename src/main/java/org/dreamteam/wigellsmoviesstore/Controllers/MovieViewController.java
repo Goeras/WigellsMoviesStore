@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
 import org.dreamteam.wigellsmoviesstore.Entitys.Category;
 import org.dreamteam.wigellsmoviesstore.Entitys.Film;
+import org.dreamteam.wigellsmoviesstore.IoValidator;
+import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
 
 
 import java.io.IOException;
@@ -22,6 +24,24 @@ import java.util.List;
 import static org.dreamteam.wigellsmoviesstore.IoConverter.*;
 
 public class MovieViewController {
+    @FXML
+    private Label titleLabel;
+    @FXML
+    private Label rentalCostLabel;
+    @FXML
+    private Label replacementFeeLabel;
+    @FXML
+    private Label categoryLabel;
+    @FXML
+    private Label actorLabel;
+    @FXML
+    private Label releaseLabel;
+    @FXML
+    private Label languageLabel;
+    @FXML
+    private Label lengthLabel;
+    @FXML
+    private TextField searchField;
     @FXML
     private TextField filterField;
     @FXML
@@ -83,6 +103,24 @@ public class MovieViewController {
     movieTable.setItems(filteredList);
     }
     public void onSearchByIdButton(){
-        System.out.println("Hämta korrekt film från DAO och lägg in den info vi vill ha");
+        String inputText = searchField.getText();
+        if(IoValidator.validateInteger(inputText)){
+            int filmId = Integer.parseInt(inputText);
+
+            DAOmanager daoManager = new DAOmanager();
+            Film searchedFilm =daoManager.getFilmDAO().getFilmById(filmId);
+
+            if(searchedFilm != null){
+                titleLabel.setText(searchedFilm.getTitle());
+                rentalCostLabel.setText(String.valueOf(searchedFilm.getRentalRate()));
+                replacementFeeLabel.setText(String.valueOf(searchedFilm.getReplacementCost()));
+                categoryLabel.setText(searchedFilm.getCategoryList().toString());
+                actorLabel.setText(searchedFilm.getActors().toString());
+                releaseLabel.setText(String.valueOf(searchedFilm.getReleaseYear()));
+                languageLabel.setText(searchedFilm.getLanguage().getName());
+                lengthLabel.setText(String.valueOf(searchedFilm.getLength()));
+            }
+        }
+
     }
 }
