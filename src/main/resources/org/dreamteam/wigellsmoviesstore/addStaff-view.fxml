@@ -27,7 +27,6 @@
                 <TextField promptText="Efternamn"/>
                 <TextField promptText="Email"/>
                 <TextField promptText="Telefonnummer"/>
-                <TextField promptText="Användarnamn"/>
                 <PasswordField promptText="Lösen"/>
                 <PasswordField promptText="Upprepa Lösen"/>
                 <Button text="Spara medarbetare"/>
@@ -39,7 +38,7 @@
                 <TextField promptText="Postkod"/>
                 <TextField promptText="Stad"/>
                 <TextField promptText="Land"/>
-                <Button text="Ladda upp bild" onAction="#onUploadPictureButtonClick"/>
+                <Button text="Ladda upp ny bild" onAction="#onUploadPictureButtonClick"/>
                 <ImageView fx:id="imageView"/>
             </VBox>
         </HBox>

@@ -11,14 +11,14 @@ public class ViewManager {
 
     public void showStartView(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("start-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 400, 600);
         stage.setTitle("Start!");
         stage.setScene(scene);
         stage.show();
     }
     public void showMenuView(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("menu-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 400, 600);
         stage.setTitle("Meny!");
         stage.setScene(scene);
         stage.show();
@@ -39,7 +39,7 @@ public class ViewManager {
     }
     public void showPosView(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("pos-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 400, 600);
         stage.setTitle("Pos!");
         stage.setScene(scene);
         stage.show();
@@ -53,14 +53,14 @@ public class ViewManager {
     }
     public void showNewCustomerView(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("addCustomer-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 400, 600);
         stage.setTitle("Ny kund!");
         stage.setScene(scene);
         stage.show();
     }
     public void showUpdateCustomerView(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("updateCustomer-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 400, 600);
         stage.setTitle("Uppdatera kund!");
         stage.setScene(scene);
         stage.show();
@@ -88,7 +88,7 @@ public class ViewManager {
     }
     public void showUpdateStaffView(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("updateStaff-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 400, 600);
         stage.setTitle("Uppdatera medarbetare!");
         stage.setScene(scene);
         stage.show();
