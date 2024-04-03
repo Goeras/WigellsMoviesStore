@@ -9,9 +9,55 @@
 <StackPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.dreamteam.wigellsmoviesstore.Controllers.PosController"
-            prefHeight="400.0" prefWidth="600.0">
-    <VBox alignment="CENTER">
-        <Label fx:id="topLabel" text="Kassa"/>
-        <Button text="Tillbaka" onAction="#onBackButtonClick"/>
+            prefHeight="400.0" prefWidth="600.0"
+            stylesheets="@styles/styles.css">
+    <VBox styleClass="background">
+        <VBox styleClass="body">
+            <HBox styleClass="header">
+                <Label fx:id="topLabel" text="Kassa"/>
+            </HBox>
+            <VBox styleClass="boxes">
+                <HBox fx:id="searchCustomer">
+                    <TextField promptText="Kundnummer"/>
+                    <Button text="Sök"/>
+                </HBox>
+                <HBox fx:id="confirmCustomer">
+                    <Label text="Kund id"/>
+                    <Label text="Kundnamn"/>
+                    <Button text="OK" onAction="#onConfirmCustomerButton"/>
+                </HBox>
+                <HBox fx:id="chosenCustInfo" visible="false" managed="false">
+                    <Label text="Kund id"/>
+                    <Label text="Kundnamn"/>
+                    <Button text="Byt kund" onAction="#onChangeCustomerButton"/>
+                </HBox>
+            </VBox>
+            <VBox styleClass="boxes">
+                <HBox>
+                    <TextField promptText="FilmId"/>
+                    <Button text="Sök"/>
+                </HBox>
+                <HBox>
+                    <Label text="FilmId"/>
+                    <Label text="Filmtitel"/>
+                    <Button text="Lägg till"/>
+                </HBox>
+            </VBox>
+            <TableView>
+                <columns>
+                    <TableColumn text="FilmId"/>
+                    <TableColumn text="Titel"/>
+                    <TableColumn text="Pris"/>
+                    <TableColumn text="Returdatum"/>
+                </columns>
+            </TableView>
+            <HBox styleClass="hboxes">
+                <Button text="Swish" styleClass="swishButton"/>
+                <Button text="Kort" styleClass="cardButton"/>
+            </HBox>
+            <HBox styleClass="hboxes">
+                <Button text="Tillbaka" onAction="#onBackButtonClick"/>
+            </HBox>
+        </VBox>
     </VBox>
 </StackPane>
