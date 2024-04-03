@@ -13,8 +13,8 @@ public class Inventory {
     @Column(name = "inventory_id", columnDefinition = "MEDIUMINT UNSIGNED")
     private int id;
 
-    @OneToMany(mappedBy = "inventory")
-    private List<Rental> rentals;
+    @OneToOne(mappedBy = "inventory")
+    private Rental rental;
 
     @Column(name = "last_update")
     private Timestamp lastUpdate;
@@ -54,12 +54,12 @@ public class Inventory {
         this.store = store;
     }
 
-    public List<Rental> getRentals() {
-        return rentals;
+    public Rental getRental() {
+        return rental;
     }
 
-    public void setRentals(List<Rental> rentals) {
-        this.rentals = rentals;
+    public void setRental(Rental rental) {
+        this.rental = rental;
     }
 
     public Film getFilm() {

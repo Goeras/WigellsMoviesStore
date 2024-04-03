@@ -30,7 +30,7 @@ public class Staff {
     private String email;
 
     @Column(name = "active")
-    private int active;
+    private boolean active;
 
     @Column(name = "username", length = 16)
     private String userName;
@@ -98,11 +98,11 @@ public class Staff {
         this.email = email;
     }
 
-    public int getActive() {
+    public boolean getActive() {
         return active;
     }
 
-    public void setActive(int active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 

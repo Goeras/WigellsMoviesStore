@@ -34,8 +34,8 @@ public class StaffManager {
         return staff;
     }
 
-    public String isActiveStringFromInt(int number){
-        if(number == 0){
+    public String isActiveStringFromBoolean(Boolean bool){
+        if(!bool){
             return "Ej Aktiv";
         }
         else{

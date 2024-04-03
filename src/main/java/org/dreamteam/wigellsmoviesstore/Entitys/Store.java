@@ -10,12 +10,12 @@ import java.util.List;
 public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "store_id", columnDefinition = "TINYINT UNSIGNED")
     private int id;
 
-    @Column(name = "manager_staff_id")
-    private byte managerStaffId;
+    @OneToOne
+    @JoinColumn(name = "manager_staff_id")
+    private Staff manager;
 
     @Column(name = "last_update")
     private Timestamp lastUpdate;
@@ -41,12 +41,12 @@ public class Store {
         this.id = id;
     }
 
-    public byte getManagerStaffId() {
-        return managerStaffId;
+    public Staff getManager() {
+        return manager;
     }
 
-    public void setManagerStaffId(byte managerStaffId) {
-        this.managerStaffId = managerStaffId;
+    public void setManager(Staff managerStaffId) {
+        this.manager = managerStaffId;
     }
 
     public Timestamp getLastUpdate() {

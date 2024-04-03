@@ -119,7 +119,7 @@ public class StaffViewController {
         email.setText(staff.getEmail());
         username.setText(staff.getUserName());
         //String active = staffManager.
-        active.setText(staffManager.isActiveStringFromInt(staff.getActive()));
+        active.setText(staffManager.isActiveStringFromBoolean(staff.getActive()));
 
         Address address = staff.getAdress();
         address1.setText(address.getAddress());

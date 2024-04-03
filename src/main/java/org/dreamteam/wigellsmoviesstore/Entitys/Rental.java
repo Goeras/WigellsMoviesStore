@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -18,7 +19,7 @@ public class Rental {
     @Temporal(TemporalType.TIMESTAMP)
     private Date rentalDate;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "inventory_id")
     private Inventory inventory;
 
@@ -27,7 +28,6 @@ public class Rental {
     private Customer customer;
 
     @Column(name = "return_date")
-    @Temporal(TemporalType.TIMESTAMP)
     private Date returnDate;
 
     @ManyToOne
@@ -37,13 +37,8 @@ public class Rental {
     @Column(name = "last_update")
     private Timestamp lastUpdate;
 
-    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "store_id")
-    private Store store;
 
-    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "film_id")
-    private Film film;
+
 
     public Rental() {
     }
@@ -64,7 +59,6 @@ public class Rental {
         this.rentalDate = rentalDate;
     }
 
-
     public Date getReturnDate() {
         return returnDate;
     }
@@ -79,22 +73,6 @@ public class Rental {
 
     public void setLastUpdate(Timestamp lastUpdate) {
         this.lastUpdate = lastUpdate;
-    }
-
-    public Store getStore() {
-        return store;
-    }
-
-    public void setStore(Store store) {
-        this.store = store;
-    }
-
-    public Film getFilm() {
-        return film;
-    }
-
-    public void setFilm(Film film) {
-        this.film = film;
     }
 
     public Inventory getInventory() {
