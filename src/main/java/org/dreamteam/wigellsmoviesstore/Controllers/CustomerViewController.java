@@ -3,6 +3,7 @@ package org.dreamteam.wigellsmoviesstore.Controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
 
 import java.io.IOException;
 

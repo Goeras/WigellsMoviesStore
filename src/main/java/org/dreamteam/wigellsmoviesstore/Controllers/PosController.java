@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
 
 import java.io.IOException;
 
