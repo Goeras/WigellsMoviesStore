@@ -6,21 +6,23 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane xmlns="http://javafx.com/javafx"
+<StackPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.dreamteam.wigellsmoviesstore.Controllers.MovieViewController"
-            prefHeight="400.0" prefWidth="600.0">
-    <VBox alignment="CENTER" minWidth="400" spacing="10">
-
-        <HBox alignment="CENTER">
+            prefHeight="400.0" prefWidth="600.0"
+            stylesheets="@styles/styles.css">
+    <VBox styleClass="background">
+        <VBox styleClass="body">
+        <HBox styleClass="header">
             <Label fx:id="topLabel" text="Sök filmer" style="-fx-font-size: 20"/>
         </HBox>
-        <HBox spacing="10" alignment="CENTER">
+        <VBox styleClass="boxes">
+        <HBox styleClass="hboxes">
             <TextField fx:id="searchField" promptText="Artikelnummer"/>
             <Button text="OK" onAction="#onSearchByIdButton"/>
             <Button text="Ny film" onAction="#onNewFilmButton"/>
         </HBox>
-        <HBox maxWidth="300" spacing="10">
+        <HBox>
             <VBox>
                 <Label text="Titel"/>
                 <Label text="Hyrkostnad"/>
@@ -35,21 +37,26 @@
                 <Label text="Längd"/>
             </VBox>
         </HBox>
-        <Button text="Se alla" onAction="#onSearchAllButton"/>
-        <HBox fx:id="filterBox" alignment="CENTER" spacing="10">
-            <TextField fx:id="filterField" promptText="Namnfilter"/>
-            <Button text="Filtrera på namn"/>
-        </HBox>
-            <TableView fx:id="movieTable" maxWidth="300" maxHeight="200">
-                <columns>
-                    <TableColumn fx:id="idColumn" text="Id"/>
-                    <TableColumn fx:id="titleColumn" text="Titel"/>
-                    <TableColumn fx:id="categoryColumn" text="Kategori"/>
-                    <TableColumn fx:id="languageColumn" text="Språk"/>
-                </columns>
-            </TableView>
-        <HBox spacing="10" alignment="CENTER">
+        </VBox>
+            <VBox styleClass="boxes">
+                <Button text="Se alla" onAction="#onSearchAllButton"/>
+                <HBox fx:id="filterBox" alignment="CENTER" spacing="10">
+                    <TextField fx:id="filterField" promptText="Namnfilter"/>
+                    <Button text="Filtrera på namn"/>
+                </HBox>
+                <TableView fx:id="movieTable" maxWidth="300" maxHeight="200">
+                    <columns>
+                        <TableColumn fx:id="idColumn" text="Id"/>
+                        <TableColumn fx:id="titleColumn" text="Titel"/>
+                        <TableColumn fx:id="categoryColumn" text="Kategori"/>
+                        <TableColumn fx:id="languageColumn" text="Språk"/>
+                    </columns>
+                </TableView>
+            </VBox>
+
+        <HBox>
         <Button text="Tillbaka" onAction="#onBackButtonClick"/>
         </HBox>
+        </VBox>
     </VBox>
-</ScrollPane>
+</StackPane>
