@@ -17,9 +17,6 @@ public class Store {
     @Column(name = "manager_staff_id")
     private byte managerStaffId;
 
-    /*@Column(name = "address_id")
-    private int address_id;*/
-
     @Column(name = "last_update")
     private Timestamp lastUpdate;
 
@@ -27,9 +24,8 @@ public class Store {
     @JoinColumn(name = "address_id")
     private Address adress;
 
-    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "staff_id")
-    private Staff staff;
+    @OneToMany(mappedBy = "store", fetch = FetchType.EAGER)
+    private List<Staff> staffList;
 
     @OneToMany(mappedBy = "store")
     private List<Rental> rentals;
@@ -53,14 +49,6 @@ public class Store {
         this.managerStaffId = managerStaffId;
     }
 
-   /* public int getAddress_id() {
-        return address_id;
-    }
-
-    public void setAddress_id(int address_id) {
-        this.address_id = address_id;
-    }*/
-
     public Timestamp getLastUpdate() {
         return lastUpdate;
     }
@@ -77,16 +65,25 @@ public class Store {
         this.adress = adress;
     }
 
-    public Staff getStaff() {
-        return staff;
-    }
-
-    public void setStaff(Staff staff) {
-        this.staff = staff;
-    }
 
     @Override
     public String toString() {
         return "Store " + this.id;
+    }
+
+    public List<Staff> getStaffList() {
+        return staffList;
+    }
+
+    public void setStaffList(List<Staff> staffList) {
+        this.staffList = staffList;
+    }
+
+    public List<Rental> getRentals() {
+        return rentals;
+    }
+
+    public void setRentals(List<Rental> rentals) {
+        this.rentals = rentals;
     }
 }

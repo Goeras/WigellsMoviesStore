@@ -3,8 +3,11 @@ package org.dreamteam.wigellsmoviesstore;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.image.Image;
 import org.dreamteam.wigellsmoviesstore.Entitys.Category;
 
+import java.io.InputStream;
+import java.sql.Blob;
 import java.util.List;
 
 import java.util.List;
@@ -60,6 +63,15 @@ public class IoConverter {
             return new SimpleStringProperty("");
         }
 
+    }
+
+    public static Image convertBlobToImage(Blob blob) {
+        try (InputStream inputStream = blob.getBinaryStream()) {
+            return new Image(inputStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

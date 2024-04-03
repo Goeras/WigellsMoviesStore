@@ -24,8 +24,8 @@
             </HBox>
             <VBox styleClass="boxes">
                 <HBox styleClass="hboxes">
-                    <TextField/>
-                    <Button text="Sök medarbetare"/>
+                    <TextField fx:id="idToSearch" text="Ange ett Id"/>
+                    <Button text="Sök medarbetare" onAction="#onSearchStaffButtonClick"/>
                     <Button text="Ny medarbetare" onAction="#onNewStaffButtonClick"/>
                 </HBox>
                 <HBox styleClass="hboxes">
@@ -52,10 +52,10 @@
                 <Button text="Ändra medarbetare" onAction="#onUpdateStaffButtonClick"/>
             </VBox>
             <VBox styleClass="boxes">
-                <Button text="Sök alla"/>
+                <Button text="Sök alla" onAction="#onSearchAllStaffButtonClicked"/>
                 <HBox styleClass="hboxes">
                     <TextField fx:id="filterStaff"/>
-                    <Button text="FIltrera på namn"/>
+                    <Button text="Filtrera på namn" onAction="#onFilterByNameButtonClicked"/>
                 </HBox>
                 <TableView fx:id="staffTable">
                     <columns>
