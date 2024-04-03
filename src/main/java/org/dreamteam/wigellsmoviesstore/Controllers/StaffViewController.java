@@ -3,10 +3,7 @@ package org.dreamteam.wigellsmoviesstore.Controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -71,6 +68,8 @@ public class StaffViewController {
     private TextField filterStaff;
     @FXML
     private TextField idToSearch;
+    @FXML
+    private Button updateButton;
 
     private ObservableList observableStaffList;
 
@@ -79,7 +78,6 @@ public class StaffViewController {
     Staff staff;
     DAOmanager daOmanager = new DAOmanager();
     StaffManager staffManager = new StaffManager();
-    IoValidator ioValidator = new IoValidator();
 
     public void initialize(){
         viewManager = new ViewManager();
@@ -90,7 +88,7 @@ public class StaffViewController {
         observableStaffList = FXCollections.observableList(staffs);
         setTable(observableStaffList);
 
-        try {
+        /*try {
             // Övre info-ruta
             Image image = new Image("file:src/images/test.jpg");
             imageView.setFitWidth(100);
@@ -99,7 +97,7 @@ public class StaffViewController {
         }
         catch (Exception e){
             System.out.println("fel vid bildladdning");
-        }
+        }*/
 
     }
 
@@ -120,7 +118,8 @@ public class StaffViewController {
         lastName.setText(staff.getLastName());
         email.setText(staff.getEmail());
         username.setText(staff.getUserName());
-        active.setText(String.valueOf(staff.getActive()));
+        //String active = staffManager.
+        active.setText(staffManager.isActiveStringFromInt(staff.getActive()));
 
         Address address = staff.getAdress();
         address1.setText(address.getAddress());
@@ -143,7 +142,9 @@ public class StaffViewController {
             Staff staff = staffManager.searchByName(Integer.parseInt(idToSearch.getText()));
             if(staff != null){
                 setStaffInfo(staff);
+                updateButton.setVisible(true);
             }
+
         }
     }
 
@@ -159,6 +160,11 @@ public class StaffViewController {
     @FXML // Filtrera på namn
     private void onFilterByNameButtonClicked()throws IOException{
         // filterStaff =
+        List<Staff> filteredStaffList = staffManager.filterByName(observableStaffList, filterStaff.getText());
+        observableStaffList.clear();
+        observableStaffList.addAll(filteredStaffList);
+        staffTable.setItems(observableStaffList);
+        staffTable.refresh();
     }
 
     @FXML // Ny medarbetare

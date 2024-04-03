@@ -1,5 +1,6 @@
 package org.dreamteam.wigellsmoviesstore.Managers;
 
+import javafx.collections.ObservableList;
 import org.dreamteam.wigellsmoviesstore.CurrentStore;
 import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
 import org.dreamteam.wigellsmoviesstore.Entitys.Staff;
@@ -10,9 +11,16 @@ import java.util.List;
 public class StaffManager {
 
 
-    public List<Staff> filterByName(String name){
+    public List<Staff> filterByName(ObservableList observableList, String name){
         List<Staff> staffList = new ArrayList<>();
-
+        for(Object o : observableList){
+            if(o instanceof Staff) {
+                Staff s = (Staff) o;
+                if (s.getFirstName().equalsIgnoreCase(name) || s.getLastName().equalsIgnoreCase(name)) {
+                    staffList.add(s);
+                }
+            }
+        }
         return staffList;
     }
 
@@ -24,6 +32,15 @@ public class StaffManager {
             }
         }
         return staff;
+    }
+
+    public String isActiveStringFromInt(int number){
+        if(number == 0){
+            return "Ej Aktiv";
+        }
+        else{
+            return "Aktiv";
+        }
     }
 
 }

@@ -30,26 +30,26 @@
                 </HBox>
                 <HBox styleClass="hboxes">
                     <VBox>
-                        <Label fx:id="firstName" text="förnamn"/>
-                        <Label fx:id="lastName" text="efternamn"/>
-                        <Label fx:id="email" text="mail"/>
-                        <Label fx:id="username" text="användarnamn"/>
-                        <Label fx:id="active" text="aktiv"/>
+                        <Label fx:id="firstName"/>
+                        <Label fx:id="lastName"/>
+                        <Label fx:id="email"/>
+                        <Label fx:id="username"/>
+                        <Label fx:id="active"/>
 
                     </VBox>
                     <VBox>
-                        <Label fx:id="address1" text="adress 1"/>
-                        <Label fx:id="address2" text="adress 2"/>
-                        <Label fx:id="district" text="distrikt"/>
-                        <Label fx:id="postalCode" text="postkod"/>
-                        <Label fx:id="city" text="stad"/>
-                        <Label fx:id="country" text="land"/>
+                        <Label fx:id="address1"/>
+                        <Label fx:id="address2"/>
+                        <Label fx:id="district"/>
+                        <Label fx:id="postalCode"/>
+                        <Label fx:id="city"/>
+                        <Label fx:id="country"/>
                     </VBox>
                     <VBox>
                         <ImageView fx:id="imageView"/>
                     </VBox>
                 </HBox>
-                <Button text="Ändra medarbetare" onAction="#onUpdateStaffButtonClick"/>
+                <Button fx:id="updateButton" text="Ändra medarbetare" onAction="#onUpdateStaffButtonClick" visible="false"/>
             </VBox>
             <VBox styleClass="boxes">
                 <Button text="Sök alla" onAction="#onSearchAllStaffButtonClicked"/>
