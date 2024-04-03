@@ -26,8 +26,16 @@
     <dependency>
       <groupId>org.hibernate.orm</groupId>
       <artifactId>hibernate-core</artifactId>
-      <version>6.4.4.Final</version>
+      <version>6.5.0.CR1</version>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-spatial -->
+    <dependency>
+      <groupId>org.hibernate.orm</groupId>
+      <artifactId>hibernate-spatial</artifactId>
+      <version>6.5.0.CR1</version>
+    </dependency>
+
 
     <dependency>
       <groupId>org.openjfx</groupId>

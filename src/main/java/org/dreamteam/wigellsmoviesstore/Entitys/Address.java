@@ -1,9 +1,11 @@
 package org.dreamteam.wigellsmoviesstore.Entitys;
 
+
 import jakarta.persistence.*;
+import org.hibernate.annotations.ColumnTransformer;
 import org.hibernate.annotations.Type;
 import org.hibernate.engine.internal.Cascade;
-
+import org.locationtech.jts.geom.Geometry;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +34,10 @@ public class Address {
 
     @Column(name = "phone", length = 20)
     private String phone;
+
+    @Column(name = "location", columnDefinition = "GEOMETRY")
+    @ColumnTransformer(read = "ST_AsText(location)", write = "ST_GeomFromText(?)")
+    private Geometry location;
 
     @Column(name = "last_update")
     private Timestamp lastUpdate;
@@ -92,6 +98,13 @@ public class Address {
         this.phone = phone;
     }
 
+    public Geometry getLocation() {
+        return location;
+    }
+
+    public void setLocation(Geometry location) {
+        this.location = location;
+    }
 
     public Timestamp getLastUpdate() {
         return lastUpdate;

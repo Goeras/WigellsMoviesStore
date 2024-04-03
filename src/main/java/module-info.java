@@ -5,6 +5,8 @@ module org.dreamteam.wigellsmoviesstore {
     requires jakarta.persistence;
     requires java.naming;
     requires javafx.graphics;
+    requires org.hibernate.orm.spatial;
+    requires org.locationtech.jts;
 
 
     opens org.dreamteam.wigellsmoviesstore.Entitys;
