@@ -12,7 +12,7 @@ public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "payment_id", columnDefinition = "SMALLINT")
+    @Column(name = "payment_id", columnDefinition = "SMALLINT UNSIGNED")
     private int id;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -27,7 +27,7 @@ public class Payment {
     @JoinColumn(name = "rental_id")
     private Rental rental;
 
-    @Column(name = "amount")
+    @Column(name = "amount",columnDefinition = "DECIMAL(5,2)")
     private double amount;
 
     @Column(name = "payment_date")
