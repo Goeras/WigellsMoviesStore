@@ -57,20 +57,7 @@ public class MovieViewController {
 
         idColumn.setCellValueFactory(cellData -> integerToSimpleIntegerProperty(cellData.getValue().getFilmId()).asObject());
         titleColumn.setCellValueFactory(cellData -> stringToSimpleStringProperty(cellData.getValue().getTitle()));
-        categoryColumn.setCellValueFactory(cellData -> {
-            List<Category> categories = cellData.getValue().getCategoryList();
-            if (categories != null && !categories.isEmpty()) {
-                StringBuilder categorySB = new StringBuilder();
-                for (Category category : categories) {
-                    categorySB.append(category.getName()).append(", ");
-                }
-                categorySB.delete(categorySB.length() - 2, categorySB.length());
-                return new SimpleStringProperty(categorySB.toString());
-            } else {
-                return new SimpleStringProperty("");
-            }
-        });
-
+        categoryColumn.setCellValueFactory(cellData -> categoriesToStringProperty(cellData.getValue().getCategoryList()));
         languageColumn.setCellValueFactory(cellData -> stringToSimpleStringProperty(cellData.getValue().getLanguage().getName()));
         movieTable.setItems(observableList);
     }

@@ -3,6 +3,9 @@ package org.dreamteam.wigellsmoviesstore;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import org.dreamteam.wigellsmoviesstore.Entitys.Category;
+
+import java.util.List;
 
 import java.util.List;
 
@@ -37,11 +40,25 @@ public class IoConverter {
         return new SimpleDoubleProperty(input);
     }
 
+<<<<<<< Updated upstream
     public static String specialFeaturesToString(List<String> specialFeatures) {
         if (specialFeatures == null || specialFeatures.isEmpty()) {
             return "";
         }
         return String.join(",", specialFeatures);
+=======
+    public static SimpleStringProperty categoriesToStringProperty(List<Category> categories){
+        if (categories != null && !categories.isEmpty()) {
+            StringBuilder categorySB = new StringBuilder();
+            for (Category category : categories) {
+                categorySB.append(category.getName()).append(", ");
+            }
+            categorySB.delete(categorySB.length() - 2, categorySB.length());
+            return new SimpleStringProperty(categorySB.toString());
+        } else {
+            return new SimpleStringProperty("");
+        }
+>>>>>>> Stashed changes
     }
 
 }
