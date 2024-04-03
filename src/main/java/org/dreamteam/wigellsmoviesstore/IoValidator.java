@@ -1,5 +1,8 @@
 package org.dreamteam.wigellsmoviesstore;
 
+
+import java.util.regex.Pattern;
+
 public class IoValidator {
     public static boolean validateInteger(String input){
         boolean isValidInt = false;
@@ -51,5 +54,25 @@ public class IoValidator {
             e.printStackTrace();
         }
         return entryMade;
+    }
+    // email-validering som accepterar t.ex "user.name@domain.co.in" men inte t.ex ".user.name@.com"
+    public static boolean validateEmail(String input) {
+        String regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+        return Pattern.compile(regexPattern)
+                .matcher(input)
+                .matches();
+    }
+    public static boolean validatePostNum(String input){
+
+        boolean isValid = false;
+
+        if(input.length() == 5){
+            if(Character.isDigit(input.charAt(0))&&Character.isDigit(input.charAt(1))&&Character.isDigit(input.charAt(2))&&
+                    Character.isDigit(input.charAt(3))&&Character.isDigit(input.charAt(4))){
+                isValid = true;
+                return isValid;
+            }
+        }
+        return isValid;
     }
 }

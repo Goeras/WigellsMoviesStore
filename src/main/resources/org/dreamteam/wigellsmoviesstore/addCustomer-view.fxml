@@ -6,12 +6,38 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<?import javafx.geometry.Insets?>
+<StackPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.dreamteam.wigellsmoviesstore.Controllers.AddCustomerController"
-            prefHeight="400.0" prefWidth="600.0">
-<VBox>
-    <Label fx:id="topLabel"/>
-    <Button text="Tillbaka" onAction="#onBackButtonClick"/>
+            prefHeight="400.0" prefWidth="600.0"
+            stylesheets="@styles/styles.css">
+<VBox styleClass="background">
+    <padding>
+        <Insets topRightBottomLeft="10"/>
+    </padding>
+    <VBox styleClass="body">
+        <HBox styleClass="header">
+            <Label fx:id="topLabel" text="Ny kund"/>
+        </HBox>
+        <HBox styleClass="boxes">
+            <VBox>
+                <TextField fx:id="firstName" promptText="Förnamn:"/>
+                <TextField fx:id="lastName" promptText="Efternamn"/>
+                <TextField fx:id="email" promptText="Emailadress"/>
+                <TextField fx:id="phone" promptText="Telefonnummer"/>
+                <Button text="Spara kund"/>
+            </VBox>
+            <VBox>
+                <TextField fx:id="address1" promptText="Adress 1:"/>
+                <TextField fx:id="address2" promptText="Adress 2:"/>
+                <TextField fx:id="district" promptText="Distrikt"/>
+                <TextField fx:id="postalCode" promptText="Postkod"/>
+                <TextField fx:id="city" promptText="Stad:"/>
+                <TextField fx:id="country" promptText="Land:"/>
+            </VBox>
+        </HBox>
+        <Button text="Tillbaka" onAction="#onBackButtonClick"/>
+    </VBox>
 </VBox>
-</AnchorPane>
+</StackPane>
