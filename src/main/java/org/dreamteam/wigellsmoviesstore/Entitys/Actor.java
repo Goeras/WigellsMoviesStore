@@ -10,7 +10,7 @@ import java.util.List;
 public class Actor {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "actor_id", columnDefinition = "SMALLINT UNSIGNED")
     private int Id;
 

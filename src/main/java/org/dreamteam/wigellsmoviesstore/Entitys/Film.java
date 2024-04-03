@@ -20,8 +20,8 @@ public class Film {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "release_year")
-    private int releaseYear;
+    @Column(name = "release_year", columnDefinition = "YEAR")
+    private short releaseYear;
 
     @ManyToOne
     @JoinColumn(name = "language_id")
@@ -31,23 +31,23 @@ public class Film {
     @JoinColumn(name = "original_language_id")
     private Language originalLanguage;
 
-    @Column(name = "rental_duration")
-    private int rentalDuration;
+    @Column(name = "rental_duration", columnDefinition = "TINYINT UNSIGNED")
+    private byte rentalDuration;
 
-    @Column(name = "rental_rate")
+    @Column(name = "rental_rate", columnDefinition = "DECIMAL(4,2)")
     private double rentalRate;
 
-    @Column(name = "length")
-    private int length;
+    @Column(name = "length",columnDefinition = "SMALLINT UNSIGNED")
+    private short length;
 
-    @Column(name = "replacement_cost")
+    @Column(name = "replacement_cost", columnDefinition = "DECIMAL(5,2)")
     private double replacementCost;
 
-    @Column(name = "rating")
+    @Column(name = "rating", columnDefinition = "ENUM('G','PG','PG-13','R','NC-17') DEFAULT 'G'")
     private String rating;
 
 
-    @Column(name = "special_features")
+    @Column(name = "special_features",columnDefinition = "SET('Trailers','Commentaries','Deleted Scenes','Behind the Scenes')")
     private String specialFeatures;
 
     @Column(name = "last_update")
@@ -75,7 +75,7 @@ public class Film {
 
     }
 
-    public Film(int filmId, String title, String description, int releaseYear, Language language, Language originalLanguage, int rentalDuration, double rentalRate, int length, double replacementCost, String rating, String specialFeatures, Timestamp lastUpdate, List<Category> categoryList) {
+    public Film(short filmId, String title, String description, short releaseYear, Language language, Language originalLanguage, byte rentalDuration, double rentalRate, short length, double replacementCost, String rating, String specialFeatures, Timestamp lastUpdate, List<Category> categoryList) {
         this.filmId = filmId;
         this.title = title;
         this.description = description;
@@ -120,7 +120,7 @@ public class Film {
         return releaseYear;
     }
 
-    public void setReleaseYear(int releaseYear) {
+    public void setReleaseYear(short releaseYear) {
         this.releaseYear = releaseYear;
     }
 
@@ -142,11 +142,11 @@ public class Film {
     }
 
 
-    public int getRentalDuration() {
+    public byte getRentalDuration() {
         return rentalDuration;
     }
 
-    public void setRentalDuration(int rentalDuration) {
+    public void setRentalDuration(byte rentalDuration) {
         this.rentalDuration = rentalDuration;
     }
 
@@ -158,11 +158,11 @@ public class Film {
         this.rentalRate = rentalRate;
     }
 
-    public int getLength() {
+    public short getLength() {
         return length;
     }
 
-    public void setLength(int length) {
+    public void setLength(short length) {
         this.length = length;
     }
 

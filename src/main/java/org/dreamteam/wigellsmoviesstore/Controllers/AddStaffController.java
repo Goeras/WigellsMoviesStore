@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
 
 import java.io.File;
 import java.io.FileInputStream;

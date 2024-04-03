@@ -2,8 +2,6 @@ package org.dreamteam.wigellsmoviesstore.Entitys;
 
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.ColumnTransformer;
-import org.hibernate.annotations.Type;
 import org.hibernate.engine.internal.Cascade;
 import org.locationtech.jts.geom.Geometry;
 import java.sql.Timestamp;
@@ -16,7 +14,7 @@ public class Address {
 
     @Id
 
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "address_id", columnDefinition = "SMALLINT UNSIGNED")
     private int id;
 
@@ -35,8 +33,7 @@ public class Address {
     @Column(name = "phone", length = 20)
     private String phone;
 
-    @Column(name = "location", columnDefinition = "GEOMETRY")
-    @ColumnTransformer(read = "ST_AsText(location)", write = "ST_GeomFromText(?)")
+    @Column(name = "location")
     private Geometry location;
 
     @Column(name = "last_update")

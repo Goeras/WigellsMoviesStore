@@ -34,21 +34,21 @@
             </VBox>
             <VBox styleClass="boxes">
                 <HBox>
-                    <TextField promptText="FilmId"/>
-                    <Button text="Sök"/>
+                    <TextField fx:id="filmIdField" promptText="FilmId"/>
+                    <Button text="Sök" onAction="#searchFilm"/>
                 </HBox>
                 <HBox>
-                    <Label text="FilmId"/>
-                    <Label text="Filmtitel"/>
-                    <Button text="Lägg till"/>
+                    <Label fx:id="filmIdLabel" text="FilmId"/>
+                    <Label fx:id="filmTitleLabel" text="Filmtitel"/>
+                    <Button text="Lägg till" onAction="#addToCart"/>
                 </HBox>
             </VBox>
-            <TableView>
+            <TableView fx:id="tableView">
                 <columns>
-                    <TableColumn text="FilmId"/>
-                    <TableColumn text="Titel"/>
-                    <TableColumn text="Pris"/>
-                    <TableColumn text="Returdatum"/>
+                    <TableColumn fx:id="filmId" text="FilmId"/>
+                    <TableColumn fx:id="title" text="Titel"/>
+                    <TableColumn fx:id="price" text="Pris"/>
+                    <TableColumn fx:id="returnDate" text="Returdatum"/>
                 </columns>
             </TableView>
             <HBox styleClass="hboxes">

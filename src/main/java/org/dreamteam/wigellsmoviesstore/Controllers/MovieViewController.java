@@ -13,7 +13,9 @@ import javafx.stage.Stage;
 import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
 import org.dreamteam.wigellsmoviesstore.Entitys.Category;
 import org.dreamteam.wigellsmoviesstore.Entitys.Film;
+
 import org.dreamteam.wigellsmoviesstore.IoValidator;
+
 import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
 
 

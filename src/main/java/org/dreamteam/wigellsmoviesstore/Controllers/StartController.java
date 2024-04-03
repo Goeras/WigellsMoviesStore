@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import org.dreamteam.wigellsmoviesstore.CurrentStore;
 import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
 import org.dreamteam.wigellsmoviesstore.Entitys.Store;
+import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
 
 import java.io.IOException;
 import java.util.List;
