@@ -18,21 +18,21 @@ public class Rental {
     @Temporal(TemporalType.TIMESTAMP)
     private Date rentalDate;
 
-    @Column(name = "inventory_id", columnDefinition = "MEDIUMINT UNSIGNED")
-    private int inventory_id;
+    @ManyToOne
+    @JoinColumn(name = "inventory_id")
+    private Inventory inventory;
 
-    @Column(name = "customer_id", columnDefinition = "SMALLINT UNSIGNED")
-    private int customer_id;
-
-    /*@Column(name = "film_id")
-    private int film_id;*/
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
     @Column(name = "return_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date returnDate;
 
-    @Column(name = "staff_id", columnDefinition = "TINYINT UNSIGNED")
-    private int staff_id;
+    @ManyToOne
+    @JoinColumn(name = "staff_id")
+    private Staff staff;
 
     @Column(name = "last_update")
     private Timestamp lastUpdate;
@@ -64,29 +64,6 @@ public class Rental {
         this.rentalDate = rentalDate;
     }
 
-    public int getInventory_id() {
-        return inventory_id;
-    }
-
-    public void setInventory_id(int inventory_id) {
-        this.inventory_id = inventory_id;
-    }
-
-    public int getCustomer_id() {
-        return customer_id;
-    }
-
-    public void setCustomer_id(int customer_id) {
-        this.customer_id = customer_id;
-    }
-
-    /*public int getFilm_id() {
-        return film_id;
-    }
-
-    public void setFilm_id(int film_id) {
-        this.film_id = film_id;
-    }*/
 
     public Date getReturnDate() {
         return returnDate;
@@ -94,14 +71,6 @@ public class Rental {
 
     public void setReturnDate(Date returnDate) {
         this.returnDate = returnDate;
-    }
-
-    public int getStaff_id() {
-        return staff_id;
-    }
-
-    public void setStaff_id(int staff_id) {
-        this.staff_id = staff_id;
     }
 
     public Timestamp getLastUpdate() {
@@ -127,4 +96,30 @@ public class Rental {
     public void setFilm(Film film) {
         this.film = film;
     }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
+    }
+
+
 }

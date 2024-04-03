@@ -2,6 +2,7 @@ package org.dreamteam.wigellsmoviesstore.Entitys;
 
 import jakarta.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "country")
@@ -17,6 +18,9 @@ public class Country {
 
     @Column(name = "last_update")
     private Timestamp lastUpdate;
+
+    @OneToMany(mappedBy = "country")
+    private List<City> cities;
 
     public Country() {
 
@@ -49,5 +53,13 @@ public class Country {
 
     public void setLastUpdate(Timestamp lastUpdate) {
         this.lastUpdate = lastUpdate;
+    }
+
+    public List<City> getCities() {
+        return cities;
+    }
+
+    public void setCities(List<City> cities) {
+        this.cities = cities;
     }
 }

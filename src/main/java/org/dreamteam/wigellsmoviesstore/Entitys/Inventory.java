@@ -3,6 +3,7 @@ package org.dreamteam.wigellsmoviesstore.Entitys;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "inventory")
@@ -12,16 +13,13 @@ public class Inventory {
     @Column(name = "inventory_id", columnDefinition = "MEDIUMINT UNSIGNED")
     private int id;
 
-    /*@Column(name = "film_id")
-    private int film_id;*/
-
-    /*@Column(name = "store_id")
-    private int store_id;*/
+    @OneToMany(mappedBy = "inventory")
+    private List<Rental> rentals;
 
     @Column(name = "last_update")
     private Timestamp lastUpdate;
 
-    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne
     @JoinColumn(name = "film_id")
     private Film film;
 
@@ -40,22 +38,6 @@ public class Inventory {
         this.id = id;
     }
 
-    /*public int getFilm_id() {
-        return film_id;
-    }
-
-    public void setFilm_id(int film_id) {
-        this.film_id = film_id;
-    }*/
-
-    /*public int getStore_id() {
-        return store_id;
-    }
-
-    public void setStore_id(int store_id) {
-        this.store_id = store_id;
-    }*/
-
     public Timestamp getLastUpdate() {
         return lastUpdate;
     }
@@ -64,20 +46,28 @@ public class Inventory {
         this.lastUpdate = lastUpdate;
     }
 
-    public Film getFilm() {
-        return film;
-    }
-
-    public void setFilm(Film film) {
-        this.film = film;
-    }
-
     public Store getStore() {
         return store;
     }
 
     public void setStore(Store store) {
         this.store = store;
+    }
+
+    public List<Rental> getRentals() {
+        return rentals;
+    }
+
+    public void setRentals(List<Rental> rentals) {
+        this.rentals = rentals;
+    }
+
+    public Film getFilm() {
+        return film;
+    }
+
+    public void setFilm(Film film) {
+        this.film = film;
     }
 }
 

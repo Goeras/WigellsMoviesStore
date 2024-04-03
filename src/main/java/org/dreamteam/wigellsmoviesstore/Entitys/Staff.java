@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.sql.Blob;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "staff")
@@ -21,18 +22,12 @@ public class Staff {
     @Column(name = "last_name", length = 45)
     private String lastName;
 
-    /*@Column(name = "address_id")
-    private int addressId;*/
-
     @Lob
     @Column(name = "picture")
     private Blob picture;
 
     @Column(name = "email", length = 50)
     private String email;
-
-    /*@Column(name = "store_id")
-    private int storeId;*/
 
     @Column(name = "active")
     private int active;
@@ -53,6 +48,12 @@ public class Staff {
     @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "store_id")
     private Store store;
+
+    @OneToMany(mappedBy = "staff")
+    private List<Rental> rentals;
+
+    @OneToMany(mappedBy = "staff")
+    private List<Payment> payments;
 
     public Staff() {
     }
@@ -81,14 +82,6 @@ public class Staff {
         this.lastName = lastName;
     }
 
-    /*public int getAddressId() {
-        return addressId;
-    }
-
-    public void setAddressId(int addressId) {
-        this.addressId = addressId;
-    }*/
-
     public Blob getPicture() {
         return picture;
     }
@@ -104,14 +97,6 @@ public class Staff {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    /*public int getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(int storeId) {
-        this.storeId = storeId;
-    }*/
 
     public int getActive() {
         return active;
@@ -159,5 +144,21 @@ public class Staff {
 
     public void setStore(Store store) {
         this.store = store;
+    }
+
+    public List<Rental> getRentals() {
+        return rentals;
+    }
+
+    public void setRentals(List<Rental> rentals) {
+        this.rentals = rentals;
+    }
+
+    public List<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(List<Payment> payments) {
+        this.payments = payments;
     }
 }

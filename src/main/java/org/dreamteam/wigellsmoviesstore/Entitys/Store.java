@@ -3,6 +3,7 @@ package org.dreamteam.wigellsmoviesstore.Entitys;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "store")
@@ -29,6 +30,9 @@ public class Store {
     @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "staff_id")
     private Staff staff;
+
+    @OneToMany(mappedBy = "store")
+    private List<Rental> rentals;
 
     public Store() {
     }

@@ -59,6 +59,18 @@ public class Film {
             inverseJoinColumns = {@JoinColumn(name = "film_id")})
     private List<Category> categoryList = new ArrayList<>();
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "film_actor",
+            joinColumns = {@JoinColumn(name = "film_id")},
+            inverseJoinColumns = {@JoinColumn(name = "actor_id")})
+    private List<Actor> actors = new ArrayList<>();
+
+    @OneToMany(mappedBy = "film")
+    private List<Rental> rentals;
+
+    @OneToMany(mappedBy = "film")
+    private List<Inventory> inventories;
+
     public Film() {
 
     }
@@ -192,5 +204,29 @@ public class Film {
 
     public void setCategoryList(List<Category> categoryList) {
         this.categoryList = categoryList;
+    }
+
+    public List<Actor> getActors() {
+        return actors;
+    }
+
+    public void setActors(List<Actor> actors) {
+        this.actors = actors;
+    }
+
+    public List<Rental> getRentals() {
+        return rentals;
+    }
+
+    public void setRentals(List<Rental> rentals) {
+        this.rentals = rentals;
+    }
+
+    public List<Inventory> getInventories() {
+        return inventories;
+    }
+
+    public void setInventories(List<Inventory> inventories) {
+        this.inventories = inventories;
     }
 }

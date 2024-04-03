@@ -3,7 +3,9 @@ package org.dreamteam.wigellsmoviesstore.Entitys;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "customer")
@@ -14,9 +16,6 @@ public class Customer {
     @Column(name = "customer_id", columnDefinition = "SMALLINT UNSIGNED")
     private int id;
 
-    /*@Column(name = "store_id")
-    private int store_id;*/
-
     @Column(name = "first_name", length = 45)
     private String firstName;
 
@@ -26,8 +25,8 @@ public class Customer {
     @Column(name = "email", length = 50)
     private String email;
 
-    /*@Column(name = "address_id")
-    private int addressId;*/
+    @OneToMany(mappedBy = "customer")
+    private List<Rental> rentals;
 
     @Column(name = "active")
     private int active;
@@ -47,6 +46,9 @@ public class Customer {
     @JoinColumn(name = "store_id")
     private Store store;
 
+    @OneToMany(mappedBy = "customer")
+    private List<Payment> payments;
+
     public Customer() {
     }
 
@@ -57,14 +59,6 @@ public class Customer {
     public void setId(int id) {
         this.id = id;
     }
-
-    /*public int getStore_id() {
-        return store_id;
-    }
-
-    public void setStore_id(int store_id) {
-        this.store_id = store_id;
-    }*/
 
     public String getFirstName() {
         return firstName;
@@ -89,14 +83,6 @@ public class Customer {
     public void setEmail(String email) {
         this.email = email;
     }
-
-   /* public int getAddressId() {
-        return addressId;
-    }
-
-    public void setAddressId(int addressId) {
-        this.addressId = addressId;
-    }*/
 
     public int getActive() {
         return active;
@@ -136,5 +122,21 @@ public class Customer {
 
     public void setStore(Store store) {
         this.store = store;
+    }
+
+    public List<Rental> getRentals() {
+        return rentals;
+    }
+
+    public void setRentals(List<Rental> rentals) {
+        this.rentals = rentals;
+    }
+
+    public List<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(List<Payment> payments) {
+        this.payments = payments;
     }
 }

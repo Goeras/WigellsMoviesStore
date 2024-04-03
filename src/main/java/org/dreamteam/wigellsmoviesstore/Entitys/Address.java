@@ -27,9 +27,6 @@ public class Address {
     @Column(name = "district", length = 20)
     private String district;
 
-    /*@Column(name = "city_id")
-    private int cityId;*/
-
     @Column(name = "postal_code", length = 10)
     private String postalCode;
 
@@ -78,14 +75,6 @@ public class Address {
     public void setDistrict(String district) {
         this.district = district;
     }
-
-    /*public int getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(int cityId) {
-        this.cityId = cityId;
-    }*/
 
     public String getPostalCode() {
         return postalCode;
