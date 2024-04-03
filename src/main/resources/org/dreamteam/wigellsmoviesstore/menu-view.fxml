@@ -9,13 +9,20 @@
 <StackPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.dreamteam.wigellsmoviesstore.Controllers.MenuViewController"
-            prefHeight="400.0" prefWidth="600.0">
-<VBox alignment="CENTER" spacing="10">
-    <Label fx:id="menuLabel" text="Meny"/>
-    <Button text="back" onAction="#onBackButton"/>
-    <Button text="Sök kunder" onAction="#onCustomerButtonClick"/>
-    <Button text="Sök filmer" onAction="#onMovieButtonClick"/>
-    <Button text="Hyr ut film" onAction="#onPosButtonClick"/>
-    <Button text="Personal" onAction="#onStaffButtonClick"/>
+            prefHeight="400.0" prefWidth="600.0"
+            stylesheets="@styles/styles.css">
+<VBox styleClass="background">
+    <VBox styleClass="body" minHeight="300">
+        <HBox styleClass="header">
+            <Label fx:id="menuLabel" text="Meny"/>
+        </HBox>
+        <VBox styleClass="boxes" minHeight="270">
+            <Button text="Sök kunder" onAction="#onCustomerButtonClick"/>
+            <Button text="Sök filmer" onAction="#onMovieButtonClick"/>
+            <Button text="Hyr ut film" onAction="#onPosButtonClick"/>
+            <Button text="Personal" onAction="#onStaffButtonClick"/>
+            <Button text="Logga ut" onAction="#onBackButton"/>
+        </VBox>
+    </VBox>
 </VBox>
 </StackPane>
