@@ -14,10 +14,10 @@ public class CurrentStore {
         return instance;
     }
 
-    public Store getCurrentUser(){
+    public Store getCurrentStore(){
         return currentStore;
     }
-    public void setCurrentCustomer(Store store){
+    public void setCurrentStore(Store store){
         this.currentStore = store;
     }
 }
