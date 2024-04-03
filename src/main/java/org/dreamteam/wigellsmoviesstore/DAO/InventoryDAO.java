@@ -4,6 +4,7 @@ import org.dreamteam.wigellsmoviesstore.Entitys.Inventory;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -94,5 +95,17 @@ public class InventoryDAO {
         finally {
             session.close();
         }
+    }
+    public List<Inventory> getInventoryByFilmAndStore(int film_id, int store_id){
+        Session session = DatabaseSessionFactory.getSessionFactory().openSession();
+        session.beginTransaction();
+        String queryString = "FROM Inventory WHERE film.filmId = :filmId AND store.id = :storeId";
+        Query<Inventory> query = session.createQuery(queryString, Inventory.class);
+        query.setParameter("filmId", film_id);
+        query.setParameter("storeId", store_id);
+        List<Inventory> resultList = query.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return resultList;
     }
 }
