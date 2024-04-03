@@ -40,13 +40,14 @@ public class IoConverter {
         return new SimpleDoubleProperty(input);
     }
 
-<<<<<<< Updated upstream
+
     public static String specialFeaturesToString(List<String> specialFeatures) {
         if (specialFeatures == null || specialFeatures.isEmpty()) {
             return "";
         }
         return String.join(",", specialFeatures);
-=======
+    }
+
     public static SimpleStringProperty categoriesToStringProperty(List<Category> categories){
         if (categories != null && !categories.isEmpty()) {
             StringBuilder categorySB = new StringBuilder();
@@ -58,7 +59,7 @@ public class IoConverter {
         } else {
             return new SimpleStringProperty("");
         }
->>>>>>> Stashed changes
+
     }
 
 }
