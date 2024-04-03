@@ -29,7 +29,7 @@ public class Customer {
     private List<Rental> rentals;
 
     @Column(name = "active")
-    private int active;
+    private boolean active;
 
     @Column(name = "create_date")
     @Temporal(TemporalType.TIMESTAMP)
@@ -84,11 +84,11 @@ public class Customer {
         this.email = email;
     }
 
-    public int getActive() {
+    public boolean getActive() {
         return active;
     }
 
-    public void setActive(int active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 
