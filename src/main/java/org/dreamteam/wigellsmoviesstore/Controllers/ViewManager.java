@@ -46,7 +46,7 @@ public class ViewManager {
     }
     public void showStaffView(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("staff-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 500, 600);
         stage.setTitle("Pos!");
         stage.setScene(scene);
         stage.show();

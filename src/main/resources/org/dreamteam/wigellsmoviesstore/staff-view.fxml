@@ -6,14 +6,68 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
 <StackPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.dreamteam.wigellsmoviesstore.Controllers.StaffViewController"
-            prefHeight="400.0" prefWidth="600.0">
-<VBox alignment="CENTER">
-    <Label fx:id="topLabel" text="Personal"/>
-    <Button text="Ny medarbetare" onAction="#onNewStaffButtonClick"/>
-    <Button text="Ändra medarbetare" onAction="#onUpdateStaffButtonClick"/>
-    <Button text="Tillbaka" onAction="#onBackButtonClick"/>
-</VBox>
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="org.dreamteam.wigellsmoviesstore.Controllers.StaffViewController"
+           prefHeight="400.0" prefWidth="600.0"
+           stylesheets="@styles/styles.css">
+    <VBox styleClass="background">
+        <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+        </padding>
+        <VBox styleClass="outerBox">
+            <HBox styleClass="header">
+                <Label fx:id="topLabel" text="Personal"/>
+            </HBox>
+            <VBox styleClass="boxes">
+                <HBox styleClass="hboxes">
+                    <TextField/>
+                    <Button text="Sök medarbetare"/>
+                    <Button text="Ny medarbetare" onAction="#onNewStaffButtonClick"/>
+                </HBox>
+                <HBox styleClass="hboxes">
+                    <VBox>
+                        <Label fx:id="firstName" text="förnamn"/>
+                        <Label fx:id="lastName" text="efternamn"/>
+                        <Label fx:id="email" text="mail"/>
+                        <Label fx:id="username" text="användarnamn"/>
+                        <Label fx:id="active" text="aktiv"/>
+
+                    </VBox>
+                    <VBox>
+                        <Label fx:id="address1" text="adress 1"/>
+                        <Label fx:id="address2" text="adress 2"/>
+                        <Label fx:id="district" text="distrikt"/>
+                        <Label fx:id="postalCode" text="postkod"/>
+                        <Label fx:id="city" text="stad"/>
+                        <Label fx:id="country" text="land"/>
+                    </VBox>
+                    <VBox>
+                        <ImageView fx:id="imageView"/>
+                    </VBox>
+                </HBox>
+                <Button text="Ändra medarbetare" onAction="#onUpdateStaffButtonClick"/>
+            </VBox>
+            <VBox styleClass="boxes">
+                <Button text="Sök alla"/>
+                <HBox styleClass="hboxes">
+                    <TextField fx:id="filterStaff"/>
+                    <Button text="FIltrera på namn"/>
+                </HBox>
+                <TableView fx:id="staffTable">
+                    <columns>
+                        <TableColumn fx:id="staffIdColumn" text="ID"/>
+                        <TableColumn fx:id="firstNameColumn" text="Förnamn"/>
+                        <TableColumn fx:id="lastNameColumn" text="Efternamn"/>
+                        <TableColumn fx:id="emailColumn" text="Email"/>
+                        <TableColumn fx:id="phoneColumn" text="Telefonnummer"/>
+                    </columns>
+                </TableView>
+            </VBox>
+            <Button text="Tillbaka" onAction="#onBackButtonClick"/>
+        </VBox>
+    </VBox>
 </StackPane>
