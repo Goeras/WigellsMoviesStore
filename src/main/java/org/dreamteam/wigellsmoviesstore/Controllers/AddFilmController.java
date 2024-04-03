@@ -68,6 +68,13 @@ public class AddFilmController {
     }
     @FXML
     private void onSaveButtonClick(){
+        List<String> specialFeaturesList = new ArrayList<>();
+        specialFeaturesList.add(Boolean.toString(behindTheScenes.isSelected()));
+        specialFeaturesList.add(Boolean.toString(deletedScenes.isSelected()));
+        specialFeaturesList.add(Boolean.toString(trailers.isSelected()));
+        specialFeaturesList.add(Boolean.toString(commentaries.isSelected()));
+        String specialFeaturesString = IoConverter.specialFeaturesToString(specialFeaturesList);
+
         List<String> infoList = new ArrayList<>();
         infoList.add(title.getText());
         infoList.add(description.getText());
@@ -78,10 +85,8 @@ public class AddFilmController {
         infoList.add(length.getText());
         infoList.add(replacementCost.getText());
         infoList.add(rentalRate.getText());
-        infoList.add(Boolean.toString(behindTheScenes.isSelected()));
-        infoList.add(Boolean.toString(deletedScenes.isSelected()));
-        infoList.add(Boolean.toString(trailers.isSelected()));
-        infoList.add(Boolean.toString(commentaries.isSelected()));
+        infoList.add(specialFeaturesString);
+
 
         System.out.println("Skicka infomation och skapa ny film" + infoList.size());
     }
