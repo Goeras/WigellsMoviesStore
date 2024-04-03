@@ -6,12 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-<<<<<<< Updated upstream
-=======
 import org.dreamteam.wigellsmoviesstore.Entitys.Film;
 import org.dreamteam.wigellsmoviesstore.IoConverter;
 import org.dreamteam.wigellsmoviesstore.Managers.PosManager;
->>>>>>> Stashed changes
 import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
 
 import java.io.IOException;
@@ -50,6 +47,16 @@ public class PosController {
     private Label filmIdLabel;
     @FXML
     private Label filmTitleLabel;
+    @FXML
+    private Label confirmCustId;
+    @FXML
+    private Label confirmCustName;
+    @FXML
+    private Label chosenCustId;
+    @FXML
+    private Label chosenCustName;
+    @FXML
+    private TextField searchCustomerField;
 
     public void initialize(){
         viewManager = new ViewManager();
@@ -63,7 +70,19 @@ public class PosController {
         viewManager.showMenuView((Stage) topLabel.getScene().getWindow());
     }
     @FXML
+    private void onSearchCustomerButton(){
+        String id = searchCustomerField.getText();
+        String[] info = posManager.searchCustomer(id);
+        confirmCustId.setText(info[0]);
+        confirmCustName.setText(info[1]);
+    }
+    @FXML
     private void onConfirmCustomerButton(){
+        chosenCustId.setText(confirmCustId.getText());
+        chosenCustName.setText(confirmCustName.getText());
+        confirmCustId.setText("");
+        confirmCustName.setText("");
+        searchCustomerField.setText("");
         chosenCustInfo.setManaged(true);
         chosenCustInfo.setVisible(true);
         searchCustomer.setManaged(false);
