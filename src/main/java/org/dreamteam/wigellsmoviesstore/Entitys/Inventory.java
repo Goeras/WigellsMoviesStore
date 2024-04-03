@@ -9,8 +9,7 @@ import java.sql.Timestamp;
 public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @Column(name = "inventory_id")
+    @Column(name = "inventory_id", columnDefinition = "MEDIUMINT UNSIGNED")
     private int id;
 
     /*@Column(name = "film_id")

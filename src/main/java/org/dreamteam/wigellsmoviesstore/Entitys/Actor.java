@@ -11,7 +11,7 @@ public class Actor {
 
     @Id
     @GeneratedValue
-    @Column(name = "actor_id")
+    @Column(name = "actor_id", columnDefinition = "SMALLINT UNSIGNED")
     private int Id;
 
     @Column(name = "first_name", length = 45)

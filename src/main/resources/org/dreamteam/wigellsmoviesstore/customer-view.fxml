@@ -6,14 +6,106 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.geometry.Insets?>
 <StackPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.dreamteam.wigellsmoviesstore.Controllers.CustomerViewController"
-            prefHeight="400.0" prefWidth="600.0">
-<VBox alignment="CENTER">
-    <Label fx:id="topLabel" text="Kundsidan"/>
-    <Button text="Ny kund" onAction="#onNewCustomerClick"/>
-    <Button text="Ändra kund" onAction="#onUpdateCustomerClick"/>
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="org.dreamteam.wigellsmoviesstore.Controllers.CustomerViewController"
+           prefHeight="400.0" prefWidth="600.0" stylesheets="@styles/styles.css">
+<VBox styleClass="background">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+    <VBox styleClass="outerBox">
+        <HBox styleClass="header">
+            <Label fx:id="topLabel" text="Kundsidan"/>
+        </HBox>
+        <VBox styleClass="boxes">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+        <HBox styleClass="body">
+            <TextField fx:id="searchCustomer"/>
+            <Button text="Sök kund"/>
+            <Button text="Ny kund" onAction="#onNewCustomerClick"/>
+        </HBox>
+            <HBox styleClass="boxes">
+                <VBox spacing="2">
+                <HBox>
+                    <Label text="Förnamn" />
+                    <Label fx:id="firstName"/>
+                </HBox>
+                <HBox>
+                    <Label text="Efternamn"/>
+                    <Label fx:id="lastName"/>
+                </HBox>
+                <HBox>
+                    <Label text="Mailadress"/>
+                    <Label fx:id="email" />
+                </HBox>
+                <HBox>
+                    <Label text="Aktiv"/>
+                    <Label fx:id="active"/>
+                </HBox>
+                <HBox>
+                    <Label text="Registrerad:"/>
+                    <Label fx:id="createDate" minWidth="100"/>
+                </HBox>
+                <Button text="Ändra kund" onAction="#onUpdateCustomerClick"/>
+                </VBox>
+                <VBox spacing="2">
+                    <HBox>
+                        <Label text="Adress 1"/>
+                        <Label fx:id="address1" minWidth="100"/>
+                    </HBox>
+                    <HBox>
+                        <Label text="Adress 2"/>
+                        <Label fx:id="address2" minWidth="100"/>
+                    </HBox>
+                    <HBox>
+                        <Label text="Distrikt"/>
+                        <Label fx:id="disctrict" minWidth="100"/>
+                    </HBox>
+                    <HBox>
+                        <Label text="Stad"/>
+                        <Label fx:id="city" minWidth="100"/>
+                    </HBox>
+                    <HBox>
+                        <Label text="Postkod:"/>
+                        <Label fx:id="postalCode" minWidth="100"/>
+                    </HBox>
+                    <HBox>
+                        <Label text="Land:"/>
+                        <Label fx:id="country" minWidth="60"/>
+                    </HBox>
+                </VBox>
+            </HBox>
+            <TableView fx:id="rentalHistory">
+                <columns>
+                    <TableColumn fx:id="rentalDate" text="Datum"/>
+                    <TableColumn fx:id="returnDate" text="Returdatum"/>
+                    <TableColumn fx:id="store" text="Butik"/>
+                    <TableColumn fx:id="filmId" text="FilmId"/>
+                    <TableColumn fx:id="title" text="Titel"/>
+                </columns>
+            </TableView>
+        </VBox>
+        <VBox styleClass="boxes">
+            <Button text="Sök alla kunder"/>
+            <HBox alignment="CENTER" spacing="10">
+                <TextField fx:id="searchByName"/>
+                <Button text="Filtrera på namn"/>
+            </HBox>
+            <TableView fx:id="customerTable">
+                <columns>
+                    <TableColumn fx:id="customerid" text="Kundnr" minWidth="60" maxWidth="60"/>
+                    <TableColumn fx:id="name" text="Namn" minWidth="100"/>
+                    <TableColumn fx:id="mail" text="Mailadress" minWidth="100"/>
+                    <TableColumn fx:id="phone" text="Telefonnummer" minWidth="120"/>
+                </columns>
+            </TableView>
+        </VBox>
+
     <Button text="Tillbaka" onAction="#onBackButtonClick"/>
+    </VBox>
 </VBox>
 </StackPane>

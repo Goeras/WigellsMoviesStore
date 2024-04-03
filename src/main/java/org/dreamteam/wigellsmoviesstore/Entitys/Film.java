@@ -14,7 +14,7 @@ public class Film {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "film_id")
+    @Column(name = "film_id", columnDefinition = "SMALLINT UNSIGNED")
     private int filmId;
 
     @Column(name = "title", length = 128)

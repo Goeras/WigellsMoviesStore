@@ -10,8 +10,8 @@ import java.util.List;
 public class Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id")
+    @GeneratedValue/*(strategy = GenerationType.IDENTITY)*/
+    @Column(name = "category_id", columnDefinition = "TINYINT UNSIGNED")
     private int Id;
 
     @Column(name = "name", length = 25)
@@ -22,8 +22,8 @@ public class Category {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "film_category",
-            joinColumns = {@JoinColumn(name = "film_id")},
-            inverseJoinColumns = {@JoinColumn(name = "category_id")})
+            joinColumns = {@JoinColumn(name = "category_id")},
+            inverseJoinColumns = {@JoinColumn(name = "film_id")})
     private List<Film> filmList = new ArrayList<>();
 
     public Category() {

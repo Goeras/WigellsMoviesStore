@@ -25,7 +25,7 @@ public class ViewManager {
     }
     public void showCustomerView(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("customer-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 450, 600);
         stage.setTitle("Kund!");
         stage.setScene(scene);
         stage.show();

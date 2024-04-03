@@ -1,0 +1,57 @@
+.button {
+    -fx-background-color: #aec6a9; /* Green */
+    -fx-font-weight: bold;
+}
+
+.body {
+    -fx-spacing: 10px;
+    -fx-min-width: 350px;
+    -fx-max-width: 350px;
+    -fx-background-color: white;
+    -fx-padding: 10;
+    -fx-font-family: "Roboto Light";
+
+}
+.background {
+    -fx-spacing: 10px;
+    -fx-background-color: #aec6a9;;
+    -fx-alignment: TOP_CENTER;
+}
+.outerBox {
+    -fx-background-color: white;
+    -fx-padding: 10;
+    -fx-spacing: 10;
+    -fx-border-width: 1px;
+    -fx-border-color: #92b58a;
+    -fx-font-family: "Roboto Light";
+    -fx-alignment: CENTER;
+}
+.boxes {
+    -fx-background-color: white;
+    -fx-padding: 10;
+    -fx-spacing: 10;
+    -fx-border-width: 1px;
+    -fx-border-color: #92b58a;
+    -fx-font-family: "Roboto Light";
+    -fx-alignment: CENTER;
+}
+.boxes .label {
+    -fx-min-width: 80;
+    -fx-font-family: Corbel;
+    -fx-font-size: 14px;
+}
+.table-view .filler{
+    -fx-background-color: #92b58a;
+}
+.table-view .column-header{
+    -fx-background-color: #92b58a;
+}
+.table-view {
+    -fx-max-width: 400px;
+}
+.header {
+    -fx-background-color: white;
+    -fx-alignment: CENTER;
+    -fx-text-fill: #779c6b;
+    -fx-font-size: 20;
+}
