@@ -1,4 +1,4 @@
-package org.dreamteam.wigellsmoviesstore.Controllers;
+package org.dreamteam.wigellsmoviesstore.Managers;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
