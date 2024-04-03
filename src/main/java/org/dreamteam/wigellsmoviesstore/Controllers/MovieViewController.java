@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
@@ -21,6 +22,8 @@ import java.util.List;
 import static org.dreamteam.wigellsmoviesstore.IoConverter.*;
 
 public class MovieViewController {
+    @FXML
+    private TextField filterField;
     @FXML
     private Label topLabel;
     @FXML
@@ -70,6 +73,14 @@ public class MovieViewController {
         filmList.addAll(filmsFromDatabase);
 
         movieTable.setItems(filmList);
+    }
+
+    public void onFilterByNameButton(){
+    String filterText = filterField.getText().trim().toLowerCase();
+    ObservableList<Film> filteredList = FXCollections.observableArrayList(filmList);
+    filteredList.setAll(filmList.filtered(film -> film.getTitle().toLowerCase().contains(filterText)));
+
+    movieTable.setItems(filteredList);
     }
     public void onSearchByIdButton(){
         System.out.println("Hämta korrekt film från DAO och lägg in den info vi vill ha");
