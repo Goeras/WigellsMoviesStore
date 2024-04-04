@@ -60,4 +60,9 @@ public class Category {
     public void setFilmList(List<Film> filmList) {
         this.filmList = filmList;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
