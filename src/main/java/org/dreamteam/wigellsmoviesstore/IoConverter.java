@@ -32,6 +32,8 @@ public class IoConverter {
         return Integer.parseInt(input);
     }
 
+    public static short stringToShort(String input) { return Short.parseShort(input);}
+
     public static SimpleStringProperty stringToSimpleStringProperty(String input){
         return new SimpleStringProperty(input);
     }
