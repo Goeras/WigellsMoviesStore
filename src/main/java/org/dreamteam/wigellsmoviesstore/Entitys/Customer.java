@@ -25,7 +25,7 @@ public class Customer {
     @Column(name = "email", length = 50)
     private String email;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     private List<Rental> rentals;
 
     @Column(name = "active")
