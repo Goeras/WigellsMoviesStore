@@ -1,9 +1,12 @@
 package org.dreamteam.wigellsmoviesstore.DAO;
 
 import org.dreamteam.wigellsmoviesstore.Entitys.City;
+import org.dreamteam.wigellsmoviesstore.Entitys.Inventory;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+
 import java.util.List;
 
 public class CityDAO {
@@ -37,6 +40,22 @@ public class CityDAO {
         s.close();
 
         return city;
+    }
+
+    public City getCityByName(String city){
+        Session session = DatabaseSessionFactory.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        String queryString = "FROM City WHERE name = :cityName";
+        Query<City> query = session.createQuery(queryString, City.class);
+        query.setParameter("cityName", city);
+
+        City newCity = query.uniqueResult();
+
+        session.getTransaction().commit();
+        session.close();
+
+        return newCity;
     }
 
     public List<City> getAllCities(){

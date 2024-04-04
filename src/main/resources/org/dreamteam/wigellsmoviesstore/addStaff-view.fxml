@@ -23,22 +23,23 @@
         </HBox>
         <HBox styleClass="boxes">
             <VBox>
-                <TextField promptText="Förnamn"/>
-                <TextField promptText="Efternamn"/>
-                <TextField promptText="Email"/>
-                <TextField promptText="Telefonnummer"/>
-                <PasswordField promptText="Lösen"/>
-                <PasswordField promptText="Upprepa Lösen"/>
-                <Button text="Spara medarbetare"/>
+                <TextField fx:id="firstName" promptText="Förnamn"/>
+                <TextField fx:id="lastName" promptText="Efternamn"/>
+                <TextField fx:id="eMail" promptText="Email"/>
+                <TextField fx:id="userName" promptText="Användarnamn"/>
+                <PasswordField fx:id="password" promptText="Lösen"/>
+                <PasswordField fx:id="password2" promptText="Upprepa Lösen"/>
+                <Button text="Spara medarbetare" onAction="#onSaveStaffButtonClicked"/>
             </VBox>
             <VBox>
-                <TextField promptText="Adress"/>
-                <TextField promptText="Adress"/>
-                <TextField promptText="Distrikt"/>
-                <TextField promptText="Postkod"/>
-                <TextField promptText="Stad"/>
-                <TextField promptText="Land"/>
+                <TextField fx:id="address" promptText="Adress"/>
+                <TextField fx:id="address2" promptText="Adress"/>
+                <TextField fx:id="district" promptText="Distrikt"/>
+                <TextField fx:id="postalCode" promptText="Postkod"/>
+                <TextField fx:id="city" promptText="Stad"/>
+                <ChoiceBox fx:id="country"/>
                 <Button text="Ladda upp ny bild" onAction="#onUploadPictureButtonClick"/>
+                <TextField fx:id="userNotice" visible="false"/>
                 <ImageView fx:id="imageView"/>
             </VBox>
         </HBox>

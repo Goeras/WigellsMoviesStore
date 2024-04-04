@@ -75,4 +75,12 @@ public class IoValidator {
         }
         return isValid;
     }
+    public static boolean stringOneEqualsStringTwo(String stringOne, String stringTwo){
+        if(stringOne.equals(stringTwo)){
+            return true;
+        }
+        return false;
+    }
 }
+
+
