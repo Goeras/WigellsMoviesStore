@@ -34,6 +34,8 @@ public class IoConverter {
 
     public static short stringToShort(String input) { return Short.parseShort(input);}
 
+    public static byte stringToByte(String input) { return Byte.parseByte(input);}
+
     public static SimpleStringProperty stringToSimpleStringProperty(String input){
         return new SimpleStringProperty(input);
     }
