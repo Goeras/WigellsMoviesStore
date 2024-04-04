@@ -57,8 +57,8 @@ public class Film {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "film_category",
-            joinColumns = {@JoinColumn(name = "category_id")},
-            inverseJoinColumns = {@JoinColumn(name = "film_id")})
+            joinColumns = {@JoinColumn(name = "film_id")},
+            inverseJoinColumns = {@JoinColumn(name = "category_id")})
     private List<Category> categoryList = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
