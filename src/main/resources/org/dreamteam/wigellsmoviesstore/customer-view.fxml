@@ -25,7 +25,7 @@
             </padding>
         <HBox styleClass="body">
             <TextField fx:id="searchCustomer"/>
-            <Button text="Sök kund"/>
+            <Button text="Sök kund" onAction="#onSearchButtonClick"/>
             <Button text="Ny kund" onAction="#onNewCustomerClick"/>
         </HBox>
             <HBox styleClass="boxes">
