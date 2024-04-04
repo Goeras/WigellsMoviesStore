@@ -109,5 +109,7 @@ public class CustomerManager {
         ObservableList<Rental> rentals = FXCollections.observableList(customer.getRentals());
         return rentals;
     }
-
+    public ObservableList<Customer> getAllCustomer(){
+        return FXCollections.observableList(daoManager.getCustomerDAO().readAllCustomers());
+    }
 }

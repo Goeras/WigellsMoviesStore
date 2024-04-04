@@ -1,9 +1,11 @@
 package org.dreamteam.wigellsmoviesstore.Controllers;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.dreamteam.wigellsmoviesstore.Entitys.Customer;
 import org.dreamteam.wigellsmoviesstore.Entitys.Rental;
 import org.dreamteam.wigellsmoviesstore.IoConverter;
 import org.dreamteam.wigellsmoviesstore.Managers.CustomerManager;
@@ -11,6 +13,8 @@ import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerViewController {
 @FXML
@@ -56,14 +60,30 @@ private Label address2;
     private TableColumn<Rental, Integer> filmId;
     @FXML
     private TableColumn<Rental, String> filmTitle;
+    @FXML
+    private TableView<Customer> customerTable;
+    @FXML
+    private TableColumn<Customer, Integer> customerid;
+    @FXML
+    private TableColumn<Customer, String> name;
+    @FXML
+    private TableColumn<Customer, String> mail;
+    @FXML
+    private TableColumn<Customer, String> phone;
+    ObservableList<Customer> customers;
+    @FXML
+    private TextField searchByName;
+
 
 
 
 public void initialize(){
-
+    List<Customer> customerList = new ArrayList<>();
+    customers = FXCollections.observableList(customerList);
     viewManager = new ViewManager();
     customerManager = new CustomerManager();
     setRentHistoryTable();
+    setCustomerTable();
 }
 @FXML
 private void onBackButtonClick() throws IOException {
@@ -104,6 +124,31 @@ private void onBackButtonClick() throws IOException {
     filmId.setCellValueFactory(cellData -> IoConverter.integerToSimpleIntegerProperty(cellData.getValue().getInventory().getFilm().getFilmId()).asObject());
     filmTitle.setCellValueFactory(cellData -> IoConverter.stringToSimpleStringProperty(cellData.getValue().getInventory().getFilm().getTitle()));
     rentalHistoryTable.setItems(rentalHistory);
+}
+@FXML
+    private void setCustomerTable(){
 
+    customerid.setCellValueFactory(cellData -> IoConverter.integerToSimpleIntegerProperty(cellData.getValue().getId()).asObject());
+    name.setCellValueFactory(cellData -> IoConverter.stringToSimpleStringProperty(cellData.getValue().getFirstName() + " " + cellData.getValue().getLastName()));
+    mail.setCellValueFactory(cellData -> IoConverter.stringToSimpleStringProperty(cellData.getValue().getEmail()));
+    phone.setCellValueFactory(cellData -> IoConverter.stringToSimpleStringProperty(cellData.getValue().getAdress().getPhone()));
+    customerTable.setItems(customers);
+}
+@FXML
+    private void onSeeAllCustomers(){
+    customers = customerManager.getAllCustomer();
+    customerTable.setItems(customers);
+}
+@FXML
+    private void filterOnName(){
+    String filterString = searchByName.getText();
+    List<Customer> filteredList = new ArrayList<>();
+    for(Customer customer : customers){
+        if((customer.getFirstName().toUpperCase() + " " + customer.getLastName().toUpperCase()).contains(filterString.toUpperCase())){
+            filteredList.add(customer);
+        }
+    }
+    customers = FXCollections.observableList(filteredList);
+    customerTable.setItems(customers);
 }
 }

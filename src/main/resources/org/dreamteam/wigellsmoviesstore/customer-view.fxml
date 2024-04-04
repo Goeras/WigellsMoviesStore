@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
-<StackPane xmlns="http://javafx.com/javafx"
+<ScrollPane xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
            fx:controller="org.dreamteam.wigellsmoviesstore.Controllers.CustomerViewController"
            prefHeight="400.0" prefWidth="600.0" stylesheets="@styles/styles.css">
@@ -91,12 +91,12 @@
             </TableView>
         </VBox>
         <VBox styleClass="boxes">
-            <Button text="Sök alla kunder"/>
+            <Button text="Sök alla kunder" onAction="#onSeeAllCustomers"/>
             <HBox alignment="CENTER" spacing="10">
-                <TextField fx:id="searchByName"/>
-                <Button text="Filtrera på namn"/>
+                <TextField fx:id="searchByName" />
+                <Button text="Filtrera på namn" onAction="#filterOnName"/>
             </HBox>
-            <TableView fx:id="customerTable">
+            <TableView fx:id="customerTable" minHeight="200">
                 <columns>
                     <TableColumn fx:id="customerid" text="Kundnr" minWidth="60" maxWidth="60"/>
                     <TableColumn fx:id="name" text="Namn" minWidth="100"/>
@@ -109,4 +109,4 @@
     <Button text="Tillbaka" onAction="#onBackButtonClick"/>
     </VBox>
 </VBox>
-</StackPane>
+</ScrollPane>
