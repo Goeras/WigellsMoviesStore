@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import org.dreamteam.wigellsmoviesstore.Entitys.Film;
+import org.dreamteam.wigellsmoviesstore.Entitys.Staff;
 import org.dreamteam.wigellsmoviesstore.IoConverter;
 import org.dreamteam.wigellsmoviesstore.Managers.PosManager;
 import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
@@ -57,11 +58,16 @@ public class PosController {
     private Label chosenCustName;
     @FXML
     private TextField searchCustomerField;
+    @FXML
+    private ChoiceBox<Staff> staffBox;
+    ObservableList<Staff> staffList;
 
     public void initialize(){
         viewManager = new ViewManager();
         posManager = new PosManager();
         filmList = new ArrayList<>();
+        staffList = posManager.getStaffList();
+        staffBox.setItems(staffList);
         cart = FXCollections.observableArrayList(filmList);
         initializeTable();
     }
@@ -103,13 +109,13 @@ public class PosController {
         filmId.setCellValueFactory(cellData -> IoConverter.integerToSimpleIntegerProperty(cellData.getValue().getFilmId()).asObject());
         title.setCellValueFactory(cellData -> IoConverter.stringToSimpleStringProperty(cellData.getValue().getTitle()));
         price.setCellValueFactory(cellData -> IoConverter.doubleToSimpleDoubleProperty(cellData.getValue().getRentalRate()).asObject());
-        returnDate.setCellValueFactory(cellData -> IoConverter.stringToSimpleStringProperty(posManager.calculateReturnDate(cellData.getValue().getRentalDuration())));
+       // returnDate.setCellValueFactory(cellData -> IoConverter.stringToSimpleStringProperty(posManager.calculateReturnDate(cellData.getValue().getRentalDuration())));
     }
     @FXML
     private void addToCart(){
         posManager.addFilmToCart(cart, filmIdField.getText());
         tableView.setItems(cart);
-        filmIdField.setText("");
+        //filmIdField.setText("");
     }
     @FXML
     private void searchFilm(){
@@ -122,7 +128,8 @@ public class PosController {
     }
     @FXML
     private void onConfirmRentalButtons(){
-        posManager.newRental();
+        int staff = staffBox.getValue().getId();
+        posManager.confirmRentals(cart, chosenCustId.getText(), staff);
 
         cart.removeAll(cart);
         tableView.setItems(cart);
@@ -130,5 +137,9 @@ public class PosController {
         chosenCustId.setText("");
         filmIdLabel.setText("");
         filmTitleLabel.setText("");
+    }
+    @FXML
+    private void onReturnButtonClick() throws IOException {
+        viewManager.showReturnRentalView((Stage) topLabel.getScene().getWindow());
     }
 }

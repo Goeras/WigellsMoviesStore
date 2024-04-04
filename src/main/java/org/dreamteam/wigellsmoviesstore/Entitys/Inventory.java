@@ -13,9 +13,6 @@ public class Inventory {
     @Column(name = "inventory_id", columnDefinition = "MEDIUMINT UNSIGNED")
     private int id;
 
-    @OneToOne(mappedBy = "inventory")
-    private Rental rental;
-
     @Column(name = "last_update")
     private Timestamp lastUpdate;
 
@@ -53,15 +50,6 @@ public class Inventory {
     public void setStore(Store store) {
         this.store = store;
     }
-
-    public Rental getRental() {
-        return rental;
-    }
-
-    public void setRental(Rental rental) {
-        this.rental = rental;
-    }
-
     public Film getFilm() {
         return film;
     }

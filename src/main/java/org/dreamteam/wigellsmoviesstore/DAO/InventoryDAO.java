@@ -100,6 +100,7 @@ public class InventoryDAO {
         Session session = DatabaseSessionFactory.getSessionFactory().openSession();
         session.beginTransaction();
         String queryString = "FROM Inventory WHERE film.filmId = :filmId AND store.id = :storeId";
+        System.out.println(queryString);
         Query<Inventory> query = session.createQuery(queryString, Inventory.class);
         query.setParameter("filmId", film_id);
         query.setParameter("storeId", store_id);

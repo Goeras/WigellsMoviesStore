@@ -93,4 +93,11 @@ public class ViewManager {
         stage.setScene(scene);
         stage.show();
     }
+    public void showReturnRentalView(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("returnRental-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 400, 600);
+        stage.setTitle("Lämna tillbaka film!");
+        stage.setScene(scene);
+        stage.show();
+    }
 }

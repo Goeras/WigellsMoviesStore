@@ -19,7 +19,7 @@ public class Rental {
     @Temporal(TemporalType.TIMESTAMP)
     private Date rentalDate;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "inventory_id")
     private Inventory inventory;
 
