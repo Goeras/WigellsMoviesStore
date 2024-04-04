@@ -34,7 +34,7 @@
                 <TextField fx:id="district" promptText="Distrikt"/>
                 <TextField fx:id="postalCode" promptText="Postkod"/>
                 <TextField fx:id="city" promptText="Stad:"/>
-                <TextField fx:id="country" promptText="Land:"/>
+                <ChoiceBox fx:id="country" value="Land:"/>
             </VBox>
         </HBox>
         <Button text="Tillbaka" onAction="#onBackButtonClick"/>
