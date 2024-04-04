@@ -28,7 +28,7 @@ public class Payment {
     @JoinColumn(name = "rental_id")
     private List<Rental> rentals;
 
-    @Column(name = "amount",columnDefinition = "DECIMAL(5,2)")
+    @Column(name = "amount",columnDefinition = "DECIMAL(5,2) NOT NULL")
     private double amount;
 
     @Column(name = "payment_date")

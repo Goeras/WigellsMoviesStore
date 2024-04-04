@@ -1,6 +1,8 @@
 package org.dreamteam.wigellsmoviesstore.Entitys;
 
 import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,13 +36,13 @@ public class Film {
     @Column(name = "rental_duration", columnDefinition = "TINYINT UNSIGNED")
     private byte rentalDuration;
 
-    @Column(name = "rental_rate", columnDefinition = "DECIMAL(4,2)")
+    @Column(name = "rental_rate", columnDefinition = "DECIMAL(4,2) NOT NULL DEFAULT 4.99")
     private double rentalRate;
 
     @Column(name = "length",columnDefinition = "SMALLINT UNSIGNED")
     private short length;
 
-    @Column(name = "replacement_cost", columnDefinition = "DECIMAL(5,2)")
+    @Column(name = "replacement_cost", columnDefinition = "DECIMAL(5,2) NOT NULL DEFAULT 19.99")
     private double replacementCost;
 
     @Column(name = "rating", columnDefinition = "ENUM('G','PG','PG-13','R','NC-17') DEFAULT 'G'")
