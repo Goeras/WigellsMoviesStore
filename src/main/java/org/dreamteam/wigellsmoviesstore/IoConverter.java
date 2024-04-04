@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
 import org.dreamteam.wigellsmoviesstore.Entitys.Category;
+import org.locationtech.jts.geom.Geometry;
 
 import java.io.InputStream;
 import java.sql.Blob;
@@ -72,6 +73,10 @@ public class IoConverter {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static String geometryToString(Geometry geometry) {
+        return ("Position: " + geometry.toText());
     }
 
 }
