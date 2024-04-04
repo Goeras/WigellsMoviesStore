@@ -5,11 +5,12 @@
 
 .body {
     -fx-spacing: 10px;
-    -fx-min-width: 350px;
-    -fx-max-width: 350px;
+    -fx-min-width: 550px;
+    -fx-max-width: 550px;
     -fx-background-color:  #f0f0f0;
     -fx-padding: 10;
     -fx-font-family: "Roboto Light";
+    -fx-alignment: Center;
 
 }
 .background {

@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<ScrollPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.dreamteam.wigellsmoviesstore.Controllers.ReturnRentalController"
             prefHeight="400.0" prefWidth="600.0"
@@ -23,7 +23,7 @@
                 </HBox>
                 <Label fx:id="custId" text="Kundid"/>
                 <Label fx:id="lastName" text="Efternamn"/>
-                <TableView fx:id="rentalTableView">
+                <TableView fx:id="rentalTableView" maxHeight="200">
                     <columns>
                         <TableColumn fx:id="rentalIdColumn" text="Nummer"/>
                         <TableColumn fx:id="dateColumn" text="Datum"/>
@@ -32,11 +32,11 @@
                         <TableColumn fx:id="returnDate" text="Tillbakalämnad"/>
                     </columns>
                 </TableView>
-                <HBox>
+                <HBox styleClass="hboxes">
                     <Button text="Lämna tillbaka markerad film" onAction="#onReturnButtonClick"/>
                     <Button text="Ersätt markerad film" onAction="#onReplaceButtonClick"/>
                 </HBox>
-                <TableView fx:id="posTable">
+                <TableView fx:id="posTable" maxHeight="200">
                     <columns>
                         <TableColumn fx:id="rentalId"/>
                         <TableColumn fx:id="filmIdColumn"/>
@@ -44,13 +44,13 @@
                         <TableColumn fx:id="price"/>
                     </columns>
                 </TableView>
-                <HBox>
+                <HBox styleClass="hboxes">
                     <Button fx:id="swishButton" styleClass="swishButton" onAction="#onConfirmReturnButtonClick"/>
                     <Button fx:id="cardButton" styleClass="cardButton" onAction="#onConfirmReturnButtonClick"/>
                 </HBox>
             </VBox>
-            <Button text="Tillbaka"/>
+            <Button text="Tillbaka" onAction="#onBackButtonClick"/>
         </VBox>
     </VBox>
 
-</AnchorPane>
+</ScrollPane>

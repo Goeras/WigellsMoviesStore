@@ -161,4 +161,9 @@ public class Staff {
     public void setPayments(List<Payment> payments) {
         this.payments = payments;
     }
+
+    @Override
+    public String toString() {
+        return firstName + ' ' + lastName;
+    }
 }
