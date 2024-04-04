@@ -39,7 +39,7 @@ public class Address {
     @Column(name = "last_update")
     private Timestamp lastUpdate;
 
-    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne/*(cascade = { CascadeType.MERGE, CascadeType.PERSIST})*/
     @JoinColumn(name = "city_id")
     private City city;
 
