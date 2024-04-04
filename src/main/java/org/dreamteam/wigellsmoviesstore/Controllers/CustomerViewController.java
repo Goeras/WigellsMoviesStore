@@ -2,11 +2,10 @@ package org.dreamteam.wigellsmoviesstore.Controllers;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.dreamteam.wigellsmoviesstore.Entitys.Rental;
+import org.dreamteam.wigellsmoviesstore.IoConverter;
 import org.dreamteam.wigellsmoviesstore.Managers.CustomerManager;
 import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
 
@@ -43,12 +42,28 @@ private Label address2;
     @FXML
     private Label country;
     ObservableList<Rental> rentalHistory;
+    @FXML
+    private TableView<Rental> rentalHistoryTable;
+    @FXML
+    private TableColumn<Rental, Integer> rentalId;
+    @FXML
+    private TableColumn<Rental, String> rentalDate;
+    @FXML
+    private TableColumn<Rental, String> returnDate;
+    @FXML
+    private TableColumn<Rental, String> store;
+    @FXML
+    private TableColumn<Rental, Integer> filmId;
+    @FXML
+    private TableColumn<Rental, String> filmTitle;
+
 
 
 public void initialize(){
 
     viewManager = new ViewManager();
     customerManager = new CustomerManager();
+    setRentHistoryTable();
 }
 @FXML
 private void onBackButtonClick() throws IOException {
@@ -77,6 +92,18 @@ private void onBackButtonClick() throws IOException {
         city.setText(info[8]);
         postalCode.setText(info[9]);
         country.setText(info[10]);
+        rentalHistory = customerManager.getCustomerRentals(customerId);
+        rentalHistoryTable.setItems(rentalHistory);
 }
+@FXML
+    private void setRentHistoryTable(){
+    rentalId.setCellValueFactory(cellData -> IoConverter.integerToSimpleIntegerProperty(cellData.getValue().getRentalId()).asObject());
+    rentalDate.setCellValueFactory(cellData -> IoConverter.stringToSimpleStringProperty(cellData.getValue().getRentalDate().toString()));
+    returnDate.setCellValueFactory(cellData -> IoConverter.dateToSimpleStringProperty(cellData.getValue().getReturnDate()));
+    store.setCellValueFactory(cellData -> IoConverter.stringToSimpleStringProperty(cellData.getValue().getCustomer().getStore().toString()));
+    filmId.setCellValueFactory(cellData -> IoConverter.integerToSimpleIntegerProperty(cellData.getValue().getInventory().getFilm().getFilmId()).asObject());
+    filmTitle.setCellValueFactory(cellData -> IoConverter.stringToSimpleStringProperty(cellData.getValue().getInventory().getFilm().getTitle()));
+    rentalHistoryTable.setItems(rentalHistory);
 
+}
 }

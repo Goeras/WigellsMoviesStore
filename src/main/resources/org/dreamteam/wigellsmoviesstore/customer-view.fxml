@@ -79,13 +79,14 @@
                     </HBox>
                 </VBox>
             </HBox>
-            <TableView fx:id="rentalHistory">
+            <TableView fx:id="rentalHistoryTable" minHeight="200">
                 <columns>
+                    <TableColumn fx:id="rentalId" text="UthyrningsId"/>
                     <TableColumn fx:id="rentalDate" text="Datum"/>
                     <TableColumn fx:id="returnDate" text="Returdatum"/>
                     <TableColumn fx:id="store" text="Butik"/>
                     <TableColumn fx:id="filmId" text="FilmId"/>
-                    <TableColumn fx:id="title" text="Titel"/>
+                    <TableColumn fx:id="filmTitle" text="Titel"/>
                 </columns>
             </TableView>
         </VBox>
