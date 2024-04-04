@@ -1,4 +1,6 @@
 package org.dreamteam.wigellsmoviesstore.Controllers;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
@@ -44,15 +46,16 @@ public class AddCustomerController {
     private ViewManager viewManager;
     private CustomerManager customerManager;
     private IoValidator ioValidator;
+    private ObservableList countries = FXCollections.observableArrayList();
 
 
     public void initialize(){
         viewManager = new ViewManager();
         customerManager = new CustomerManager();
-        List<Country> countries = customerManager.getCountryList();
-        country.getItems().addAll(countries);
-
-
+//        List<Country> countries = customerManager.getCountryList();
+//        country.getItems().addAll(countries);
+        countries.addAll(customerManager.getCountryList());
+        country.setItems(countries);
 
     }
     @FXML
@@ -64,26 +67,24 @@ public class AddCustomerController {
     public void onSaveButtonClick() throws IOException{
 
 
-        // valideringar från iovalidator innan något läggs in.
+        // valideringar från iovalidator innan något läggs in.  //ska göras om till mer individuella när sakerna fungerar riktigt.
         boolean validName = ioValidator.validateStringNotEmpty(firstName.getText());
         boolean validLastName = ioValidator.validateStringNotEmpty(lastName.getText());
         boolean validEmail = ioValidator.validateEmail(email.getText());
         boolean uniqueEmail = customerManager.validateUniqueEmail(email.getText());
         boolean phoneNotEmpty = ioValidator.validateStringNotEmpty(phone.getText());
-        boolean validPhoneNum = ioValidator.validateInteger(phone.getText());
+        boolean validPhoneNum = ioValidator.validateInteger(phone.getText()) || phone.getText().isEmpty();
         boolean validAddess = ioValidator.validateStringNotEmpty(address1.getText());
         boolean validDistrict = ioValidator.validateStringNotEmpty(district.getText());
         boolean validPostCode = ioValidator.validatePostNum(postalCode.getText());
         boolean validCity = ioValidator.validateStringNotEmpty(city.getText());
 
-        Country selectedCountry = country.getSelectionModel().getSelectedItem();
+        if(validName && validLastName && validEmail && uniqueEmail && validPhoneNum && phoneNotEmpty && validAddess && validDistrict && validPostCode && validCity && country != null){
+            customerManager.newCustomer(firstName.getText(),lastName.getText(),email.getText(),phone.getText(),address1.getText(),address2.getText(),district.getText(),postalCode.getText(),city.getText(),country.getValue());
 
-
-        if(validName && validLastName && validEmail && uniqueEmail && validPhoneNum && phoneNotEmpty && validAddess && validDistrict && validPostCode && validCity && selectedCountry != null){
-            customerManager.newCustomer(firstName.getText(),lastName.getText(),email.getText(),phone.getText(),address1.getText(),address2.getText(),district.getText(),postalCode.getText(),city.getText(),selectedCountry);
         } else {
-//            userNotice.setVisible(true);
-//            userNotice.setText("Kontrollera uppgifterna och försök igen");
+            userNotice.setVisible(true);
+            userNotice.setText("Kontrollera uppgifterna och försök igen");
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
