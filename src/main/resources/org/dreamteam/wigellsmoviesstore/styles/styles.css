@@ -2,6 +2,9 @@
     -fx-background-color: #aec6a9; /* Green */
     -fx-font-weight: bold;
 }
+.button:hover {
+    -fx-background-color: #7f9f7c; /* Lite mörkare grön */
+}
 
 .body {
     -fx-spacing: 10px;
