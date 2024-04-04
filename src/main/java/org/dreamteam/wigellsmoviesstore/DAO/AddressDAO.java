@@ -1,9 +1,11 @@
 package org.dreamteam.wigellsmoviesstore.DAO;
 
 import org.dreamteam.wigellsmoviesstore.Entitys.Address;
+import org.dreamteam.wigellsmoviesstore.Entitys.City;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -25,6 +27,7 @@ public class AddressDAO {
         catch(Exception E){
             if(session.getTransaction() != null && session.getTransaction().isActive()){
                 session.getTransaction().rollback();
+                E.printStackTrace();
             }
         }
         finally{
@@ -49,6 +52,22 @@ public class AddressDAO {
         {
             session.close();
         }
+    }
+
+    public Address getAddressByName(String address){
+        Session session = DatabaseSessionFactory.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        String queryString = "FROM Address WHERE address = :addressName";
+        Query<Address> query = session.createQuery(queryString, Address.class);
+        query.setParameter("addressName", address);
+
+        Address foundAddress = query.uniqueResult();
+
+        session.getTransaction().commit();
+        session.close();
+
+        return foundAddress;
     }
 
     public List<Address> readAllAddresses(){

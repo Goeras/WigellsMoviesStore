@@ -19,7 +19,7 @@ public class Country {
     @Column(name = "last_update")
     private Timestamp lastUpdate;
 
-    @OneToMany(mappedBy = "country")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "country")
     private List<City> cities;
 
     public Country() {
@@ -57,6 +57,10 @@ public class Country {
 
     public List<City> getCities() {
         return cities;
+    }
+
+    public void addCity(City city){
+        this.cities.add(city);
     }
 
     public void setCities(List<City> cities) {

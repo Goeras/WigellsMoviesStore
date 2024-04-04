@@ -4,10 +4,12 @@ import javafx.collections.ObservableList;
 import org.dreamteam.wigellsmoviesstore.CurrentStore;
 import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
 import org.dreamteam.wigellsmoviesstore.Entitys.*;
+import org.locationtech.jts.geom.Geometry;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class StaffManager {
 
@@ -45,41 +47,77 @@ public class StaffManager {
             return "Aktiv";
         }
     }
-    public boolean createNewStaff(String firstName, String lastName, String eMail, String userName, String password, String password2, String address1, String address2, String district, String postalCode, String city, Country country ) {
+
+
+    public boolean createNewStaff(String firstName, String lastName, String eMail, String userName, String phoneNumber, String password, String password2, String address1, String address2, String district, String postalCode, String city, Country country ) {
+        // kontrollerar om något nödvändigt fällt ej är ifyllt av användaren. returnerar isf false.
         if (firstName.isEmpty() || lastName.isEmpty() || eMail.isEmpty() || userName.isEmpty() || password.isEmpty() || password2.isEmpty() || address1.isEmpty() || district.isEmpty() || postalCode.isEmpty() || city.isEmpty() || country == null) {
             return false; // Om någon parameter är tom, returnera false
         } else {
-            // Staff
+
+            country.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
+            daOmanager.getCountryDAO().updateCountry(country);
+
+            City newCity = daOmanager.getCityDAO().getCityByName(city); // hämta city från databas om den redan finns.
+
+            if (newCity == null) { // skapa ny city om den inte redan existerar.
+                newCity = createNewCity(city, country);
+                country.addCity(newCity);
+            }
+
+            Address newAddress = createNewAdress(newCity, address1, address2, district, postalCode, phoneNumber);
+
             Staff newStaff = new Staff();
             newStaff.setFirstName(firstName);
             newStaff.setLastName(lastName);
             newStaff.setEmail(eMail);
             newStaff.setUserName(userName);
             newStaff.setPassword(password);
-
-            // Adress
-            Address newAddress = new Address();
-            newAddress.setAddress(address1);
-            if(!address2.isEmpty()){
-                newAddress.setAddress2(address2);
-            }
-            newAddress.setDistrict(district);
-            newAddress.setPostalCode(postalCode);
             newStaff.setAdress(newAddress);
+            newStaff.setActive(true);
+            newStaff.setStore(CurrentStore.getInstance().getCurrentStore());
+            newStaff.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
+            daOmanager.getStaffDAO().updateStaff(newStaff);
 
-            City newCity = daOmanager.getCityDAO().getCityByName(city);
-            if(newCity == null){
-                newCity = new City();
-                newCity.setName(city);
-                newCity.setCountry(country);
-            }
-
-            newAddress.setCity(newCity);
-
-            daOmanager.getStaffDAO().createStaff(newStaff);
-
-            return true; // Om ingen parameter är tom, returnera true
+            return true;
         }
+    }
+
+    public City createNewCity(String cityName, Country country){
+        City city = new City();
+        city.setName(cityName);
+        city.setCountry(country);
+        city.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
+        daOmanager.getCityDAO().updateCity(city);
+
+        City cityFromDataBase = daOmanager.getCityDAO().getCityByName(cityName);
+        return cityFromDataBase;
+    }
+
+    public Address createNewAdress(City city, String address1, String address2, String district, String postalCode, String phoneNumber){
+        Address address = new Address();
+        address.setCity(city);
+        address.setAddress(address1);
+        address.setAddress2(address2);
+        address.setDistrict(district);
+        address.setPostalCode(postalCode);
+        address.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
+        address.setLocation(getDefaultGeometry());
+        address.setPhone(phoneNumber);
+
+        daOmanager.getAddressDAO().createAddress(address);
+
+        return daOmanager.getAddressDAO().getAddressByName(address1); // Returnerar addressen från databasen för att få med ID.
+    }
+
+    public Geometry getDefaultGeometry() { // Skapar och returnerar default geometry punkt.
+
+        org.locationtech.jts.geom.Coordinate coordinate = new org.locationtech.jts.geom.Coordinate(1.0, 2.0);
+
+        org.locationtech.jts.geom.GeometryFactory geometryFactory = new org.locationtech.jts.geom.GeometryFactory();
+        org.locationtech.jts.geom.Point point = geometryFactory.createPoint(coordinate);
+
+        return point;
     }
     public boolean validateUniqueUsername(String username){
 
@@ -105,13 +143,6 @@ public class StaffManager {
     public List<Country> getAllCountriesAsList(){
         List<Country> countryList = daOmanager.getCountryDAO().getAllCountries();
         return countryList;
-    }
-
-    // Metod för att konvertera en lista av länder till en lista av ländernas namn
-    public List<String> convertCountryListToStringList(List<Country> countryList) {
-        return countryList.stream()
-                .map(Country::getName) // Hämta namnet för varje land
-                .collect(Collectors.toList()); // Samla in namnen i en lista
     }
 
 }
