@@ -1,10 +1,9 @@
 package org.dreamteam.wigellsmoviesstore.Managers;
 
+import org.dreamteam.wigellsmoviesstore.CurrentStore;
 import org.dreamteam.wigellsmoviesstore.DAO.CountryDAO;
-import org.dreamteam.wigellsmoviesstore.Entitys.Address;
-import org.dreamteam.wigellsmoviesstore.Entitys.City;
-import org.dreamteam.wigellsmoviesstore.Entitys.Country;
-import org.dreamteam.wigellsmoviesstore.Entitys.Customer;
+import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
+import org.dreamteam.wigellsmoviesstore.Entitys.*;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -14,55 +13,58 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerManager {
-    Customer newCustomer = new Customer();
-    Address newAddress = new Address();
-    City newCity = new City();
-    Country newCountry = new Country();
-    CountryDAO countryDAO = new CountryDAO();
 
-    public void newCustomer(String firstName, String lastName, String email, String phone, String address1, String address2, String district, String postalcode, String city, String country){
+    private Country country;
+    private Store store;
+    private CurrentStore currentStore;
+    private DAOmanager daoManager = new DAOmanager();
 
+    public void newCustomer(String firstName, String lastName, String email, String phone, String address1, String address2, String district, String postalcode, String city, Country country){
 
+        // hämta adress id ? eller? list lost
+        Address newAddress = new Address();
+        newAddress.setAddress(address1);
+        if(!address2.isEmpty()){
+            newAddress.setAddress2(address2);
+        }
+        newAddress.setDistrict(district);
+        newAddress.setPostalCode(postalcode);
+        newAddress.setPhone(phone);
+        newAddress.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
+
+        Store store = currentStore.getInstance().getCurrentStore();
+
+        Customer newCustomer = new Customer();
         newCustomer.setFirstName(firstName);
         newCustomer.setLastName(lastName);
         newCustomer.setEmail(email);
         newCustomer.setActive(true);
         newCustomer.setCreateDate(new Date(System.currentTimeMillis()));
         newCustomer.setLast_update(Timestamp.valueOf(LocalDateTime.now()));
-
-        newAddress.setAddress(address1);
-        newAddress.setAddress(address2);
-        newAddress.setDistrict(district);
-        newAddress.setPostalCode(postalcode);
-        newAddress.setPhone(phone);
-        //newAddress.setLocation();
-        newAddress.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
-
-        //Gör en metod som söker på land och hämtar country id för att lägga till i en ny stad som läggs in.
-        int countryId = getCountryId(country);
-        //newCity.setCountry(countryId);
-        newCity.setName(city);
-        newCity.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
-
-        //bör länderna hämtas och visas som en lista?
-        //lägga till en stad med country id?
-
-        //newCity.setCountry();
-
-        newCountry.setName(country);
-        newCountry.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
+        newCustomer.setStore(store);
 
 
+        City newCity = daoManager.getCityDAO().getCityByName(city);
+        if(newCity == null){
+            newCity = new City();
+            newCity.setName(city);
+            newCity.setCountry(country);
+            newCity.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
+        }
+
+        newAddress.setCity(newCity);
+
+        daoManager.getCustomerDAO().createCustomer(newCustomer);
     }
     public List<Country> getCountryList(){
 
-        List<Country> countryList = countryDAO.getAllCountries();
+        List<Country> countryList = daoManager.getCountryDAO().getAllCountries();
 
         return countryList;
     }
     public int getCountryId(String country){
 
-        List<Country> countryList = countryDAO.getAllCountries();
+        List<Country> countryList = daoManager.getCountryDAO().getAllCountries();
 
         for (Country currentCountry : countryList) {
             if (currentCountry.getName().equalsIgnoreCase(country)) {
@@ -72,7 +74,14 @@ public class CustomerManager {
         // Returnera -1 om landet inte hittades
         return -1;
     }
-    public void citySearch(){
-        //metod som gör en query efter land och skickar tillbaks country id?
+    public boolean validateUniqueEmail(String email){
+        List<Customer> customerList = daoManager.getCustomerDAO().readAllCustomers();
+        for(Customer custSearch : customerList){
+            if(custSearch.getEmail().equalsIgnoreCase(email)){
+                return false;
+            }
+        }
+        return true;
     }
+
 }
