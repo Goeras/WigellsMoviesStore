@@ -8,13 +8,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.dreamteam.wigellsmoviesstore.Entitys.Country;
-import org.dreamteam.wigellsmoviesstore.Entitys.Store;
 import org.dreamteam.wigellsmoviesstore.IoValidator;
 import org.dreamteam.wigellsmoviesstore.Managers.CustomerManager;
 import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
 
 import java.io.IOException;
-import java.util.List;
 
 public class AddCustomerController {
     @FXML
@@ -78,7 +76,7 @@ public class AddCustomerController {
         boolean validCity = ioValidator.validateStringNotEmpty(city.getText());
 
         if(validName && validLastName && validEmail && uniqueEmail && validPhoneNum && phoneNotEmpty && validAddess && validDistrict && validPostCode && validCity && country != null){
-            customerManager.newCustomer2(firstName.getText(),lastName.getText(),email.getText(),phone.getText(),address1.getText(),address2.getText(),district.getText(),postalCode.getText(),city.getText(),country.getValue());
+            customerManager.newCustomer(firstName.getText(),lastName.getText(),email.getText(),phone.getText(),address1.getText(),address2.getText(),district.getText(),postalCode.getText(),city.getText(),country.getValue());
 
         } else {
             userNotice.setVisible(true);

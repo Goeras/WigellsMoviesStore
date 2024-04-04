@@ -3,7 +3,6 @@ package org.dreamteam.wigellsmoviesstore.Managers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.dreamteam.wigellsmoviesstore.CurrentStore;
-import org.dreamteam.wigellsmoviesstore.DAO.CountryDAO;
 import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
 import org.dreamteam.wigellsmoviesstore.Entitys.*;
 import org.dreamteam.wigellsmoviesstore.IoConverter;
@@ -13,7 +12,6 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerManager {
@@ -23,44 +21,7 @@ public class CustomerManager {
     private CurrentStore currentStore;
     private DAOmanager daoManager = new DAOmanager();
 
-    public void newCustomer(String firstName, String lastName, String email, String phone, String address1, String address2, String district, String postalcode, String city, Country country){
-
-        // hämta adress id ? eller? list lost
-        Address newAddress = new Address();
-        newAddress.setAddress(address1);
-        if(!address2.isEmpty()){
-            newAddress.setAddress2(address2);
-        }
-        newAddress.setDistrict(district);
-        newAddress.setPostalCode(postalcode);
-        newAddress.setPhone(phone);
-        newAddress.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
-
-        Store store = currentStore.getInstance().getCurrentStore();
-
-        Customer newCustomer = new Customer();
-        newCustomer.setFirstName(firstName);
-        newCustomer.setLastName(lastName);
-        newCustomer.setEmail(email);
-        newCustomer.setActive(true);
-        newCustomer.setCreateDate(new Date(System.currentTimeMillis()));
-        newCustomer.setLast_update(Timestamp.valueOf(LocalDateTime.now()));
-        newCustomer.setStore(store);
-
-
-        City newCity = daoManager.getCityDAO().getCityByName(city);
-        if(newCity == null){
-            newCity = new City();
-            newCity.setName(city);
-            newCity.setCountry(country);
-            newCity.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
-        }
-
-        newAddress.setCity(newCity);
-
-        daoManager.getCustomerDAO().createCustomer(newCustomer);
-    }
-    public void newCustomer2(String firstName, String lastName, String email, String phoneNumber, String address1, String address2, String district, String postalCode, String city, Country country) {
+    public void newCustomer(String firstName, String lastName, String email, String phoneNumber, String address1, String address2, String district, String postalCode, String city, Country country) {
 
         country.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
         daoManager.getCountryDAO().updateCountry(country);
