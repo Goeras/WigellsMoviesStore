@@ -38,8 +38,6 @@ public class Rental {
     private Timestamp lastUpdate;
 
 
-
-
     public Rental() {
     }
 

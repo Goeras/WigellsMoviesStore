@@ -24,9 +24,9 @@ public class Payment {
     @JoinColumn(name = "staff_id")
     private Staff staff;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "rental_id")
-    private List<Rental> rentals;
+    private Rental rental;
 
     @Column(name = "amount",columnDefinition = "DECIMAL(5,2) NOT NULL")
     private double amount;
@@ -64,12 +64,12 @@ public class Payment {
         this.staff = staff;
     }
 
-    public List<Rental> getRentals() {
-        return rentals;
+    public Rental getRental() {
+        return rental;
     }
 
-    public void setRentals(List<Rental> rental) {
-        this.rentals = rental;
+    public void setRental(Rental rental) {
+        this.rental = rental;
     }
 
     public double getAmount() {
