@@ -40,7 +40,7 @@ public class CustomerManager {
 
         //Gör en metod som söker på land och hämtar country id för att lägga till i en ny stad som läggs in.
         int countryId = getCountryId(country);
-        newCity.setCountry(countryId);
+        //newCity.setCountry(countryId);
         newCity.setName(city);
         newCity.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
 
