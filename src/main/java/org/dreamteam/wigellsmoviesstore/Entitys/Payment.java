@@ -3,6 +3,7 @@ package org.dreamteam.wigellsmoviesstore.Entitys;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 //TODO kan behöva se över "fetchtype" osv? Behöver dom ha cascade eller något dylikt?
 
@@ -23,9 +24,9 @@ public class Payment {
     @JoinColumn(name = "staff_id")
     private Staff staff;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "rental_id")
-    private Rental rental;
+    private List<Rental> rentals;
 
     @Column(name = "amount",columnDefinition = "DECIMAL(5,2)")
     private double amount;
@@ -63,12 +64,12 @@ public class Payment {
         this.staff = staff;
     }
 
-    public Rental getRental() {
-        return rental;
+    public List<Rental> getRentals() {
+        return rentals;
     }
 
-    public void setRental(Rental rental) {
-        this.rental = rental;
+    public void setRentals(List<Rental> rental) {
+        this.rentals = rental;
     }
 
     public double getAmount() {
