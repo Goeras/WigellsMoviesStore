@@ -26,7 +26,7 @@ public class AddFilmController {
     @FXML
     private ChoiceBox<String> ratingBox;
     @FXML
-    private ChoiceBox<Category> categoryBox;
+    private ListView<Category> categoryBox;
     @FXML
     private TextField title;
     @FXML
@@ -55,6 +55,11 @@ public class AddFilmController {
 
     public void initialize(){
         viewManager = new ViewManager();
+
+        categoryBox.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        ObservableList<Category> categoryList = FXCollections.observableList(daoManager.getCategoryDAO().readAllCategories());
+        categoryBox.setItems(categoryList);
+
         ObservableList<Language> languageList = FXCollections.observableList(daoManager.getLanguageDAO().readAllLanguages());
         languageBox.setItems(languageList);
         originalLanguage.setItems(languageList);
@@ -68,8 +73,8 @@ public class AddFilmController {
         ObservableList<String> filmRatingList = FXCollections.observableList(ratingList);
         ratingBox.setItems(filmRatingList);
 
-        ObservableList<Category> categoryList = FXCollections.observableList(daoManager.getCategoryDAO().readAllCategories());
-        categoryBox.setItems(categoryList);
+
+
     }
     @FXML
     private void onBackButtonClick() throws IOException {
@@ -84,8 +89,10 @@ public class AddFilmController {
         specialFeaturesList.add(Boolean.toString(commentaries.isSelected()));
         String specialFeaturesString = IoConverter.specialFeaturesToString(specialFeaturesList);
 
-        List<String> categoriesList = new ArrayList<>();
-        categoriesList.add(IoConverter.integerToString(categoryBox.getValue().getId()));
+
+        List<Category>categoryList = categoryBox.getSelectionModel().getSelectedItems();
+
+
 
         List<String> infoList = new ArrayList<>();
         infoList.add(title.getText());

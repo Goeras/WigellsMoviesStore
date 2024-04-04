@@ -1,6 +1,7 @@
 package org.dreamteam.wigellsmoviesstore.Managers;
 
 import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
+import org.dreamteam.wigellsmoviesstore.Entitys.Category;
 import org.dreamteam.wigellsmoviesstore.Entitys.Film;
 import org.dreamteam.wigellsmoviesstore.IoConverter;
 
@@ -10,7 +11,7 @@ import java.util.List;
 public class FilmManager {
   DAOmanager daoManager = new DAOmanager();
 
-  public void addFilm(List<String> infoList) {
+  public void addFilm(List<String> infoList, List<Category>categoryList) {
     Film film = new Film();
     film.setTitle(infoList.get(0));
     film.setDescription(infoList.get(1));
@@ -22,6 +23,7 @@ public class FilmManager {
     film.setReplacementCost(IoConverter.stringToDouble(infoList.get(7)));
     film.setRentalRate(IoConverter.stringToDouble(infoList.get(8)));
     film.setSpecialFeatures(infoList.get(9));
+    film.setCategoryList(categoryList);
 
 
   }
