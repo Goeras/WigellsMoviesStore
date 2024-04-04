@@ -92,4 +92,9 @@ public class Language {
         this.originalLanguageFilms = originalLanguageFilms;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
 }

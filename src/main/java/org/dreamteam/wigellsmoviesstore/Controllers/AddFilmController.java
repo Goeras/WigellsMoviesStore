@@ -8,6 +8,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
 import org.dreamteam.wigellsmoviesstore.Entitys.Language;
 import org.dreamteam.wigellsmoviesstore.IoConverter;
 import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
@@ -49,17 +50,20 @@ public class AddFilmController {
     @FXML
     private CheckBox commentaries;
 
+    DAOmanager daoManager = new DAOmanager();
 
     public void initialize(){
         viewManager = new ViewManager();
-        List<Language> languageList = new ArrayList<>();
-        ObservableList<Language> languageList1 = FXCollections.observableList(languageList);
-        languageBox.setItems(languageList1);
-        originalLanguage.setItems(languageList1);
+        ObservableList<Language> observableLanguageStringList = FXCollections.observableList(daoManager.getLanguageDAO().readAllLanguages());
+
+        languageBox.setItems(observableLanguageStringList);
+        originalLanguage.setItems(observableLanguageStringList);
         List<String> ratingList = new ArrayList<>();
-        ratingList.add("PG_13");
+        ratingList.add("G");
         ratingList.add("PG");
+        ratingList.add("PG_13");
         ratingList.add("R");
+        ratingList.add("NC-17");
         ObservableList<String> filmratingList = FXCollections.observableList(ratingList);
         ratingBox.setItems(filmratingList);
     }
