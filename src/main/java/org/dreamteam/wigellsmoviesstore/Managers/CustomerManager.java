@@ -7,6 +7,7 @@ import org.dreamteam.wigellsmoviesstore.DAO.CountryDAO;
 import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
 import org.dreamteam.wigellsmoviesstore.Entitys.*;
 import org.dreamteam.wigellsmoviesstore.IoConverter;
+import org.locationtech.jts.geom.Geometry;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -59,7 +60,53 @@ public class CustomerManager {
 
         daoManager.getCustomerDAO().createCustomer(newCustomer);
     }
-    public List<Country> getCountryList(){
+    public void newCustomer2(String firstName, String lastName, String email, String phoneNumber, String address1, String address2, String district, String postalCode, String city, Country country) {
+
+        country.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
+        daoManager.getCountryDAO().updateCountry(country);
+
+        City newCity = daoManager.getCityDAO().getCityByName(city);
+
+        if(newCity == null){
+            newCity = new City();
+            newCity.setName(city);
+            newCity.setCountry(country);
+            newCity.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
+            daoManager.getCityDAO().updateCity(newCity);
+        }
+        City dataBaseCity = daoManager.getCityDAO().getCityByName(city);   // vet ej om detta hjälper än men hämtar från dbs
+        country.addCity(dataBaseCity);
+
+        Address newAddress = new Address();
+        newAddress.setCity(dataBaseCity);
+        newAddress.setAddress(address1);
+        newAddress.setAddress2(address2);
+        newAddress.setDistrict(district);
+        newAddress.setPostalCode(postalCode);
+        newAddress.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
+        newAddress.setLocation(getDefaultGeometry());
+        newAddress.setPhone(phoneNumber);
+
+        daoManager.getAddressDAO().createAddress(newAddress);
+        Address dataBaseAddress = daoManager.getAddressDAO().getAddressByName(address1);
+
+        Store store = currentStore.getInstance().getCurrentStore();
+        Customer newCustomer = new Customer();
+        newCustomer.setFirstName(firstName);
+        newCustomer.setLastName(lastName);
+        newCustomer.setEmail(email);
+        newCustomer.setAdress(dataBaseAddress);
+        newCustomer.setActive(true);
+        newCustomer.setStore(store);
+        newCustomer.setCreateDate(new Date(System.currentTimeMillis()));
+        newCustomer.setLast_update(Timestamp.valueOf(LocalDateTime.now()));
+        newCustomer.setStore(store);
+        daoManager.getCustomerDAO().updateCustomer(newCustomer);
+
+
+    }
+
+        public List<Country> getCountryList(){
 
         List<Country> countryList = daoManager.getCountryDAO().getAllCountries();
 
@@ -111,5 +158,14 @@ public class CustomerManager {
     }
     public ObservableList<Customer> getAllCustomer(){
         return FXCollections.observableList(daoManager.getCustomerDAO().readAllCustomers());
+    }
+    public Geometry getDefaultGeometry() { // Skapar och returnerar default geometry punkt.
+
+        org.locationtech.jts.geom.Coordinate coordinate = new org.locationtech.jts.geom.Coordinate(1.0, 2.0);
+
+        org.locationtech.jts.geom.GeometryFactory geometryFactory = new org.locationtech.jts.geom.GeometryFactory();
+        org.locationtech.jts.geom.Point point = geometryFactory.createPoint(coordinate);
+
+        return point;
     }
 }

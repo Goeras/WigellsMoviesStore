@@ -52,8 +52,6 @@ public class AddCustomerController {
     public void initialize(){
         viewManager = new ViewManager();
         customerManager = new CustomerManager();
-//        List<Country> countries = customerManager.getCountryList();
-//        country.getItems().addAll(countries);
         countries.addAll(customerManager.getCountryList());
         country.setItems(countries);
 
@@ -71,7 +69,7 @@ public class AddCustomerController {
         boolean validName = ioValidator.validateStringNotEmpty(firstName.getText());
         boolean validLastName = ioValidator.validateStringNotEmpty(lastName.getText());
         boolean validEmail = ioValidator.validateEmail(email.getText());
-        boolean uniqueEmail = customerManager.validateUniqueEmail(email.getText());
+        boolean uniqueEmail = customerManager.validateUniqueEmail(email.getText()) || email.getText().isEmpty();
         boolean phoneNotEmpty = ioValidator.validateStringNotEmpty(phone.getText());
         boolean validPhoneNum = ioValidator.validateInteger(phone.getText()) || phone.getText().isEmpty();
         boolean validAddess = ioValidator.validateStringNotEmpty(address1.getText());
@@ -80,7 +78,7 @@ public class AddCustomerController {
         boolean validCity = ioValidator.validateStringNotEmpty(city.getText());
 
         if(validName && validLastName && validEmail && uniqueEmail && validPhoneNum && phoneNotEmpty && validAddess && validDistrict && validPostCode && validCity && country != null){
-            customerManager.newCustomer(firstName.getText(),lastName.getText(),email.getText(),phone.getText(),address1.getText(),address2.getText(),district.getText(),postalCode.getText(),city.getText(),country.getValue());
+            customerManager.newCustomer2(firstName.getText(),lastName.getText(),email.getText(),phone.getText(),address1.getText(),address2.getText(),district.getText(),postalCode.getText(),city.getText(),country.getValue());
 
         } else {
             userNotice.setVisible(true);
