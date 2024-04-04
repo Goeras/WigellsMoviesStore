@@ -11,12 +11,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import org.dreamteam.wigellsmoviesstore.Entitys.Film;
 import org.dreamteam.wigellsmoviesstore.Entitys.Rental;
 import org.dreamteam.wigellsmoviesstore.IoConverter;
 import org.dreamteam.wigellsmoviesstore.Managers.PosManager;
 import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -117,5 +119,9 @@ public class ReturnRentalController {
     private void onReplaceButtonClick(){
         price.setCellValueFactory(cellData -> IoConverter.stringToSimpleStringProperty(IoConverter.doubleToString(cellData.getValue().getInventory().getFilm().getReplacementCost())));
         returnList.add(rentalTableView.getSelectionModel().getSelectedItem());
+    }
+    @FXML
+    private void onBackButtonClick() throws IOException {
+        viewManager.showPosView((Stage) posTable.getScene().getWindow());
     }
 }

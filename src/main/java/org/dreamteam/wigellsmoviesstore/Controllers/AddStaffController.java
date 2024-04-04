@@ -35,6 +35,8 @@ public class AddStaffController {
     @FXML
     private TextField userName;
     @FXML
+    private TextField phoneNumber;
+    @FXML
     private TextField address;
     @FXML
     private TextField address2;
@@ -72,7 +74,7 @@ public class AddStaffController {
             userNotice.setText("Lösenorden matchar ej");
         }
         if(usernameUnique && emailUnique) {
-            createSuccessfull = staffManager.createNewStaff(firstName.getText(), lastName.getText(), eMail.getText(), userName.getText(), password.getText(), password2.getText(), address.getText(), address2.getText(), district.getText(), postalCode.getText(), city.getText(), country.getValue());
+            createSuccessfull = staffManager.createNewStaff(firstName.getText(), lastName.getText(), eMail.getText(), userName.getText(), phoneNumber.getText(), password.getText(), password2.getText(), address.getText(), address2.getText(), district.getText(), postalCode.getText(), city.getText(), country.getValue());
         }
         else{
             userNotice.setVisible(true);

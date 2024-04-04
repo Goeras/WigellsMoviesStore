@@ -15,8 +15,8 @@
         <VBox styleClass="body">
             <HBox styleClass="header">
                 <Label fx:id="topLabel" text="Kassa"/>
-                <ChoiceBox fx:id="staffBox"/>
             </HBox>
+            <ChoiceBox fx:id="staffBox"/>
             <VBox styleClass="boxes">
                 <Button text="Lämna tillbaka film" onAction="#onReturnButtonClick"/>
                 <HBox fx:id="searchCustomer">

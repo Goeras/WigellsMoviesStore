@@ -26,7 +26,7 @@
                 <TextField fx:id="lastName" promptText="Efternamn"/>
                 <TextField fx:id="email" promptText="Emailadress"/>
                 <TextField fx:id="phone" promptText="Telefonnummer"/>
-                <Button text="Spara kund"/>
+                <Button text="Spara kund" onAction="#onSaveButtonClick"/>
             </VBox>
             <VBox>
                 <TextField fx:id="address1" promptText="Adress 1:"/>
@@ -35,6 +35,7 @@
                 <TextField fx:id="postalCode" promptText="Postkod"/>
                 <TextField fx:id="city" promptText="Stad:"/>
                 <ChoiceBox fx:id="country" value="Land:"/>
+                <TextField fx:id="userNotice" visible="false"/>
             </VBox>
         </HBox>
         <Button text="Tillbaka" onAction="#onBackButtonClick"/>

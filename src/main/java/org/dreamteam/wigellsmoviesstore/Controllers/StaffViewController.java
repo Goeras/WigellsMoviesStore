@@ -35,6 +35,8 @@ public class StaffViewController {
     @FXML
     private Label lastName;
     @FXML
+    private Label phoneNumber;
+    @FXML
     private Label email;
     @FXML
     private Label username;
@@ -63,7 +65,7 @@ public class StaffViewController {
     @FXML
     private TableColumn<Staff, String> emailColumn;
     @FXML
-    private TableColumn phoneColumn;
+    private TableColumn<Staff, String> phoneColumn;
     @FXML
     private TextField filterStaff;
     @FXML
@@ -107,27 +109,28 @@ public class StaffViewController {
         firstNameColumn.setCellValueFactory(cellData -> stringToSimpleStringProperty(cellData.getValue().getFirstName()));
         lastNameColumn.setCellValueFactory(cellData -> stringToSimpleStringProperty(cellData.getValue().getLastName()));
         emailColumn.setCellValueFactory(cellData -> stringToSimpleStringProperty(cellData.getValue().getEmail()));
-        //phoneColumn
+        phoneColumn.setCellValueFactory(cellData -> stringToSimpleStringProperty(cellData.getValue().getAdress().getPhone()));
 
 
         staffTable.setItems(observableList);
     }
 
     private void setStaffInfo(Staff staff){
-        firstName.setText(staff.getFirstName());
-        lastName.setText(staff.getLastName());
-        email.setText(staff.getEmail());
-        username.setText(staff.getUserName());
-        //String active = staffManager.
-        active.setText(staffManager.isActiveStringFromBoolean(staff.getActive()));
-
         Address address = staff.getAdress();
-        address1.setText(address.getAddress());
-        address2.setText(address.getAddress2());
-        district.setText(address.getDistrict());
-        postalCode.setText(address.getPostalCode());
-        city.setText(address.getCity().getName());
-        country.setText(address.getCity().getCountry().getName());
+
+        firstName.setText("Förnamn: "+staff.getFirstName());
+        lastName.setText("Efternamn: "+staff.getLastName());
+        phoneNumber.setText("Telefon nr: "+address.getPhone());
+        email.setText("Mail: "+staff.getEmail());
+        username.setText("Användarnamn: "+staff.getUserName());
+        active.setText("Status: "+staffManager.isActiveStringFromBoolean(staff.getActive()));
+
+        address1.setText("Adress 1: "+address.getAddress());
+        address2.setText("Adress 2: "+address.getAddress2());
+        district.setText("Distrikt: "+address.getDistrict());
+        postalCode.setText("Post nr: "+address.getPostalCode());
+        city.setText("Stad: "+address.getCity().getName());
+        country.setText("Land: "+address.getCity().getCountry().getName());
 
         Image image = new Image("file:src/images/test.jpg");
         imageView.setFitWidth(100);

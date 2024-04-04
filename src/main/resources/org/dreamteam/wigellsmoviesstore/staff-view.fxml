@@ -32,6 +32,7 @@
                     <VBox>
                         <Label fx:id="firstName"/>
                         <Label fx:id="lastName"/>
+                        <Label fx:id="phoneNumber"/>
                         <Label fx:id="email"/>
                         <Label fx:id="username"/>
                         <Label fx:id="active"/>
@@ -57,7 +58,7 @@
                     <TextField fx:id="filterStaff"/>
                     <Button text="Filtrera på namn" onAction="#onFilterByNameButtonClicked"/>
                 </HBox>
-                <TableView fx:id="staffTable">
+                <TableView fx:id="staffTable" styleClass="staffTable">
                     <columns>
                         <TableColumn fx:id="staffIdColumn" text="ID"/>
                         <TableColumn fx:id="firstNameColumn" text="Förnamn"/>

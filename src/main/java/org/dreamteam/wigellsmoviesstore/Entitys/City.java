@@ -17,7 +17,7 @@ public class City {
     @Column(name = "city", length = 50)
     private String name;
 
-    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+    @ManyToOne(fetch = FetchType.EAGER/*cascade = { CascadeType.MERGE, CascadeType.PERSIST }*/)
     @JoinColumn(name = "country_id")
     private Country country;
 

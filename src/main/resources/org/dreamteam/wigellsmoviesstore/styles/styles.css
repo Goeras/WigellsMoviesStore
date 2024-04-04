@@ -2,14 +2,18 @@
     -fx-background-color: #aec6a9; /* Green */
     -fx-font-weight: bold;
 }
+.button:hover {
+    -fx-background-color: #7f9f7c; /* Lite mörkare grön */
+}
 
 .body {
     -fx-spacing: 10px;
-    -fx-min-width: 350px;
-    -fx-max-width: 350px;
+    -fx-min-width: 550px;
+    -fx-max-width: 550px;
     -fx-background-color:  #f0f0f0;
     -fx-padding: 10;
     -fx-font-family: "Roboto Light";
+    -fx-alignment: Center;
 
 }
 .background {
@@ -107,4 +111,8 @@
 }
 .table-row-cell:odd{
     -fx-background-color:  #d6e2cf;
+}
+.staffTable{
+    -fx-min-width: 450;
+    -fx-max-height: 200;
 }

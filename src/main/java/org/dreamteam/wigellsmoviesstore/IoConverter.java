@@ -9,6 +9,7 @@ import org.locationtech.jts.geom.Geometry;
 
 import java.io.InputStream;
 import java.sql.Blob;
+import java.util.Date;
 import java.util.List;
 
 import java.util.List;
@@ -37,7 +38,11 @@ public class IoConverter {
     public static byte stringToByte(String input) { return Byte.parseByte(input);}
 
     public static SimpleStringProperty stringToSimpleStringProperty(String input){
-        return new SimpleStringProperty(input);
+        if(input!=null){
+        return new SimpleStringProperty(input);}
+        else{
+            return new SimpleStringProperty(" ");
+        }
     }
 
     public static SimpleIntegerProperty integerToSimpleIntegerProperty(int input){
@@ -81,6 +86,14 @@ public class IoConverter {
 
     public static String geometryToString(Geometry geometry) {
         return ("Position: " + geometry.toText());
+    }
+    public static SimpleStringProperty dateToSimpleStringProperty(Date date){
+        if(date!=null){
+            return new SimpleStringProperty(date.toString());
+        }
+        else {
+            return new SimpleStringProperty("");
+        }
     }
 
 }
