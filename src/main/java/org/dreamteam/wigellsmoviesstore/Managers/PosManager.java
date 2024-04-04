@@ -74,6 +74,7 @@ public class PosManager {
         payment.setAmount(amount);
         payment.setStaff(staff);
         payment.setRental(rental);
+        payment.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
         daOmanager.getPaymentDAO().createPayment(payment);
     }
     public void replaceFilm(Rental rental, String staffIdString){
@@ -99,7 +100,7 @@ public class PosManager {
         return resultList;
     }
     public void returnRental(Rental rental){
-        rental.setReturnDate(new Date(System.currentTimeMillis()));
+        daOmanager.getRentalDAO().updateRental(rental);
     }
     public boolean checkDate(Rental rental){
         boolean late = false;
@@ -116,5 +117,11 @@ public class PosManager {
         List<Staff> staffList = daOmanager.getStaffDAO().getAllStaffs();
         ObservableList<Staff> staffs = FXCollections.observableList(staffList);
         return staffs;
+    }
+    public void payReturnFees(Customer customer, Staff staff, Rental rental, String amountString){
+        double amount = Double.parseDouble(amountString);
+        if(amount > 0) {
+            newPayment(customer, staff, rental, amount);
+        }
     }
 }

@@ -100,4 +100,22 @@ public class ReturnRentalController {
         returnList.add(rentalTableView.getSelectionModel().getSelectedItem());
         posTable.setItems(returnList);
     }
+    @FXML
+    private void onConfirmReturnButtonClick(){
+        for(Rental rental : posTable.getItems()){
+            posManager.payReturnFees(rental.getCustomer(), rental.getStaff(), rental, price.getCellData(rental));
+        }
+        returnList.removeAll(returnList);
+        customerNumber.setText("");
+        custId.setText("");
+        lastName.setText("");
+        rentals.removeAll(rentals);
+        setPosTableView();
+        setRentalTableView();
+    }
+    @FXML
+    private void onReplaceButtonClick(){
+        price.setCellValueFactory(cellData -> IoConverter.stringToSimpleStringProperty(IoConverter.doubleToString(cellData.getValue().getInventory().getFilm().getReplacementCost())));
+        returnList.add(rentalTableView.getSelectionModel().getSelectedItem());
+    }
 }

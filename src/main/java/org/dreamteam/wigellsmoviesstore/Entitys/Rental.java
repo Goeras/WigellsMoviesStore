@@ -96,6 +96,4 @@ public class Rental {
     public void setStaff(Staff staff) {
         this.staff = staff;
     }
-
-
 }
