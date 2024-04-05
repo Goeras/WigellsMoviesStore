@@ -32,7 +32,7 @@
                         <TextField fx:id="firstName" promptText="Förnamn"/>
                         <TextField fx:id="lastName" promptText="Efternamn"/>
                     </HBox>
-                    <Button text="Spara skådespelare"/>
+                    <Button text="Spara skådespelare" onAction="#onSaveActorButton"/>
                 </VBox>
         </VBox>
     </VBox>

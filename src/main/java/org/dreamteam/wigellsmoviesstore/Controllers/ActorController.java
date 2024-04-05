@@ -6,15 +6,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
 import org.dreamteam.wigellsmoviesstore.Entitys.Actor;
 import org.dreamteam.wigellsmoviesstore.HelloApplication;
+import org.dreamteam.wigellsmoviesstore.Managers.ActorManager;
 import org.dreamteam.wigellsmoviesstore.Managers.FilmManager;
 
 import java.io.IOException;
@@ -30,9 +28,15 @@ public class ActorController {
     private List<Actor> selectedActors;
     @FXML
     private VBox newActor;
+    @FXML
+    private TextField firstName;
+    @FXML
+    private TextField lastName;
+    ActorManager actorManager;
 
     public void initialize(){
-        FilmManager filmManager = new FilmManager();
+
+        actorManager = new ActorManager();
         DAOmanager daOmanager = new DAOmanager();
         List<Actor> actors = daOmanager.getActorDao().getAllActors();
         actorList = FXCollections.observableList(actors);
@@ -88,5 +92,9 @@ public class ActorController {
     private void onNewActorButton(){
         newActor.setManaged(true);
         newActor.setVisible(true);
+    }
+    @FXML
+    private void onSaveActorButton(){
+        actorManager.newActor(firstName.getText(), lastName.getText());
     }
 }
