@@ -22,7 +22,7 @@
             <Label fx:id="topLabel" text="Uppdatera medarbetare"/>
         </HBox>
         <HBox styleClass="boxes">
-            <VBox>
+            <VBox spacing="5">
                 <TextField fx:id="firstName" promptText="Förnamn"/>
                 <TextField fx:id="lastName" promptText="Efternamn"/>
                 <TextField fx:id="eMail" promptText="Email"/>
@@ -30,9 +30,9 @@
                 <TextField fx:id="userName" promptText="Användarnamn"/>
                 <PasswordField fx:id="password1" promptText="Nytt Lösen"/>
                 <PasswordField fx:id="password2" promptText="Upprepa Lösen"/>
-                <Button text="Spara medarbetare" onAction="#onSaveButtonClick"/>
+
             </VBox>
-            <VBox>
+            <VBox spacing="5">
                 <ChoiceBox fx:id="status"/>
                 <TextField fx:id="address1" promptText="Adress"/>
                 <TextField fx:id="address2" promptText="Adress"/>
@@ -40,10 +40,13 @@
                 <TextField fx:id="postalCode" promptText="Postkod"/>
                 <TextField fx:id="city" promptText="Stad"/>
                 <ChoiceBox fx:id="country"/>
-                <Button text="Ladda upp bild" onAction="#onUploadPictureButtonClick"/>
                 <ImageView fx:id="imageView"/>
             </VBox>
         </HBox>
+        <VBox alignment="CENTER" spacing="10">
+            <Button text="Ladda upp bild" onAction="#onUploadPictureButtonClick"/>
+            <Button text="Spara medarbetare" onAction="#onSaveButtonClick"/>
+        </VBox>
     <Button text="Tillbaka" onAction="#onBackButtonClick"/>
     </VBox>
     </VBox>

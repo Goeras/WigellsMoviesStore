@@ -53,7 +53,7 @@
                 <Button fx:id="updateButton" text="Ändra medarbetare" onAction="#onUpdateStaffButtonClick" visible="false"/>
             </VBox>
             <VBox styleClass="boxes">
-                <Button text="Sök alla" onAction="#onSearchAllStaffButtonClicked"/>
+                <Button text="Visa alla" onAction="#onSearchAllStaffButtonClicked"/>
                 <HBox styleClass="hboxes">
                     <TextField fx:id="filterStaff"/>
                     <Button text="Filtrera på namn" onAction="#onFilterByNameButtonClicked"/>

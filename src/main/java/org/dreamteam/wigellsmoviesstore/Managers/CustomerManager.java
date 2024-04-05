@@ -2,6 +2,7 @@ package org.dreamteam.wigellsmoviesstore.Managers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.dreamteam.wigellsmoviesstore.CurrentCustomer;
 import org.dreamteam.wigellsmoviesstore.CurrentStore;
 import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
 import org.dreamteam.wigellsmoviesstore.Entitys.*;
@@ -65,10 +66,12 @@ public class CustomerManager {
         daoManager.getCustomerDAO().updateCustomer(newCustomer);
 
     }
-    public void updateCustomer(String firstName, String lastName, String email, String phoneNumber, String address1, String address2, String district, String postalCode, String city, Country country) {
+    public void updateCustomer(String firstName, String lastName, String email, String phoneNumber, String address1, String address2, String district, String postalCode, String city, Country country, boolean active) {
 
-        country.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
-        daoManager.getCountryDAO().updateCountry(country);
+        Customer updateCustomer = CurrentCustomer.getInstance().getCurrentCustomer();
+
+        Address updateAddress = updateCustomer.getAdress();
+
 
         City newCity = daoManager.getCityDAO().getCityByName(city);
 
@@ -79,42 +82,46 @@ public class CustomerManager {
             newCity.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
             daoManager.getCityDAO().updateCity(newCity);
         }
-        City dataBaseCity = daoManager.getCityDAO().getCityByName(city);   // vet ej om detta hjälper än men hämtar från dbs
+        City dataBaseCity = daoManager.getCityDAO().getCityByName(city);
         country.addCity(dataBaseCity);
 
-        Address newAddress = new Address();
-        newAddress.setCity(dataBaseCity);
-        newAddress.setAddress(address1);
-        newAddress.setAddress2(address2);
-        newAddress.setDistrict(district);
-        newAddress.setPostalCode(postalCode);
-        newAddress.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
-        newAddress.setLocation(getDefaultGeometry());
-        newAddress.setPhone(phoneNumber);
+        if(!updateAddress.getAddress().equals(address1)){
+            Address newAddress = new Address();
+            newAddress.setCity(dataBaseCity);
+            newAddress.setAddress(address1);
+            newAddress.setAddress2(address2);
+            newAddress.setDistrict(district);
+            newAddress.setPostalCode(postalCode);
+            newAddress.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
+            newAddress.setLocation(getDefaultGeometry());
+            newAddress.setPhone(phoneNumber);
 
-        daoManager.getAddressDAO().createAddress(newAddress);
+            daoManager.getAddressDAO().createAddress(newAddress);
+        }
+
         Address dataBaseAddress = daoManager.getAddressDAO().getAddressByName(address1);
+        updateCustomer.setFirstName(firstName);
+        updateCustomer.setLastName(lastName);
+        updateCustomer.setEmail(email);
+        updateCustomer.setAdress(dataBaseAddress);
+        updateCustomer.setActive(active);
+        updateCustomer.setCreateDate(new Date(System.currentTimeMillis()));
+        updateCustomer.setStore(CurrentStore.getInstance().getCurrentStore());
+        updateCustomer.setLast_update(Timestamp.valueOf(LocalDateTime.now()));
 
-        Store store = currentStore.getInstance().getCurrentStore();
-        Customer newCustomer = new Customer();
-        newCustomer.setFirstName(firstName);
-        newCustomer.setLastName(lastName);
-        newCustomer.setEmail(email);
-        newCustomer.setAdress(dataBaseAddress);
-        newCustomer.setActive(true);
-        newCustomer.setStore(store);
-        newCustomer.setCreateDate(new Date(System.currentTimeMillis()));
-        newCustomer.setLast_update(Timestamp.valueOf(LocalDateTime.now()));
-        newCustomer.setStore(store);
-        daoManager.getCustomerDAO().updateCustomer(newCustomer);
+        daoManager.getCustomerDAO().updateCustomer(updateCustomer);
+    }
+    public void updateCustomerValues(String firstName,String lastName,String email,Address dataBaseAddress, boolean active, Customer updateCustomer){
+
+
 
     }
 
-        public List<Country> getCountryList(){
+    public List<Country> getCountryList(){
 
-        List<Country> countryList = daoManager.getCountryDAO().getAllCountries();
+    List<Country> countryList = daoManager.getCountryDAO().getAllCountries();
 
-        return countryList;
+    return countryList;
     }
     public int getCountryId(String country){
 
@@ -160,6 +167,11 @@ public class CustomerManager {
         ObservableList<Rental> rentals = FXCollections.observableList(customer.getRentals());
         return rentals;
     }
+    public Customer getCustomer(String custId){
+        int customerId = IoConverter.stringToInteger(custId);
+        Customer customer = daoManager.getCustomerDAO().readCustomer(customerId);
+        return customer;
+    }
     public ObservableList<Customer> getAllCustomer(){
         return FXCollections.observableList(daoManager.getCustomerDAO().readAllCustomers());
     }
@@ -171,5 +183,16 @@ public class CustomerManager {
         org.locationtech.jts.geom.Point point = geometryFactory.createPoint(coordinate);
 
         return point;
+    }
+    public String isActiveStringFromBoolean(Boolean bool){
+        if(!bool){
+            return "Ej Aktiv";
+        }
+        else{
+            return "Aktiv";
+        }
+    }
+    public boolean isActiveBooleanFromString(String string){
+        return string.equals("Aktiv");
     }
 }
