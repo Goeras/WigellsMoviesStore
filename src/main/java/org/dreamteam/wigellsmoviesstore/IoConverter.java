@@ -16,23 +16,32 @@ import java.util.List;
 // Konverterar div inputs och returnera dem. static för åtkomst över hela programmet.
 public class IoConverter {
 
-    public static String doubleToString(double input){
+    public static String doubleToString(double input) {
         return Double.toString(input);
     }
 
-    public static double stringToDouble(String input){
+    public static double stringToDouble(String input) {
         return Double.parseDouble(input);
     }
 
-    public static String integerToString(int input){
+    public static String integerToString(int input) {
         return Integer.toString(input);
     }
 
-    public static int stringToInteger(String input){
-        return Integer.parseInt(input);
+    public static int stringToInteger(String input) {
+        if (input != null) {
+            return Integer.parseInt(input);
+        }
+        throw new NumberFormatException("Input is empty or null");
     }
 
-    public static short stringToShort(String input) { return Short.parseShort(input);}
+    public static short stringToShort(String input) {
+        if (input != null) {
+            return Short.parseShort(input);
+        }
+        throw new NumberFormatException("Input is empty or null");
+    }
+
 
     public static byte stringToByte(String input) { return Byte.parseByte(input);}
 
