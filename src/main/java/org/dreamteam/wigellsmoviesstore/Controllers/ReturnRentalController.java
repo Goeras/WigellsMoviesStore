@@ -119,6 +119,7 @@ public class ReturnRentalController {
     private void onReplaceButtonClick(){
         price.setCellValueFactory(cellData -> IoConverter.stringToSimpleStringProperty(IoConverter.doubleToString(cellData.getValue().getInventory().getFilm().getReplacementCost())));
         returnList.add(rentalTableView.getSelectionModel().getSelectedItem());
+        posManager.replaceFilm(rentalTableView.getSelectionModel().getSelectedItem());
     }
     @FXML
     private void onBackButtonClick() throws IOException {

@@ -25,15 +25,16 @@ public class PosManager {
         returnDate = localDate.plusDays(duration);
         return returnDate;
     }
-    public ObservableList addFilmToCart(ObservableList<Film> filmList, String id){
-        int filmid = IoConverter.stringToInteger(id);
-        Film film = daOmanager.getFilmDAO().getFilmById(filmid);
-        filmList.add(film);
+    public ObservableList addFilmToCart(ObservableList<Inventory> filmList, String id){
+        int inventorIid = IoConverter.stringToInteger(id);
+        Inventory inventory = daOmanager.getInventoryDAO().readInventory(inventorIid);
+        filmList.add(inventory);
         return filmList;
     }
     public String[] searchFilm(String id){
-        int filmId = IoConverter.stringToInteger(id);
-        Film film = daOmanager.getFilmDAO().getFilmById(filmId);
+        int inventoryId = IoConverter.stringToInteger(id);
+        Inventory inventory = daOmanager.getInventoryDAO().readInventory(inventoryId);
+        Film film = inventory.getFilm();
         String[] strings = {Integer.toString(film.getFilmId()), film.getTitle()};
         return strings;
     }
@@ -43,9 +44,7 @@ public class PosManager {
         String[] info = {Integer.toString(customer.getId()), (customer.getFirstName() + " " + customer.getLastName())};
         return info;
     }
-    public Rental newRental(int filmId, Customer customer, Staff staff){
-        List<Inventory> inventories = daOmanager.getInventoryDAO().getInventoryByFilmAndStore(filmId, CurrentStore.getInstance().getCurrentStore().getId());
-        Inventory inventory = inventories.get(0);
+    public Rental newRental(Inventory inventory, Customer customer, Staff staff){
         Rental rental = new Rental();
         rental.setInventory(inventory);
         rental.setCustomer(customer);
@@ -57,15 +56,15 @@ public class PosManager {
 
         return rental;
     }
-    public void confirmRentals(ObservableList<Film> cart, String custId, int staffId) {
+    public void confirmRentals(ObservableList<Inventory> cart, String custId, int staffId) {
         int customerId = IoConverter.stringToInteger(custId);
         Customer customer = daOmanager.getCustomerDAO().readCustomer(customerId);
         Staff staff = daOmanager.getStaffDAO().getStaffById(staffId);
 
-        for(Film film : cart){
-            Rental rental = newRental(film.getFilmId(), customer, staff);
+        for(Inventory inventory : cart){
+            Rental rental = newRental(inventory, customer, staff);
             System.out.println(rental.getRentalId());
-            newPayment(customer, staff, rental, film.getRentalRate());
+            newPayment(customer, staff, rental, inventory.getFilm().getRentalRate());
         }
     }
     public void newPayment(Customer customer, Staff staff, Rental rental, double amount){
@@ -77,13 +76,8 @@ public class PosManager {
         payment.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
         daOmanager.getPaymentDAO().createPayment(payment);
     }
-    public void replaceFilm(Rental rental, String staffIdString){
-        int staffId = IoConverter.stringToInteger(staffIdString);
-        Staff staff = daOmanager.getStaffDAO().getStaffById(staffId);
-        Film film = rental.getInventory().getFilm();
-        double amount = film.getReplacementCost();
-        Customer customer = rental.getCustomer();
-        newPayment(customer, staff, rental, amount);
+    public void replaceFilm(Rental rental){
+        daOmanager.getInventoryDAO().deleteInventory(rental.getInventory());
     }
     public ObservableList<Rental> getObservableRentals(String custId){
         int customerId = IoConverter.stringToInteger(custId);

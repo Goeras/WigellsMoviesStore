@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import org.dreamteam.wigellsmoviesstore.Entitys.Film;
+import org.dreamteam.wigellsmoviesstore.Entitys.Inventory;
 import org.dreamteam.wigellsmoviesstore.Entitys.Staff;
 import org.dreamteam.wigellsmoviesstore.IoConverter;
 import org.dreamteam.wigellsmoviesstore.Managers.PosManager;
@@ -31,17 +32,17 @@ public class PosController {
     @FXML
     private Button backButton;
     @FXML
-    private TableView<Film> tableView;
+    private TableView<Inventory> tableView;
     @FXML
-    private TableColumn<Film, Integer> filmId;
+    private TableColumn<Inventory, Integer> filmId;
     @FXML
-    private TableColumn<Film, String> title;
+    private TableColumn<Inventory, String> title;
     @FXML
-    private TableColumn<Film, String> returnDate;
+    private TableColumn<Inventory, String> returnDate;
     @FXML
-    private TableColumn<Film, Double> price;
-    private List<Film> filmList;
-    private ObservableList<Film> cart;
+    private TableColumn<Inventory, Double> price;
+    private List<Inventory> filmList;
+    private ObservableList<Inventory> cart;
     @FXML
     private TextField filmIdField;
     @FXML
@@ -61,6 +62,7 @@ public class PosController {
     @FXML
     private ChoiceBox<Staff> staffBox;
     ObservableList<Staff> staffList;
+    String inventoryId;
 
     public void initialize(){
         viewManager = new ViewManager();
@@ -106,15 +108,15 @@ public class PosController {
         chosenCustInfo.setVisible(false);
     }
     private void initializeTable(){
-        filmId.setCellValueFactory(cellData -> IoConverter.integerToSimpleIntegerProperty(cellData.getValue().getFilmId()).asObject());
-        title.setCellValueFactory(cellData -> IoConverter.stringToSimpleStringProperty(cellData.getValue().getTitle()));
-        price.setCellValueFactory(cellData -> IoConverter.doubleToSimpleDoubleProperty(cellData.getValue().getRentalRate()).asObject());
-       // returnDate.setCellValueFactory(cellData -> IoConverter.stringToSimpleStringProperty(posManager.calculateReturnDate(cellData.getValue().getRentalDuration())));
+        filmId.setCellValueFactory(cellData -> IoConverter.integerToSimpleIntegerProperty(cellData.getValue().getFilm().getFilmId()).asObject());
+        title.setCellValueFactory(cellData -> IoConverter.stringToSimpleStringProperty(cellData.getValue().getFilm().getTitle()));
+        price.setCellValueFactory(cellData -> IoConverter.doubleToSimpleDoubleProperty(cellData.getValue().getFilm().getRentalRate()).asObject());
     }
     @FXML
     private void addToCart(){
         posManager.addFilmToCart(cart, filmIdField.getText());
         tableView.setItems(cart);
+        inventoryId = filmIdField.getText();
         //filmIdField.setText("");
     }
     @FXML
