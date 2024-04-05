@@ -3,6 +3,7 @@ package org.dreamteam.wigellsmoviesstore.Managers;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
+import org.dreamteam.wigellsmoviesstore.CurrentStaff;
 import org.dreamteam.wigellsmoviesstore.CurrentStore;
 import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
 import org.dreamteam.wigellsmoviesstore.Entitys.*;
@@ -62,7 +63,7 @@ public class StaffManager {
 
     public boolean createNewStaff(String firstName, String lastName, String eMail, String userName, String phoneNumber, String password, String password2, String address1, String address2, String district, String postalCode, String city, Country country, Blob blob) {
         // kontrollerar om något nödvändigt fällt ej är ifyllt av användaren. returnerar isf false.
-        byte[] byteArrImage = new byte[0];
+        //byte[] byteArrImage = new byte[0];
         if (firstName.isEmpty() || lastName.isEmpty() || eMail.isEmpty() || userName.isEmpty() || password.isEmpty() || password2.isEmpty() || address1.isEmpty() || district.isEmpty() || postalCode.isEmpty() || city.isEmpty() || country == null) {
             return false; // Om någon parameter är tom, returnera false
         } else {
@@ -122,6 +123,44 @@ public class StaffManager {
         return daOmanager.getAddressDAO().getAddressByName(address1); // Returnerar addressen från databasen för att få med ID.
     }
 
+    public boolean updateStaff(String firstName, String lastName, String eMail, String userName, String phoneNumber, String password, String password2, String address1, String address2, String district, String postalCode, String city, Country country, Blob blob){
+
+        Staff staff = CurrentStaff.getInstance().getCurrentStaff();
+        Address address = staff.getAdress();
+
+        if (firstName.isEmpty() || lastName.isEmpty() || eMail.isEmpty() || userName.isEmpty() || password.isEmpty() || password2.isEmpty() || address1.isEmpty() || district.isEmpty() || postalCode.isEmpty() || city.isEmpty() || country == null) {
+            return false; // Om någon parameter är tom, returnera false
+        }
+        City newCity = daOmanager.getCityDAO().getCityByName(city); // hämta city från databas om den redan finns.
+
+        if (newCity == null) { // skapa ny city om den inte redan existerar.
+            newCity = createNewCity(city, country);
+            country.addCity(newCity);
+        }
+
+        //Address newAddress = daOmanager.getAddressDAO()
+
+        if(!address.getAddress().equals(address1)){
+            address = createNewAdress(newCity, address1, address2, district, postalCode, phoneNumber);
+        }
+
+        staff.setFirstName(firstName);
+        staff.setLastName(lastName);
+        staff.setEmail(eMail);
+        staff.setUserName(userName);
+        staff.setPassword(password);
+        staff.setAdress(address);
+        staff.setActive(true); // denna behöves som inparameter.
+        staff.setPicture(blob);
+        staff.setStore(CurrentStore.getInstance().getCurrentStore());
+        staff.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
+        daOmanager.getStaffDAO().updateStaff(staff);
+
+        return true;
+    }
+
+
+
     public Geometry getDefaultGeometry() { // Skapar och returnerar default geometry punkt.
 
         Coordinate coordinate = new Coordinate(1.0, 2.0);
@@ -135,7 +174,7 @@ public class StaffManager {
 
             List<Staff> staffList = daOmanager.getStaffDAO().getAllStaffs();
             for (Staff s : staffList) {
-                if (s.getUserName().equalsIgnoreCase(username)) {
+                if (s.getUserName().equalsIgnoreCase(username) && !CurrentStaff.getInstance().getCurrentStaff().getUserName().equals(username)) {
                     return false;
                 }
             }
@@ -145,7 +184,7 @@ public class StaffManager {
     public boolean validateUniqueEmail(String eMail){
         List<Staff> staffList = daOmanager.getStaffDAO().getAllStaffs();
         for(Staff s : staffList){
-            if(s.getEmail().equalsIgnoreCase(eMail)){
+            if(s.getEmail().equalsIgnoreCase(eMail) && !CurrentStaff.getInstance().getCurrentStaff().getEmail().equals(eMail)){
                 return false;
             }
         }

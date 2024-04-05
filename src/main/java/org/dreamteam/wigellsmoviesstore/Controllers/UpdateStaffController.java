@@ -17,6 +17,7 @@ import org.dreamteam.wigellsmoviesstore.Entitys.Country;
 import org.dreamteam.wigellsmoviesstore.Entitys.Staff;
 import org.dreamteam.wigellsmoviesstore.Entitys.Store;
 import org.dreamteam.wigellsmoviesstore.IoConverter;
+import org.dreamteam.wigellsmoviesstore.IoValidator;
 import org.dreamteam.wigellsmoviesstore.Managers.StaffManager;
 import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
 
@@ -24,6 +25,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Blob;
 
 public class UpdateStaffController {
     private ViewManager viewManager;
@@ -60,6 +62,8 @@ public class UpdateStaffController {
     @FXML
     private ChoiceBox<Country> country;
 
+    Blob blob;
+
     Store store = CurrentStore.getInstance().getCurrentStore();
     Staff staff = CurrentStaff.getInstance().getCurrentStaff();
 
@@ -79,6 +83,8 @@ public class UpdateStaffController {
         phoneNumber.setText(address.getPhone());
         eMail.setText(staff.getEmail());
         userName.setText(staff.getUserName());
+        password1.setText(staff.getPassword());
+        password2.setText(staff.getPassword());
 
         status.setValue(staffManager.isActiveStringFromBoolean(staff.getActive()));
         address1.setText(address.getAddress());
@@ -87,6 +93,9 @@ public class UpdateStaffController {
         postalCode.setText(address.getPostalCode());
         city.setText(address.getCity().getName());
         country.setValue(address.getCity().getCountry());
+        imageView.setFitWidth(70);
+        imageView.setFitHeight(70);
+        imageView.setPreserveRatio(true);
         imageView.setImage(IoConverter.convertBlobToImage(staff.getPicture()));
 
     }
@@ -95,28 +104,35 @@ public class UpdateStaffController {
     }
 
     public void onUploadPictureButtonClick() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Välj bild");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Bilder", "*.jpg", "*.png", "*.jpeg"));
-        File selectedFile = fileChooser.showOpenDialog(null);
+        blob = staffManager.getImageFromDisk();
 
-        if(selectedFile!=null){
-            try{
-                InputStream inputStream = new FileInputStream(selectedFile);
-                image = new Image(inputStream);
-            }
-            catch (Exception e){
-                e.printStackTrace();
-                System.out.println("Fel vid inläsning av bild");
-            }
-        }
-        imageView.setFitWidth(60);
+        imageView.setFitWidth(70);
         imageView.setFitHeight(70);
-        imageView.setImage(image);
+        imageView.setPreserveRatio(true);
+        imageView.setImage(IoConverter.convertBlobToImage(blob));
+
     }
 
     @FXML
     public void onSaveButtonClick(){
         System.out.println("save button clicked");
+        boolean createSuccessfull = false;
+        boolean emailUnique = staffManager.validateUniqueEmail(eMail.getText());
+        boolean usernameUnique = staffManager.validateUniqueUsername(userName.getText());
+        if(!IoValidator.stringOneEqualsStringTwo(password1.getText(), password2.getText())){
+            IoValidator.displayAlert("Fel lösenord", "Lösenorden matchar ej");
+        }
+        if(usernameUnique && emailUnique) {
+            createSuccessfull = staffManager.updateStaff(firstName.getText(), lastName.getText(), eMail.getText(), userName.getText(), phoneNumber.getText(), password1.getText(), password2.getText(), address1.getText(), address2.getText(), district.getText(), postalCode.getText(), city.getText(), country.getValue(),blob);
+        }
+        else{
+            IoValidator.displayAlert("Användarnamn eller email upptaget", "Testa annat användarnamn eller email");
+        }
+        if(createSuccessfull){
+            IoValidator.displayConfirmation("Medarbetare uppdaterad", "Medarbetare uppdaterad");
+        }
+        else{
+            IoValidator.displayAlert("Felaktig input", "Kontrollera uppgifterna");
+        }
     }
 }
