@@ -23,22 +23,23 @@
         </HBox>
         <HBox styleClass="boxes">
             <VBox>
-                <TextField promptText="Förnamn"/>
-                <TextField promptText="Efternamn"/>
-                <TextField promptText="Email"/>
-                <TextField promptText="Telefonnummer"/>
-                <TextField promptText="Användarnamn"/>
-                <PasswordField promptText="Lösen"/>
-                <PasswordField promptText="Upprepa Lösen"/>
-                <Button text="Spara medarbetare"/>
+                <TextField fx:id="firstName" promptText="Förnamn"/>
+                <TextField fx:id="lastName" promptText="Efternamn"/>
+                <TextField fx:id="eMail" promptText="Email"/>
+                <TextField fx:id="phoneNumber" promptText="Telefonnummer"/>
+                <TextField fx:id="userName" promptText="Användarnamn"/>
+                <PasswordField fx:id="password1" promptText="Nytt Lösen"/>
+                <PasswordField fx:id="password2" promptText="Upprepa Lösen"/>
+                <Button text="Spara medarbetare" onAction="#onSaveButtonClick"/>
             </VBox>
             <VBox>
-                <TextField promptText="Adress"/>
-                <TextField promptText="Adress"/>
-                <TextField promptText="Distrikt"/>
-                <TextField promptText="Postkod"/>
-                <TextField promptText="Stad"/>
-                <TextField promptText="Land"/>
+                <ChoiceBox fx:id="status"/>
+                <TextField fx:id="address1" promptText="Adress"/>
+                <TextField fx:id="address2" promptText="Adress"/>
+                <TextField fx:id="district" promptText="Distrikt"/>
+                <TextField fx:id="postalCode" promptText="Postkod"/>
+                <TextField fx:id="city" promptText="Stad"/>
+                <ChoiceBox fx:id="country"/>
                 <Button text="Ladda upp bild" onAction="#onUploadPictureButtonClick"/>
                 <ImageView fx:id="imageView"/>
             </VBox>
