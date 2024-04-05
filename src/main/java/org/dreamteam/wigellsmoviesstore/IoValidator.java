@@ -3,6 +3,7 @@ package org.dreamteam.wigellsmoviesstore;
 
 import javafx.scene.control.Alert;
 
+import java.time.LocalDate;
 import java.util.regex.Pattern;
 
 public class IoValidator {
@@ -22,7 +23,7 @@ public class IoValidator {
     }
     public static boolean validateMovieYear(String input){
         final int FIRST_MOVIE_EVER_YEAR = 1901;
-        final int CURRENT_YEAR = 2024;
+        final int CURRENT_YEAR = LocalDate.now().getYear();
 
         boolean isValid = false;
         boolean isValidInt = validateInteger(input);
