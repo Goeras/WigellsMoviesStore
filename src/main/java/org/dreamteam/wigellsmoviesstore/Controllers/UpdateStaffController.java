@@ -107,6 +107,7 @@ public class UpdateStaffController {
         imageView.setFitHeight(70);
         imageView.setPreserveRatio(true);
         imageView.setImage(IoConverter.convertBlobToImage(staff.getPicture()));
+        blob = staff.getPicture();
 
     }
     public void onBackButtonClick() throws IOException {
@@ -116,8 +117,8 @@ public class UpdateStaffController {
     public void onUploadPictureButtonClick() {
         blob = staffManager.getImageFromDisk();
 
-        imageView.setFitWidth(70);
-        imageView.setFitHeight(70);
+        imageView.setFitWidth(90);
+        imageView.setFitHeight(90);
         imageView.setPreserveRatio(true);
         imageView.setImage(IoConverter.convertBlobToImage(blob));
 

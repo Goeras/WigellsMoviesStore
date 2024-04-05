@@ -1,19 +1,16 @@
 package org.dreamteam.wigellsmoviesstore.Managers;
 
 import javafx.collections.ObservableList;
-import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import org.dreamteam.wigellsmoviesstore.CurrentStaff;
 import org.dreamteam.wigellsmoviesstore.CurrentStore;
 import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
 import org.dreamteam.wigellsmoviesstore.Entitys.*;
-import org.dreamteam.wigellsmoviesstore.IoConverter;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
 
-import javax.sql.rowset.serial.SerialBlob;
 import java.io.*;
 import java.sql.Blob;
 import java.sql.SQLException;
@@ -141,8 +138,6 @@ public class StaffManager {
             country.addCity(newCity);
         }
 
-        //Address newAddress = daOmanager.getAddressDAO()
-
         if(!address.getAddress().equals(address1)){
             address = createNewAdress(newCity, address1, address2, district, postalCode, phoneNumber);
         }
@@ -221,7 +216,7 @@ public class StaffManager {
                 byte[] imageBytes = bos.toByteArray();
                 Blob blob = new javax.sql.rowset.serial.SerialBlob(imageBytes);
                 return blob;
-                // Now you can use 'blob' as needed
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
