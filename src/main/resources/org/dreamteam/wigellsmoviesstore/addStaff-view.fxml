@@ -40,7 +40,6 @@
                 <TextField fx:id="city" promptText="Stad"/>
                 <ChoiceBox fx:id="country"/>
                 <Button text="Ladda upp ny bild" onAction="#onUploadPictureButtonClick"/>
-                <TextField fx:id="userNotice" visible="false"/>
                 <ImageView fx:id="imageView"/>
             </VBox>
         </HBox>
