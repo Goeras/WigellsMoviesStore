@@ -3,11 +3,15 @@ package org.dreamteam.wigellsmoviesstore.Controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
+import org.dreamteam.wigellsmoviesstore.Entitys.Actor;
 import org.dreamteam.wigellsmoviesstore.Entitys.Category;
 import org.dreamteam.wigellsmoviesstore.Entitys.Language;
+import org.dreamteam.wigellsmoviesstore.HelloApplication;
 import org.dreamteam.wigellsmoviesstore.IoConverter;
 import org.dreamteam.wigellsmoviesstore.Managers.FilmManager;
 import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
@@ -50,6 +54,7 @@ public class AddFilmController {
     private CheckBox trailers;
     @FXML
     private CheckBox commentaries;
+    List<Actor> selectedActors;
 
 
     DAOmanager daoManager = new DAOmanager();
@@ -74,9 +79,28 @@ public class AddFilmController {
         ratingList.add("NC-17");
         ObservableList<String> filmRatingList = FXCollections.observableList(ratingList);
         ratingBox.setItems(filmRatingList);
+    }
+    public void initialize(List<Actor> actors){
+        selectedActors = actors;
+        viewManager = new ViewManager();
 
+        ObservableList<Category> categoryList = FXCollections.observableList(daoManager.getCategoryDAO().readAllCategories());
+        categoryBox.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        categoryBox.setItems(categoryList);
 
+        ObservableList<Language> languageList = FXCollections.observableList(daoManager.getLanguageDAO().readAllLanguages());
+        languageBox.setItems(languageList);
+        originalLanguage.setItems(languageList);
 
+        List<String> ratingList = new ArrayList<>();
+        ratingList.add("G");
+        ratingList.add("PG");
+        ratingList.add("PG-13");
+        ratingList.add("R");
+        ratingList.add("NC-17");
+        ObservableList<String> filmRatingList = FXCollections.observableList(ratingList);
+        ratingBox.setItems(filmRatingList);
+        System.out.println(selectedActors.size());
     }
     @FXML
     private void onBackButtonClick() throws IOException {
@@ -123,5 +147,15 @@ public class AddFilmController {
 
         filmManager.addFilm(infoList, categoryList);
         System.out.println("Skicka infomation och skapa ny film" + infoList.size());
+    }
+    private void onOpenActorView() throws IOException {
+        Stage stage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("actor-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+            stage.setTitle("Lämna tillbaka film!");
+            stage.setScene(scene);
+            stage.show();
+            ActorController controller = fxmlLoader.getController();
+
     }
 }
