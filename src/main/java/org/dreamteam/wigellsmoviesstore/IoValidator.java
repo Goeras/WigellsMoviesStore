@@ -21,7 +21,7 @@ public class IoValidator {
         return isValidInt;
     }
     public static boolean validateMovieYear(String input){
-        final int FIRST_MOVIE_EVER_YEAR = 1888;
+        final int FIRST_MOVIE_EVER_YEAR = 1901;
         final int CURRENT_YEAR = 2024;
 
         boolean isValid = false;
@@ -101,6 +101,8 @@ public class IoValidator {
 
         alert.showAndWait();
     }
+
+
 }
 
 
