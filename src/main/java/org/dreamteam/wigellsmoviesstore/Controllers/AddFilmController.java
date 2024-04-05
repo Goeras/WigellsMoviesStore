@@ -13,6 +13,7 @@ import org.dreamteam.wigellsmoviesstore.Entitys.Category;
 import org.dreamteam.wigellsmoviesstore.Entitys.Language;
 import org.dreamteam.wigellsmoviesstore.HelloApplication;
 import org.dreamteam.wigellsmoviesstore.IoConverter;
+import org.dreamteam.wigellsmoviesstore.IoValidator;
 import org.dreamteam.wigellsmoviesstore.Managers.FilmManager;
 import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
 
@@ -108,6 +109,10 @@ public class AddFilmController {
     }
     @FXML
     private void onSaveButtonClick(){
+        if(selectedActors == null) {
+            IoValidator.displayAlert("Missing Actors", "Vänligen fyll i Actors");
+        }
+
         List<String> specialFeaturesList = new ArrayList<>();
 
         if (behindTheScenes.isSelected()) {
