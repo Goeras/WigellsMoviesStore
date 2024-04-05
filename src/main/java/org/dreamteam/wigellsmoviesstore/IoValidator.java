@@ -1,6 +1,8 @@
 package org.dreamteam.wigellsmoviesstore;
 
 
+import javafx.scene.control.Alert;
+
 import java.util.regex.Pattern;
 
 public class IoValidator {
@@ -80,6 +82,24 @@ public class IoValidator {
             return true;
         }
         return false;
+    }
+
+    public static void displayAlert(String title, String contentText) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(contentText);
+
+        alert.showAndWait();
+    }
+
+    public static void displayConfirmation(String title, String contentText) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(contentText);
+
+        alert.showAndWait();
     }
 }
 
