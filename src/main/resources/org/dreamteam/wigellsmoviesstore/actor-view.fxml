@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.shape.Line?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.dreamteam.wigellsmoviesstore.Controllers.ActorController"
+            prefHeight="400.0" prefWidth="600.0"
+            stylesheets="@styles/styles.css">
+
+    <VBox styleClass="background">
+        <VBox styleClass="body">
+            <VBox styleClass="header">
+                <VBox styleClass="boxes">
+                    <ListView fx:id="actorListView"/>
+                    <Button text="OK" onAction="#onOpenActorView"/>
+                    <Button text="Ny actor"/>
+                    <VBox>
+                        <TextField/>
+                        <TextField/>
+                        <TextField/>
+                    </VBox>
+                </VBox>
+            </VBox>
+        </VBox>
+    </VBox>
+</AnchorPane>
