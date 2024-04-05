@@ -60,10 +60,13 @@ public class StaffManager {
         }
     }
 
+    public boolean isActiveBooleanFromString(String string){
+        return string.equals("Aktiv");
+    }
+
 
     public boolean createNewStaff(String firstName, String lastName, String eMail, String userName, String phoneNumber, String password, String password2, String address1, String address2, String district, String postalCode, String city, Country country, Blob blob) {
         // kontrollerar om något nödvändigt fällt ej är ifyllt av användaren. returnerar isf false.
-        //byte[] byteArrImage = new byte[0];
         if (firstName.isEmpty() || lastName.isEmpty() || eMail.isEmpty() || userName.isEmpty() || password.isEmpty() || password2.isEmpty() || address1.isEmpty() || district.isEmpty() || postalCode.isEmpty() || city.isEmpty() || country == null) {
             return false; // Om någon parameter är tom, returnera false
         } else {
@@ -123,7 +126,7 @@ public class StaffManager {
         return daOmanager.getAddressDAO().getAddressByName(address1); // Returnerar addressen från databasen för att få med ID.
     }
 
-    public boolean updateStaff(String firstName, String lastName, String eMail, String userName, String phoneNumber, String password, String password2, String address1, String address2, String district, String postalCode, String city, Country country, Blob blob){
+    public boolean updateStaff(String firstName, String lastName, String eMail, String userName, String phoneNumber, String password, String password2, String address1, String address2, String district, String postalCode, String city, Country country, Blob blob, boolean active){
 
         Staff staff = CurrentStaff.getInstance().getCurrentStaff();
         Address address = staff.getAdress();
@@ -150,7 +153,7 @@ public class StaffManager {
         staff.setUserName(userName);
         staff.setPassword(password);
         staff.setAdress(address);
-        staff.setActive(true); // denna behöves som inparameter.
+        staff.setActive(active);
         staff.setPicture(blob);
         staff.setStore(CurrentStore.getInstance().getCurrentStore());
         staff.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));

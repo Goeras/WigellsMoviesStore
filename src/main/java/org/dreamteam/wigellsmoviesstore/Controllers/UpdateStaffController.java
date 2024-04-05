@@ -1,5 +1,7 @@
 package org.dreamteam.wigellsmoviesstore.Controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
@@ -71,10 +73,16 @@ public class UpdateStaffController {
 
     StaffManager staffManager =  new StaffManager();
 
+    private ObservableList<Country> countryList = FXCollections.observableArrayList();
+    ObservableList<String> statusOptions = FXCollections.observableArrayList("Aktiv", "Ej Aktiv");
+
     public void initialize(){
 
         CurrentStore.getInstance().updateCurrentStore();
         viewManager = new ViewManager();
+
+        countryList.addAll(staffManager.getAllCountriesAsList());
+        country.setItems(countryList);
 
         Address address = staff.getAdress();
 
@@ -86,7 +94,9 @@ public class UpdateStaffController {
         password1.setText(staff.getPassword());
         password2.setText(staff.getPassword());
 
+        status.setItems(statusOptions);
         status.setValue(staffManager.isActiveStringFromBoolean(staff.getActive()));
+
         address1.setText(address.getAddress());
         address2.setText(address.getAddress2());
         district.setText(address.getDistrict());
@@ -123,7 +133,7 @@ public class UpdateStaffController {
             IoValidator.displayAlert("Fel lösenord", "Lösenorden matchar ej");
         }
         if(usernameUnique && emailUnique) {
-            createSuccessfull = staffManager.updateStaff(firstName.getText(), lastName.getText(), eMail.getText(), userName.getText(), phoneNumber.getText(), password1.getText(), password2.getText(), address1.getText(), address2.getText(), district.getText(), postalCode.getText(), city.getText(), country.getValue(),blob);
+            createSuccessfull = staffManager.updateStaff(firstName.getText(), lastName.getText(), eMail.getText(), userName.getText(), phoneNumber.getText(), password1.getText(), password2.getText(), address1.getText(), address2.getText(), district.getText(), postalCode.getText(), city.getText(), country.getValue(),blob, staffManager.isActiveBooleanFromString(status.getValue()));
         }
         else{
             IoValidator.displayAlert("Användarnamn eller email upptaget", "Testa annat användarnamn eller email");
