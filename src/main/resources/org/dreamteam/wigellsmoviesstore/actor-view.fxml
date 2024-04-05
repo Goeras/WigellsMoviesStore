@@ -16,17 +16,24 @@
     <VBox styleClass="background">
         <VBox styleClass="body">
             <VBox styleClass="header">
+            </VBox>
                 <VBox styleClass="boxes">
+                    <HBox styleClass="hboxes">
+                        <TextField fx:id="filterField"/>
+                        <Button text="Filtrera på namn"/>
+                    </HBox>
                     <ListView fx:id="actorListView"/>
                     <Button text="OK" onAction="#onOpenActorView"/>
-                    <Button text="Ny actor"/>
-                    <VBox>
-                        <TextField/>
-                        <TextField/>
-                        <TextField/>
-                    </VBox>
+                    <Button text="Ny actor" onAction="#onNewActorButton"/>
                 </VBox>
-            </VBox>
+                <VBox styleClass="boxes" fx:id="newActor" managed="false" visible="false">
+                    <Label text="Ny skådespelare"/>
+                    <HBox styleClass="hboxes">
+                        <TextField fx:id="firstName" promptText="Förnamn"/>
+                        <TextField fx:id="lastName" promptText="Efternamn"/>
+                    </HBox>
+                    <Button text="Spara skådespelare"/>
+                </VBox>
         </VBox>
     </VBox>
 </AnchorPane>

@@ -4,10 +4,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
 import org.dreamteam.wigellsmoviesstore.Entitys.Actor;
@@ -24,7 +27,9 @@ public class ActorController {
     private ObservableList<Actor> actorList;
     @FXML
     private CheckBox checkBox;
-    private List<Actor> chosenActor;
+    private List<Actor> selectedActors;
+    @FXML
+    private VBox newActor;
 
     public void initialize(){
         FilmManager filmManager = new FilmManager();
@@ -32,34 +37,40 @@ public class ActorController {
         List<Actor> actors = daOmanager.getActorDao().getAllActors();
         actorList = FXCollections.observableList(actors);
         actorListView.setItems(actorList);
-        chosenActor = new ArrayList<>();
-
-        actorListView.setCellFactory(param -> new ListCell<Actor>() {
+        selectedActors = new ArrayList<>();
+        actorListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        actorListView.setCellFactory(param -> new ListCell<>() {
             private final CheckBox checkBox = new CheckBox();
 
             {
                 checkBox.selectedProperty().addListener((obs, oldVal, newVal) -> {
                     // Hantera CheckBox-händelse
-                    System.out.println("CheckBox " + (newVal ? "selected" : "deselected"));
                     Actor actor = getItem();
-                    chosenActor.add(actor);
-                    System.out.println(getItem().getFirstName());
-
+                    if (newVal) {
+                        // Om CheckBox är markerad, lägg till aktören i listan för markerade objekt
+                        selectedActors.add(actor);
+                    } else {
+                        // Om CheckBox är avmarkerad, ta bort aktören från listan för markerade objekt
+                        selectedActors.remove(actor);
+                    }
+                    System.out.println("CheckBox " + (newVal ? "selected" : "deselected"));
                 });
             }
 
             @Override
-            protected void updateItem(Actor item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
+            protected void updateItem(Actor actor, boolean empty) {
+                super.updateItem(actor, empty);
+                if (empty || actor == null) {
                     setGraphic(null);
                 } else {
-                    checkBox.setText(item.toString());
+                    checkBox.setSelected(selectedActors.contains(actor));
+                    checkBox.setText(actor.toString());
                     setGraphic(checkBox);
                 }
             }
         });
     }
+
     @FXML
     private void onOpenActorView() throws IOException {
         Stage stage = new Stage();
@@ -69,7 +80,13 @@ public class ActorController {
         stage.setScene(scene);
         stage.show();
         AddFilmController controller = (AddFilmController) fxmlLoader.getController();
-        controller.initialize(chosenActor);
-
+        controller.initialize(selectedActors);
+        Stage stage2 = (Stage) actorListView.getScene().getWindow();
+        stage2.close();
+    }
+    @FXML
+    private void onNewActorButton(){
+        newActor.setManaged(true);
+        newActor.setVisible(true);
     }
 }
