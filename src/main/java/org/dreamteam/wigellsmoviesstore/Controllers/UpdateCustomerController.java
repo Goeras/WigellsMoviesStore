@@ -8,8 +8,13 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.dreamteam.wigellsmoviesstore.CurrentCustomer;
+import org.dreamteam.wigellsmoviesstore.CurrentStore;
 import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
+import org.dreamteam.wigellsmoviesstore.Entitys.Address;
 import org.dreamteam.wigellsmoviesstore.Entitys.Country;
+import org.dreamteam.wigellsmoviesstore.Entitys.Customer;
+import org.dreamteam.wigellsmoviesstore.Entitys.Store;
 import org.dreamteam.wigellsmoviesstore.IoValidator;
 import org.dreamteam.wigellsmoviesstore.Managers.CustomerManager;
 import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
@@ -29,6 +34,8 @@ public class UpdateCustomerController {
     @FXML
     private TextField phone;
     @FXML
+    private ChoiceBox<String> status;
+    @FXML
     private TextField address1;
     @FXML
     private TextField address2;
@@ -42,30 +49,49 @@ public class UpdateCustomerController {
     private ChoiceBox<Country> country;
     @FXML
     private TextField userNotice;
-    private DAOmanager daoManager;
-    private CustomerManager customerManager;
-    private IoValidator ioValidator;
-    private ObservableList countries = FXCollections.observableArrayList();
 
-    public void initialize(int x){
+    CustomerManager customerManager = new CustomerManager();
+    private IoValidator ioValidator;
+    private ObservableList<Country> countries = FXCollections.observableArrayList();
+    private ObservableList<String> statusOptions = FXCollections.observableArrayList("Aktiv", "Ej Aktiv");
+
+
+    Store store = CurrentStore.getInstance().getCurrentStore();
+    Customer customer = CurrentCustomer.getInstance().getCurrentCustomer();
+
+    public void initialize(){
+
+        CurrentStore.getInstance().updateCurrentStore();
         viewManager = new ViewManager();
-        customerManager = new CustomerManager();
+
         countries.addAll(customerManager.getCountryList());
         country.setItems(countries);
 
+        Address address = customer.getAdress();
+        firstName.setText(customer.getFirstName());
+        lastName.setText(customer.getLastName());
+        phone.setText(address.getPhone());
+        email.setText(customer.getEmail());
+        status.setItems(statusOptions);
+        status.setValue(customerManager.isActiveStringFromBoolean(customer.getActive()));
+        address1.setText(address.getAddress());
+        address2.setText(address.getAddress2());
+        district.setText(address.getDistrict());
+        postalCode.setText(address.getPostalCode());
+        city.setText(address.getCity().getName());
+        country.setValue(address.getCity().getCountry());
+
     }
     public void onSaveButtonClick() throws IOException{
-
-
 
         // valideringar från iovalidator innan något läggs in.  //ska göras om till mer individuella när sakerna fungerar riktigt.
         boolean validName = ioValidator.validateStringNotEmpty(firstName.getText());
         boolean validLastName = ioValidator.validateStringNotEmpty(lastName.getText());
         boolean validEmail = ioValidator.validateEmail(email.getText());
         //boolean uniqueEmail = customerManager.validateUniqueEmail(email.getText()) || email.getText().isEmpty();
-        //boolean phoneNotEmpty = ioValidator.validateStringNotEmpty(phone.getText());
+        boolean phoneNotEmpty = ioValidator.validateStringNotEmpty(phone.getText());
         boolean validPhoneNum = ioValidator.validateInteger(phone.getText()) || phone.getText().isEmpty();
-        boolean validAddess = ioValidator.validateStringNotEmpty(address1.getText());
+        boolean validAddress = ioValidator.validateStringNotEmpty(address1.getText());
         boolean validDistrict = ioValidator.validateStringNotEmpty(district.getText());
         boolean validPostCode = ioValidator.validatePostNum(postalCode.getText());
         boolean validCity = ioValidator.validateStringNotEmpty(city.getText());
@@ -83,7 +109,7 @@ public class UpdateCustomerController {
         if(!validPhoneNum){
             ioValidator.displayAlert("Error","Du måste ange ett telefonnummer");
         }
-        if(!validAddess){
+        if(!validAddress){
             ioValidator.displayAlert("Error","Du måste fylla i adress");
         }
         if(!validDistrict){
@@ -98,10 +124,16 @@ public class UpdateCustomerController {
 
 
 
-//        if(validName && validLastName && validEmail && uniqueEmail && validPhoneNum && phoneNotEmpty && validAddess && validDistrict && validPostCode && validCity && country != null){
-//            //customerManager.newCustomer(firstName.getText(),lastName.getText(),email.getText(),phone.getText(),address1.getText(),address2.getText(),district.getText(),postalCode.getText(),city.getText(),country.getValue());
-//
-//        } else {
+        if(validName && validLastName && validEmail && validPhoneNum && phoneNotEmpty && validAddress && validDistrict && validPostCode && validCity && country != null){
+            customerManager.updateCustomer(firstName.getText(),lastName.getText(),email.getText(),
+                    phone.getText(),address1.getText(),address2.getText(),district.getText(),
+                    postalCode.getText(),city.getText(),country.getValue(),
+                    customerManager.isActiveBooleanFromString(status.getValue()));
+            IoValidator.displayConfirmation("Sparat","Information uppdaterad");
+        } else {
+            System.out.println("shit is wack");
+        }
+//        else {
 //            //userNotice.setVisible(true);
 //            //userNotice.setText("Kontrollera uppgifterna och försök igen");
 //            Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -117,8 +149,6 @@ public class UpdateCustomerController {
     private void onBackButtonClick() throws IOException {
         viewManager = new ViewManager();
         viewManager.showCustomerView((Stage) topLabel.getScene().getWindow());
-        //viewManager.showCustomerView((Stage) topLabel.getScene().getWindow());
-
     }
 //    public void proccessId(CustomerViewController customerViewController){
 //        int customerId = customerViewController.getIdHolder();

@@ -5,19 +5,17 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import org.dreamteam.wigellsmoviesstore.Entitys.Customer;
-import org.dreamteam.wigellsmoviesstore.Entitys.Rental;
-import org.dreamteam.wigellsmoviesstore.IoConverter;
+import org.dreamteam.wigellsmoviesstore.*;
+import org.dreamteam.wigellsmoviesstore.Entitys.*;
 import org.dreamteam.wigellsmoviesstore.Managers.CustomerManager;
 import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerViewController {
-    private int idHolder = 0;
+
     @FXML
     private Label topLabel;
     ViewManager viewManager;
@@ -39,7 +37,7 @@ public class CustomerViewController {
     @FXML
     private Label address2;
     @FXML
-    private Label disctrict;
+    private Label district;
     @FXML
     private Label postalCode;
     @FXML
@@ -74,20 +72,15 @@ public class CustomerViewController {
     ObservableList<Customer> customers;
     @FXML
     private TextField searchByName;
+    Customer customer;
 
-//    public int getIdHolder() {
-//        return idHolder;
-//    }
-//
-//    public void setIdHolder(int idHolder) {
-//        this.idHolder = idHolder;
-//    }
-//    public CustomerViewController(int idHolder){
-//        this.idHolder = idHolder;
-//    }
 
     public void initialize(){
+        CurrentStore.getInstance().updateCurrentStore();
+        Store currentStore = CurrentStore.getInstance().getCurrentStore(); //ev strul med denna store. ej skapat som andra.
+
         List<Customer> customerList = new ArrayList<>();
+
         customers = FXCollections.observableList(customerList);
         viewManager = new ViewManager();
         customerManager = new CustomerManager();
@@ -103,7 +96,8 @@ private void onBackButtonClick() throws IOException {
     viewManager.showNewCustomerView((Stage) topLabel.getScene().getWindow());
 }
 @FXML
-    private void onUpdateCustomerClick() throws IOException {
+    private void onUpdateCustomerClick() throws IOException {  //grejat är med current customer
+    CurrentCustomer.getInstance().setCurrentCustomer(customer);
     viewManager.showUpdateCustomerView((Stage) topLabel.getScene().getWindow());
 
 
@@ -119,13 +113,58 @@ private void onBackButtonClick() throws IOException {
         createDate.setText(info[4]);
         address1.setText(info[5]);
         address2.setText(info[6]);
-        disctrict.setText(info[7]);
+        district.setText(info[7]);
         city.setText(info[8]);
         postalCode.setText(info[9]);
         country.setText(info[10]);
         rentalHistory = customerManager.getCustomerRentals(customerId);
         rentalHistoryTable.setItems(rentalHistory);
+        boolean isInteger = IoValidator.validateInteger(searchCustomer.getText());
+        if (isInteger){
+            //customer = customerManager.searchByName(Integer.parseInt(idToSearch.getText()));
+            customer = customerManager.getCustomer(customerId);
+            if(customer != null){
+                setCustomerInfo(customer);
+                //updateButton.setVisible(true);
+                System.out.println("set customer info update has ran");
+            }
+
+    }
+
 }
+    private void setCustomerInfo(Customer customer) {
+        Address address = customer.getAdress();
+
+        firstName.setText(customer.getFirstName());
+        lastName.setText(customer.getLastName());
+        phone.setText(address.getPhone());
+        email.setText(customer.getEmail());
+        active.setText(customerManager.isActiveStringFromBoolean(customer.getActive()));
+        address1.setText(address.getAddress());
+        address2.setText(address.getAddress2());
+        district.setText(address.getDistrict());
+        postalCode.setText(address.getPostalCode());
+        city.setText(address.getCity().getName());
+        country.setText(address.getCity().getCountry().getName());
+    }
+    @FXML
+    private void onSearchButtonClickOld(){
+        String customerId = searchCustomer.getText();
+        String[] info = customerManager.getCustomerInfo(customerId);
+        firstName.setText(info[0]);
+        lastName.setText(info[1]);
+        email.setText(info[2]);
+        active.setText(info[3]);
+        createDate.setText(info[4]);
+        address1.setText(info[5]);
+        address2.setText(info[6]);
+        district.setText(info[7]);
+        city.setText(info[8]);
+        postalCode.setText(info[9]);
+        country.setText(info[10]);
+        rentalHistory = customerManager.getCustomerRentals(customerId);
+        rentalHistoryTable.setItems(rentalHistory);
+    }
 @FXML
     private void setRentHistoryTable(){
     rentalId.setCellValueFactory(cellData -> IoConverter.integerToSimpleIntegerProperty(cellData.getValue().getRentalId()).asObject());

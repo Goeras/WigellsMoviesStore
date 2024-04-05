@@ -26,6 +26,7 @@
                 <TextField fx:id="lastName" promptText="Efternamn"/>
                 <TextField fx:id="email" promptText="Emailadress"/>
                 <TextField fx:id="phone" promptText="Telefonnummer"/>
+                <ChoiceBox fx:id="status" value="Aktiv"/>
                 <Button text="Spara kund" onAction="#onSaveButtonClick"/>
             </VBox>
             <VBox>
