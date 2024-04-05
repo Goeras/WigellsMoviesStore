@@ -9,6 +9,7 @@ import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
 import org.dreamteam.wigellsmoviesstore.Entitys.Category;
 import org.dreamteam.wigellsmoviesstore.Entitys.Language;
 import org.dreamteam.wigellsmoviesstore.IoConverter;
+import org.dreamteam.wigellsmoviesstore.Managers.FilmManager;
 import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
 
 import java.io.IOException;
@@ -52,12 +53,13 @@ public class AddFilmController {
 
 
     DAOmanager daoManager = new DAOmanager();
+    FilmManager filmManager = new FilmManager();
 
     public void initialize(){
         viewManager = new ViewManager();
 
-        categoryBox.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         ObservableList<Category> categoryList = FXCollections.observableList(daoManager.getCategoryDAO().readAllCategories());
+        categoryBox.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         categoryBox.setItems(categoryList);
 
         ObservableList<Language> languageList = FXCollections.observableList(daoManager.getLanguageDAO().readAllLanguages());
@@ -67,7 +69,7 @@ public class AddFilmController {
         List<String> ratingList = new ArrayList<>();
         ratingList.add("G");
         ratingList.add("PG");
-        ratingList.add("PG_13");
+        ratingList.add("PG-13");
         ratingList.add("R");
         ratingList.add("NC-17");
         ObservableList<String> filmRatingList = FXCollections.observableList(ratingList);
@@ -83,15 +85,26 @@ public class AddFilmController {
     @FXML
     private void onSaveButtonClick(){
         List<String> specialFeaturesList = new ArrayList<>();
-        specialFeaturesList.add(Boolean.toString(behindTheScenes.isSelected()));
-        specialFeaturesList.add(Boolean.toString(deletedScenes.isSelected()));
-        specialFeaturesList.add(Boolean.toString(trailers.isSelected()));
-        specialFeaturesList.add(Boolean.toString(commentaries.isSelected()));
+
+        if (behindTheScenes.isSelected()) {
+            specialFeaturesList.add("Behind the Scenes");
+        }
+
+        if (deletedScenes.isSelected()) {
+            specialFeaturesList.add("Deleted Scenes");
+        }
+
+        if (trailers.isSelected()) {
+            specialFeaturesList.add("Trailers");
+        }
+
+        if (commentaries.isSelected()) {
+            specialFeaturesList.add("Commentaries");
+        }
         String specialFeaturesString = IoConverter.specialFeaturesToString(specialFeaturesList);
 
 
         List<Category>categoryList = categoryBox.getSelectionModel().getSelectedItems();
-
 
 
         List<String> infoList = new ArrayList<>();
@@ -105,9 +118,10 @@ public class AddFilmController {
         infoList.add(replacementCost.getText());
         infoList.add(rentalRate.getText());
         infoList.add(specialFeaturesString);
+        infoList.add(ratingBox.getValue());
 
 
-
+        filmManager.addFilm(infoList, categoryList);
         System.out.println("Skicka infomation och skapa ny film" + infoList.size());
     }
 }

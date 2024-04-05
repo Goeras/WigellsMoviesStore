@@ -1,10 +1,13 @@
 package org.dreamteam.wigellsmoviesstore.Managers;
 
 import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
+import org.dreamteam.wigellsmoviesstore.Entitys.Actor;
 import org.dreamteam.wigellsmoviesstore.Entitys.Category;
 import org.dreamteam.wigellsmoviesstore.Entitys.Film;
 import org.dreamteam.wigellsmoviesstore.IoConverter;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +26,14 @@ public class FilmManager {
     film.setReplacementCost(IoConverter.stringToDouble(infoList.get(7)));
     film.setRentalRate(IoConverter.stringToDouble(infoList.get(8)));
     film.setSpecialFeatures(infoList.get(9));
+    film.setRating(infoList.get(10));
     film.setCategoryList(categoryList);
+    film.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
+    List<Actor> actorList = new ArrayList<>();
+    actorList.add(daoManager.getActorDao().getActorById(1));
+    film.setActors(actorList);
+
+    daoManager.getFilmDAO().createFilm(film);
 
 
   }

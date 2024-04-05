@@ -6,7 +6,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
 import org.dreamteam.wigellsmoviesstore.Entitys.Category;
 import org.locationtech.jts.geom.Geometry;
-
 import java.io.InputStream;
 import java.sql.Blob;
 import java.util.Date;
