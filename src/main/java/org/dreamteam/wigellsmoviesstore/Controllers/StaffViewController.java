@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import org.dreamteam.wigellsmoviesstore.CurrentStaff;
 import org.dreamteam.wigellsmoviesstore.CurrentStore;
 import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
 import org.dreamteam.wigellsmoviesstore.Entitys.Address;
@@ -132,7 +133,7 @@ public class StaffViewController {
     private void onSearchStaffButtonClick() throws IOException{
         boolean isInteger = IoValidator.validateInteger(idToSearch.getText());
         if (isInteger){
-            Staff staff = staffManager.searchByName(Integer.parseInt(idToSearch.getText()));
+            staff = staffManager.searchByName(Integer.parseInt(idToSearch.getText()));
             if(staff != null){
                 setStaffInfo(staff);
                 updateButton.setVisible(true);
@@ -166,6 +167,7 @@ public class StaffViewController {
     }
     @FXML // Ändra medarbetare
     private void onUpdateStaffButtonClick() throws IOException{
+        CurrentStaff.getInstance().setCurrentStaff(staff);
         viewManager.showUpdateStaffView((Stage) topLabel.getScene().getWindow());
     }
     @FXML // Tillbaka
