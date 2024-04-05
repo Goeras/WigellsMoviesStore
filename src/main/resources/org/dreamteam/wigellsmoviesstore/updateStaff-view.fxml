@@ -30,7 +30,7 @@
                 <TextField fx:id="userName" promptText="Användarnamn"/>
                 <PasswordField fx:id="password1" promptText="Nytt Lösen"/>
                 <PasswordField fx:id="password2" promptText="Upprepa Lösen"/>
-                <Button text="Spara medarbetare" onAction="#onSaveButtonClick"/>
+
             </VBox>
             <VBox spacing="5">
                 <ChoiceBox fx:id="status"/>
@@ -40,11 +40,12 @@
                 <TextField fx:id="postalCode" promptText="Postkod"/>
                 <TextField fx:id="city" promptText="Stad"/>
                 <ChoiceBox fx:id="country"/>
+                <ImageView fx:id="imageView"/>
             </VBox>
         </HBox>
         <VBox alignment="CENTER" spacing="10">
             <Button text="Ladda upp bild" onAction="#onUploadPictureButtonClick"/>
-            <ImageView fx:id="imageView"/>
+            <Button text="Spara medarbetare" onAction="#onSaveButtonClick"/>
         </VBox>
     <Button text="Tillbaka" onAction="#onBackButtonClick"/>
     </VBox>

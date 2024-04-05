@@ -138,7 +138,9 @@ public class StaffViewController {
                 setStaffInfo(staff);
                 updateButton.setVisible(true);
             }
-
+        }
+        else{
+            IoValidator.displayAlert("Ingen träff", "Ange ett giltigt ID");
         }
     }
 
@@ -153,12 +155,21 @@ public class StaffViewController {
 
     @FXML // Filtrera på namn
     private void onFilterByNameButtonClicked()throws IOException{
-        // filterStaff =
-        List<Staff> filteredStaffList = staffManager.filterByName(observableStaffList, filterStaff.getText());
-        observableStaffList.clear();
-        observableStaffList.addAll(filteredStaffList);
-        staffTable.setItems(observableStaffList);
-        staffTable.refresh();
+        if(filterStaff.getText().isEmpty()) {
+            IoValidator.displayAlert("Ingen input", "Skriv in ett namn");
+        }
+        else{
+            List<Staff> filteredStaffList = staffManager.filterByName(observableStaffList, filterStaff.getText());
+            if(filteredStaffList.isEmpty()){
+                IoValidator.displayAlert("Ingen träff", "Testa ett annat namn");
+            }
+            else {
+                observableStaffList.clear();
+                observableStaffList.addAll(filteredStaffList);
+                staffTable.setItems(observableStaffList);
+                staffTable.refresh();
+            }
+        }
     }
 
     @FXML // Ny medarbetare
