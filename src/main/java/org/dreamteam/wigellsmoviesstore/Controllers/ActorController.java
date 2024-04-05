@@ -33,6 +33,12 @@ public class ActorController {
     @FXML
     private TextField lastName;
     ActorManager actorManager;
+    @FXML
+    private TextField firstNameField;
+    @FXML
+    private TextField lastNameField;
+    @FXML
+    private VBox upDateActor;
 
     public void initialize(){
 
@@ -96,5 +102,18 @@ public class ActorController {
     @FXML
     private void onSaveActorButton(){
         actorManager.newActor(firstName.getText(), lastName.getText());
+    }
+    @FXML
+    private void onUpdateActorButton(){
+        upDateActor.setVisible(true);
+        upDateActor.setManaged(true);
+        firstNameField.setText(selectedActors.get(0).getFirstName());
+        lastNameField.setText(selectedActors.get(0).getLastName());
+    }
+    @FXML
+    private void onSaveUpdate(){
+        actorManager.updateActor(selectedActors.get(0).getId(), firstNameField.getText(), lastNameField.getText());
+        firstNameField.setText("");
+        lastNameField.setText("");
     }
 }
