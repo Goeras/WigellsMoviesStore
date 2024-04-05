@@ -1,10 +1,21 @@
 package org.dreamteam.wigellsmoviesstore.Managers;
 
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
 import org.dreamteam.wigellsmoviesstore.CurrentStore;
 import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
 import org.dreamteam.wigellsmoviesstore.Entitys.*;
+import org.dreamteam.wigellsmoviesstore.IoConverter;
+import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Point;
+
+import javax.sql.rowset.serial.SerialBlob;
+import java.io.*;
+import java.sql.Blob;
+import java.sql.SQLException;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -49,12 +60,12 @@ public class StaffManager {
     }
 
 
-    public boolean createNewStaff(String firstName, String lastName, String eMail, String userName, String phoneNumber, String password, String password2, String address1, String address2, String district, String postalCode, String city, Country country ) {
+    public boolean createNewStaff(String firstName, String lastName, String eMail, String userName, String phoneNumber, String password, String password2, String address1, String address2, String district, String postalCode, String city, Country country, Blob blob) {
         // kontrollerar om något nödvändigt fällt ej är ifyllt av användaren. returnerar isf false.
+        byte[] byteArrImage = new byte[0];
         if (firstName.isEmpty() || lastName.isEmpty() || eMail.isEmpty() || userName.isEmpty() || password.isEmpty() || password2.isEmpty() || address1.isEmpty() || district.isEmpty() || postalCode.isEmpty() || city.isEmpty() || country == null) {
             return false; // Om någon parameter är tom, returnera false
         } else {
-
             country.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
             daOmanager.getCountryDAO().updateCountry(country);
 
@@ -75,6 +86,7 @@ public class StaffManager {
             newStaff.setPassword(password);
             newStaff.setAdress(newAddress);
             newStaff.setActive(true);
+            newStaff.setPicture(blob);
             newStaff.setStore(CurrentStore.getInstance().getCurrentStore());
             newStaff.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
             daOmanager.getStaffDAO().updateStaff(newStaff);
@@ -112,10 +124,10 @@ public class StaffManager {
 
     public Geometry getDefaultGeometry() { // Skapar och returnerar default geometry punkt.
 
-        org.locationtech.jts.geom.Coordinate coordinate = new org.locationtech.jts.geom.Coordinate(1.0, 2.0);
+        Coordinate coordinate = new Coordinate(1.0, 2.0);
 
-        org.locationtech.jts.geom.GeometryFactory geometryFactory = new org.locationtech.jts.geom.GeometryFactory();
-        org.locationtech.jts.geom.Point point = geometryFactory.createPoint(coordinate);
+        GeometryFactory geometryFactory = new GeometryFactory();
+        Point point = geometryFactory.createPoint(coordinate);
 
         return point;
     }
@@ -145,4 +157,40 @@ public class StaffManager {
         return countryList;
     }
 
-}
+    public Blob getImageFromDisk(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png"),
+                new FileChooser.ExtensionFilter("JPEG files (*.jpeg)", "*.jpeg")
+        );
+        File file = fileChooser.showOpenDialog(null);
+
+        if (file != null) {
+            try {
+                FileInputStream fis = new FileInputStream(file);
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                byte[] buf = new byte[1024];
+
+                for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                    bos.write(buf, 0, readNum);
+                }
+
+                byte[] imageBytes = bos.toByteArray();
+                Blob blob = new javax.sql.rowset.serial.SerialBlob(imageBytes);
+                return blob;
+                // Now you can use 'blob' as needed
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    }
+
+

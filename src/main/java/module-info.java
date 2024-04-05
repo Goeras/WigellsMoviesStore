@@ -7,6 +7,8 @@ module org.dreamteam.wigellsmoviesstore {
     requires javafx.graphics;
     requires org.hibernate.orm.spatial;
     requires org.locationtech.jts;
+    requires java.desktop;
+    requires java.sql.rowset;
 
 
     opens org.dreamteam.wigellsmoviesstore.Entitys;

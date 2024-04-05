@@ -9,14 +9,14 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.dreamteam.wigellsmoviesstore.Entitys.Country;
+import org.dreamteam.wigellsmoviesstore.IoConverter;
 import org.dreamteam.wigellsmoviesstore.IoValidator;
 import org.dreamteam.wigellsmoviesstore.Managers.StaffManager;
 import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.sql.Blob;
+import java.sql.SQLException;
 
 public class AddStaffController {
     private ViewManager viewManager;
@@ -55,6 +55,8 @@ public class AddStaffController {
     @FXML
     private TextField userNotice;
 
+    Blob blob;
+
     StaffManager staffManager = new StaffManager();
     private ObservableList countryList = FXCollections.observableArrayList();
 
@@ -74,7 +76,7 @@ public class AddStaffController {
             userNotice.setText("Lösenorden matchar ej");
         }
         if(usernameUnique && emailUnique) {
-            createSuccessfull = staffManager.createNewStaff(firstName.getText(), lastName.getText(), eMail.getText(), userName.getText(), phoneNumber.getText(), password.getText(), password2.getText(), address.getText(), address2.getText(), district.getText(), postalCode.getText(), city.getText(), country.getValue());
+            createSuccessfull = staffManager.createNewStaff(firstName.getText(), lastName.getText(), eMail.getText(), userName.getText(), phoneNumber.getText(), password.getText(), password2.getText(), address.getText(), address2.getText(), district.getText(), postalCode.getText(), city.getText(), country.getValue(),blob);
         }
         else{
             userNotice.setVisible(true);
@@ -95,23 +97,12 @@ public class AddStaffController {
     }
     @FXML
     private void onUploadPictureButtonClick(){
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Välj bild");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Bilder", "*.jpg", "*.png", "*.jpeg"));
-        File selectedFile = fileChooser.showOpenDialog(null);
+        blob = staffManager.getImageFromDisk();
 
-        if(selectedFile!=null){
-            try{
-                InputStream inputStream = new FileInputStream(selectedFile);
-                image = new Image(inputStream);
-            }
-            catch (Exception e){
-                e.printStackTrace();
-                System.out.println("Fel vid inläsning av bild");
-            }
-        }
-        imageView.setFitWidth(60);
+
+        imageView.setFitWidth(70);
         imageView.setFitHeight(70);
-        imageView.setImage(image);
+        imageView.setPreserveRatio(true);
+        imageView.setImage(IoConverter.convertBlobToImage(blob));
     }
 }
