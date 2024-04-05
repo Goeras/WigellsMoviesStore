@@ -78,7 +78,7 @@ public class IoConverter {
         try (InputStream inputStream = blob.getBinaryStream()) {
             return new Image(inputStream);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("NullPointerException: Ingen bild finns lagrad i databasen");
             return null;
         }
     }
