@@ -23,7 +23,7 @@
                         <Button text="Filtrera på namn"/>
                     </HBox>
                     <ListView fx:id="actorListView"/>
-                    <Button text="OK" onAction="#onOpenActorView"/>
+                    <Button text="OK" onAction="#onOpenAddFilmView"/>
                     <Button text="Ny actor" onAction="#onNewActorButton"/>
                     <Button text="Ändra markerad skådespelare" onAction="#onUpdateActorButton"/>
                 </VBox>

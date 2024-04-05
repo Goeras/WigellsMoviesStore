@@ -152,11 +152,19 @@ public class AddFilmController {
         infoList.add(ratingBox.getValue());
 
 
-        filmManager.addFilm(infoList, categoryList);
+        filmManager.addFilm(infoList, categoryList, selectedActors);
         System.out.println("Skicka infomation och skapa ny film" + infoList.size());
     }
     @FXML
     private void onOpenActorView() throws IOException {
-  viewManager.showActorView((Stage) topLabel.getScene().getWindow());
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("actor-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+        stage.setTitle("Lämna tillbaka film!");
+        ActorController controller = (ActorController) fxmlLoader.getController();
+        controller.initialize(stage, this);
+        stage.setScene(scene);
+        stage.show();
+        }
     }
-}
+

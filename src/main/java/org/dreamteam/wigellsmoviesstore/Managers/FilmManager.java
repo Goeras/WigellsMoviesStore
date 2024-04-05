@@ -14,7 +14,7 @@ import java.util.List;
 public class FilmManager {
   DAOmanager daoManager = new DAOmanager();
 
-  public void addFilm(List<String> infoList, List<Category>categoryList) {
+  public void addFilm(List<String> infoList, List<Category>categoryList, List<Actor> actorList) {
     Film film = new Film();
     film.setTitle(infoList.get(0));
     film.setDescription(infoList.get(1));
@@ -29,8 +29,6 @@ public class FilmManager {
     film.setRating(infoList.get(10));
     film.setCategoryList(categoryList);
     film.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
-    List<Actor> actorList = new ArrayList<>();
-    actorList.add(daoManager.getActorDao().getActorById(1));
     film.setActors(actorList);
 
     daoManager.getFilmDAO().createFilm(film);

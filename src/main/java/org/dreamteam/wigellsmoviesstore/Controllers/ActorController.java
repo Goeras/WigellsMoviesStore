@@ -39,8 +39,49 @@ public class ActorController {
     private TextField lastNameField;
     @FXML
     private VBox upDateActor;
+    private AddFilmController addFilmController;
 
     public void initialize(){
+        actorManager = new ActorManager();
+        DAOmanager daOmanager = new DAOmanager();
+        List<Actor> actors = daOmanager.getActorDao().getAllActors();
+        actorList = FXCollections.observableList(actors);
+        actorListView.setItems(actorList);
+        selectedActors = new ArrayList<>();
+        actorListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        actorListView.setCellFactory(param -> new ListCell<>() {
+            private final CheckBox checkBox = new CheckBox();
+
+            {
+                checkBox.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                    // Hantera CheckBox-händelse
+                    Actor actor = getItem();
+                    if (newVal) {
+                        // Om CheckBox är markerad, lägg till aktören i listan för markerade objekt
+                        selectedActors.add(actor);
+                    } else {
+                        // Om CheckBox är avmarkerad, ta bort aktören från listan för markerade objekt
+                        selectedActors.remove(actor);
+                    }
+                    System.out.println("CheckBox " + (newVal ? "selected" : "deselected"));
+                });
+            }
+
+            @Override
+            protected void updateItem(Actor actor, boolean empty) {
+                super.updateItem(actor, empty);
+                if (empty || actor == null) {
+                    setGraphic(null);
+                } else {
+                    checkBox.setSelected(selectedActors.contains(actor));
+                    checkBox.setText(actor.toString());
+                    setGraphic(checkBox);
+                }
+            }
+        });
+    }
+    public void initialize(Stage stage, AddFilmController controller){
+        addFilmController = controller;
 
         actorManager = new ActorManager();
         DAOmanager daOmanager = new DAOmanager();
@@ -82,17 +123,12 @@ public class ActorController {
     }
 
     @FXML
-    private void onOpenActorView() throws IOException {
-        Stage stage = new Stage();
+    private void onOpenAddFilmView() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("addFilm-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 600);
-        stage.setTitle("Lämna tillbaka film!");
-        stage.setScene(scene);
-        stage.show();
-        AddFilmController controller = (AddFilmController) fxmlLoader.getController();
-        controller.initialize(selectedActors);
-        Stage stage2 = (Stage) actorListView.getScene().getWindow();
-        stage2.close();
+        addFilmController.initialize(selectedActors);
+        Stage stage = (Stage) newActor.getScene().getWindow();
+        stage.close();
     }
     @FXML
     private void onNewActorButton(){
