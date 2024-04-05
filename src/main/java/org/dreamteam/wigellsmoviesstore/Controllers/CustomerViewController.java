@@ -17,26 +17,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerViewController {
-@FXML
+    private int idHolder = 0;
+    @FXML
     private Label topLabel;
-ViewManager viewManager;
-CustomerManager customerManager;
-@FXML
-private TextField searchCustomer;
-@FXML
-private Label firstName;
-@FXML
-private Label lastName;
-@FXML
-private Label email;
-@FXML
-private Label active;
-@FXML
-private Label createDate;
-@FXML
-private Label address1;
-@FXML
-private Label address2;
+    ViewManager viewManager;
+    CustomerManager customerManager;
+    @FXML
+    private TextField searchCustomer;
+    @FXML
+    private Label firstName;
+    @FXML
+    private Label lastName;
+    @FXML
+    private Label email;
+    @FXML
+    private Label active;
+    @FXML
+    private Label createDate;
+    @FXML
+    private Label address1;
+    @FXML
+    private Label address2;
     @FXML
     private Label disctrict;
     @FXML
@@ -74,16 +75,24 @@ private Label address2;
     @FXML
     private TextField searchByName;
 
+//    public int getIdHolder() {
+//        return idHolder;
+//    }
+//
+//    public void setIdHolder(int idHolder) {
+//        this.idHolder = idHolder;
+//    }
+//    public CustomerViewController(int idHolder){
+//        this.idHolder = idHolder;
+//    }
 
-
-
-public void initialize(){
-    List<Customer> customerList = new ArrayList<>();
-    customers = FXCollections.observableList(customerList);
-    viewManager = new ViewManager();
-    customerManager = new CustomerManager();
-    setRentHistoryTable();
-    setCustomerTable();
+    public void initialize(){
+        List<Customer> customerList = new ArrayList<>();
+        customers = FXCollections.observableList(customerList);
+        viewManager = new ViewManager();
+        customerManager = new CustomerManager();
+        setRentHistoryTable();
+        setCustomerTable();
 }
 @FXML
 private void onBackButtonClick() throws IOException {
@@ -96,6 +105,8 @@ private void onBackButtonClick() throws IOException {
 @FXML
     private void onUpdateCustomerClick() throws IOException {
     viewManager.showUpdateCustomerView((Stage) topLabel.getScene().getWindow());
+
+
 }
 @FXML
     private void onSearchButtonClick(){

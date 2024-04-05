@@ -64,6 +64,49 @@ public class CustomerManager {
         newCustomer.setStore(store);
         daoManager.getCustomerDAO().updateCustomer(newCustomer);
 
+    }
+    public void updateCustomer(String firstName, String lastName, String email, String phoneNumber, String address1, String address2, String district, String postalCode, String city, Country country) {
+
+        country.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
+        daoManager.getCountryDAO().updateCountry(country);
+
+        City newCity = daoManager.getCityDAO().getCityByName(city);
+
+        if(newCity == null){
+            newCity = new City();
+            newCity.setName(city);
+            newCity.setCountry(country);
+            newCity.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
+            daoManager.getCityDAO().updateCity(newCity);
+        }
+        City dataBaseCity = daoManager.getCityDAO().getCityByName(city);   // vet ej om detta hjälper än men hämtar från dbs
+        country.addCity(dataBaseCity);
+
+        Address newAddress = new Address();
+        newAddress.setCity(dataBaseCity);
+        newAddress.setAddress(address1);
+        newAddress.setAddress2(address2);
+        newAddress.setDistrict(district);
+        newAddress.setPostalCode(postalCode);
+        newAddress.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
+        newAddress.setLocation(getDefaultGeometry());
+        newAddress.setPhone(phoneNumber);
+
+        daoManager.getAddressDAO().createAddress(newAddress);
+        Address dataBaseAddress = daoManager.getAddressDAO().getAddressByName(address1);
+
+        Store store = currentStore.getInstance().getCurrentStore();
+        Customer newCustomer = new Customer();
+        newCustomer.setFirstName(firstName);
+        newCustomer.setLastName(lastName);
+        newCustomer.setEmail(email);
+        newCustomer.setAdress(dataBaseAddress);
+        newCustomer.setActive(true);
+        newCustomer.setStore(store);
+        newCustomer.setCreateDate(new Date(System.currentTimeMillis()));
+        newCustomer.setLast_update(Timestamp.valueOf(LocalDateTime.now()));
+        newCustomer.setStore(store);
+        daoManager.getCustomerDAO().updateCustomer(newCustomer);
 
     }
 
