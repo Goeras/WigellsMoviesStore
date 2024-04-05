@@ -22,7 +22,7 @@
                         <TextField fx:id="filterField"/>
                         <Button text="Filtrera på namn"/>
                     </HBox>
-                    <ListView fx:id="actorListView"/>
+                    <ListView fx:id="actorListView" maxHeight="200"/>
                     <Button text="OK" onAction="#onOpenAddFilmView"/>
                     <Button text="Ny actor" onAction="#onNewActorButton"/>
                     <Button text="Ändra markerad skådespelare" onAction="#onUpdateActorButton"/>

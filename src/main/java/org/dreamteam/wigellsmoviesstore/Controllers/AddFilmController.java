@@ -159,7 +159,7 @@ public class AddFilmController {
     private void onOpenActorView() throws IOException {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("actor-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+        Scene scene = new Scene(fxmlLoader.load(), 500, 600);
         stage.setTitle("Lämna tillbaka film!");
         ActorController controller = (ActorController) fxmlLoader.getController();
         controller.initialize(stage, this);
