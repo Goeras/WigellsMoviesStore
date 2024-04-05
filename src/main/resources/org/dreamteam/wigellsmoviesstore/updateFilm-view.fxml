@@ -24,9 +24,9 @@
                   <TextField fx:id="description" promptText="Beskrivning"/>
                   <TextField fx:id="releaseYear" promptText="Utgivningsår"/>
                   <ChoiceBox fx:id="languageBox" value="Språk" minWidth="120"/>
-                  <ChoiceBox fx:id="originalLanguage" value="OriginalSpråk" minWidth="120"/>
+                  <ChoiceBox fx:id="originalLanguageBox" value="OriginalSpråk" minWidth="120"/>
                   <ChoiceBox fx:id="ratingBox" value="Rating" minWidth="120"/>
-                  <ChoiceBox fx:id="category" value="Kategori" minWidth="120"/>
+                  <ChoiceBox fx:id="categoryBox" value="Kategori" minWidth="120"/>
               </VBox>
               <VBox spacing="2">
                   <TextField fx:id="rentalDuration" promptText="Hyrperiod dagar"/>
@@ -39,7 +39,8 @@
                   <CheckBox fx:id="commentaries" text="Kommentarer"/>
               </VBox>
           </HBox>
-          <Button text="Spara uppdatering"/>
+          <Button text="Spara uppdatering" onAction="#onSaveButtonClick"/>
+          <TextField fx:id="userNotice" visible="false"/>
       </VBox>
       <Button text="Tillbaka" onAction="#onBackButtonClick"/>
   </VBox>

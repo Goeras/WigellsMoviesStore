@@ -83,4 +83,8 @@ public class Actor {
         this.films.remove(film);
     }
 
+    @Override
+    public String toString() {
+        return firstName.toLowerCase() + " " + lastName.toLowerCase();
+    }
 }
