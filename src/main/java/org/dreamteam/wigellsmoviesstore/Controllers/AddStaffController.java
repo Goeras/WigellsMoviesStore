@@ -52,8 +52,6 @@ public class AddStaffController {
     private PasswordField password;
     @FXML
     private PasswordField password2;
-    @FXML
-    private TextField userNotice;
 
     Blob blob;
 
@@ -72,23 +70,19 @@ public class AddStaffController {
         boolean emailUnique = staffManager.validateUniqueEmail(eMail.getText());
         boolean usernameUnique = staffManager.validateUniqueUsername(userName.getText());
         if(!IoValidator.stringOneEqualsStringTwo(password.getText(), password2.getText())){
-            userNotice.setVisible(true);
-            userNotice.setText("Lösenorden matchar ej");
+            IoValidator.displayAlert("Fel lösenord", "Lösenorden matchar ej");
         }
         if(usernameUnique && emailUnique) {
             createSuccessfull = staffManager.createNewStaff(firstName.getText(), lastName.getText(), eMail.getText(), userName.getText(), phoneNumber.getText(), password.getText(), password2.getText(), address.getText(), address2.getText(), district.getText(), postalCode.getText(), city.getText(), country.getValue(),blob);
         }
         else{
-            userNotice.setVisible(true);
-            userNotice.setText("Användarnamn eller eMail upptagen");
+            IoValidator.displayAlert("Användarnamn eller email upptaget", "Testa annat användarnamn eller email");
         }
        if(createSuccessfull){
-           userNotice.setVisible(true);
-           userNotice.setText("Medarbetare sparad");
+           IoValidator.displayConfirmation("Medarbetare skapad", "Ny medarbetare skapad");
         }
        else{
-           userNotice.setVisible(true);
-           userNotice.setText("Kontrollera uppgifterna och försök igen");
+           IoValidator.displayAlert("Felaktig input", "Kontrollera uppgifterna");
         }
     }
     @FXML
@@ -98,7 +92,6 @@ public class AddStaffController {
     @FXML
     private void onUploadPictureButtonClick(){
         blob = staffManager.getImageFromDisk();
-
 
         imageView.setFitWidth(70);
         imageView.setFitHeight(70);
