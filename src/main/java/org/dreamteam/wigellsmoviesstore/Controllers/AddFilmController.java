@@ -13,6 +13,7 @@ import org.dreamteam.wigellsmoviesstore.Entitys.Category;
 import org.dreamteam.wigellsmoviesstore.Entitys.Language;
 import org.dreamteam.wigellsmoviesstore.HelloApplication;
 import org.dreamteam.wigellsmoviesstore.IoConverter;
+import org.dreamteam.wigellsmoviesstore.IoValidator;
 import org.dreamteam.wigellsmoviesstore.Managers.FilmManager;
 import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
 
@@ -54,7 +55,9 @@ public class AddFilmController {
     private CheckBox trailers;
     @FXML
     private CheckBox commentaries;
-    List<Actor> selectedActors;
+    private ObservableList<Actor> selectedActors;
+    @FXML
+    private ListView<Actor> actorList;
 
 
     DAOmanager daoManager = new DAOmanager();
@@ -81,7 +84,7 @@ public class AddFilmController {
         ratingBox.setItems(filmRatingList);
     }
     public void initialize(List<Actor> actors){
-        selectedActors = actors;
+        selectedActors = FXCollections.observableList(actors);
         viewManager = new ViewManager();
 
         ObservableList<Category> categoryList = FXCollections.observableList(daoManager.getCategoryDAO().readAllCategories());
@@ -100,7 +103,7 @@ public class AddFilmController {
         ratingList.add("NC-17");
         ObservableList<String> filmRatingList = FXCollections.observableList(ratingList);
         ratingBox.setItems(filmRatingList);
-        System.out.println(selectedActors.size());
+        actorList.setItems(selectedActors);
     }
     @FXML
     private void onBackButtonClick() throws IOException {
@@ -108,6 +111,10 @@ public class AddFilmController {
     }
     @FXML
     private void onSaveButtonClick(){
+        if(selectedActors == null) {
+            IoValidator.displayAlert("Missing Actors", "Vänligen fyll i Actors");
+        }
+
         List<String> specialFeaturesList = new ArrayList<>();
 
         if (behindTheScenes.isSelected()) {
@@ -148,14 +155,8 @@ public class AddFilmController {
         filmManager.addFilm(infoList, categoryList);
         System.out.println("Skicka infomation och skapa ny film" + infoList.size());
     }
+    @FXML
     private void onOpenActorView() throws IOException {
-        Stage stage = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("actor-view.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
-            stage.setTitle("Lämna tillbaka film!");
-            stage.setScene(scene);
-            stage.show();
-            ActorController controller = fxmlLoader.getController();
-
+  viewManager.showActorView((Stage) topLabel.getScene().getWindow());
     }
 }

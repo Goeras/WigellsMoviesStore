@@ -79,17 +79,9 @@ public class AddCustomerController {
             customerManager.newCustomer(firstName.getText(),lastName.getText(),email.getText(),phone.getText(),address1.getText(),address2.getText(),district.getText(),postalCode.getText(),city.getText(),country.getValue());
 
         } else {
-            userNotice.setVisible(true);
-            userNotice.setText("Kontrollera uppgifterna och försök igen");
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Kontrollera uppgifterna och försök igen");
-
-            alert.showAndWait();
+            //userNotice.setVisible(true);
+            //userNotice.setText("Kontrollera uppgifterna och försök igen");
+            ioValidator.displayAlert("Error","Kontrollera uppgifterna och försök igen");
         }
-
     }
-
-
 }

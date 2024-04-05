@@ -25,6 +25,7 @@
                     <ListView fx:id="actorListView"/>
                     <Button text="OK" onAction="#onOpenActorView"/>
                     <Button text="Ny actor" onAction="#onNewActorButton"/>
+                    <Button text="Ändra markerad skådespelare" onAction="#onUpdateActorButton"/>
                 </VBox>
                 <VBox styleClass="boxes" fx:id="newActor" managed="false" visible="false">
                     <Label text="Ny skådespelare"/>
@@ -34,6 +35,14 @@
                     </HBox>
                     <Button text="Spara skådespelare" onAction="#onSaveActorButton"/>
                 </VBox>
+            <VBox styleClass="boxes" fx:id="upDateActor" managed="false" visible="false">
+                <Label text="Uppdatera skådespelare"/>
+                <HBox styleClass="hboxes">
+                    <TextField fx:id="firstNameField"/>
+                    <TextField fx:id="lastNameField"/>
+                    <Button text="OK" onAction="#onSaveUpdate"/>
+                </HBox>
+            </VBox>
         </VBox>
     </VBox>
 </AnchorPane>
