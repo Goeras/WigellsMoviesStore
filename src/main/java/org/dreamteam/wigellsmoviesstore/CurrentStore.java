@@ -1,9 +1,12 @@
 package org.dreamteam.wigellsmoviesstore;
+import org.dreamteam.wigellsmoviesstore.DAO.StoreDAO;
 import org.dreamteam.wigellsmoviesstore.Entitys.Store;
 public class CurrentStore {
 
     private static CurrentStore instance;
     private Store currentStore;
+
+    private StoreDAO storeDAO = new StoreDAO();
 
     private CurrentStore(){}
 
@@ -19,5 +22,9 @@ public class CurrentStore {
     }
     public void setCurrentStore(Store store){
         this.currentStore = store;
+    }
+
+    public void updateCurrentStore(){
+        this.currentStore = storeDAO.getStoreById(currentStore.getId());
     }
 }

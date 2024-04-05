@@ -73,7 +73,7 @@ public class StaffViewController {
     @FXML
     private Button updateButton;
 
-    private ObservableList observableStaffList;
+    private ObservableList<Staff> observableStaffList;
 
 
     Store store;
@@ -82,24 +82,14 @@ public class StaffViewController {
     StaffManager staffManager = new StaffManager();
 
     public void initialize(){
+        CurrentStore.getInstance().updateCurrentStore();
         viewManager = new ViewManager();
 
-        store = CurrentStore.getInstance().getCurrentStore(); // store fungerar
+        store = CurrentStore.getInstance().getCurrentStore();
         List<Staff> staffs = new ArrayList<>();
-        staffs.addAll(store.getStaffList()); // staff fungerar.
+        staffs.addAll(store.getStaffList());
         observableStaffList = FXCollections.observableList(staffs);
         setTable(observableStaffList);
-
-        /*try {
-            // Övre info-ruta
-            Image image = new Image("file:src/images/test.jpg");
-            imageView.setFitWidth(100);
-            imageView.setFitHeight(120);
-            imageView.setImage(image);
-        }
-        catch (Exception e){
-            System.out.println("fel vid bildladdning");
-        }*/
 
     }
 
