@@ -101,11 +101,13 @@ public class PosManager {
         }
         return late;
     }
+
     public ObservableList<Staff> getStaffList(){
-        List<Staff> staffList = daOmanager.getStaffDAO().getAllStaffs();
+        List<Staff> staffList = CurrentStore.getInstance().getCurrentStore().getStaffList();
         ObservableList<Staff> staffs = FXCollections.observableList(staffList);
         return staffs;
     }
+
     public void payReturnFees(Customer customer, Staff staff, Rental rental, String amountString){
         double amount = Double.parseDouble(amountString);
         if(amount > 0) {
