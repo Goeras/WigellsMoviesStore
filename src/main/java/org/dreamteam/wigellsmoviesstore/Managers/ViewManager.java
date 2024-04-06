@@ -100,4 +100,11 @@ public class ViewManager {
         stage.setScene(scene);
         stage.show();
     }
+    public void showTransactionView(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("rental-payment-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+        stage.setTitle("Lämna tillbaka film!");
+        stage.setScene(scene);
+        stage.show();
+    }
 }

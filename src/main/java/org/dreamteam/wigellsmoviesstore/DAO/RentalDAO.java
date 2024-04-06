@@ -1,10 +1,13 @@
 package org.dreamteam.wigellsmoviesstore.DAO;
 
+import org.dreamteam.wigellsmoviesstore.Entitys.Payment;
 import org.dreamteam.wigellsmoviesstore.Entitys.Rental;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public class RentalDAO {
@@ -94,5 +97,16 @@ public class RentalDAO {
         finally {
             session.close();
         }
+    }
+    public List<Rental> getInventoryByFilmAndStore(){
+        Session session = DatabaseSessionFactory.getSessionFactory().openSession();
+        session.beginTransaction();
+        String queryString = "FROM Rental WHERE returnDate IS null";
+        System.out.println(queryString);
+        Query<Rental> query = session.createQuery(queryString, Rental.class);
+        List<Rental> resultList = query.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return resultList;
     }
 }

@@ -19,12 +19,6 @@ import java.util.List;
 public class PosManager {
     DAOmanager daOmanager = new DAOmanager();
 
-    public LocalDateTime calculateReturnDate(int duration){
-        LocalDateTime localDate = LocalDateTime.now();
-        LocalDateTime returnDate = LocalDateTime.now();
-        returnDate = localDate.plusDays(duration);
-        return returnDate;
-    }
     public ObservableList addFilmToCart(ObservableList<Inventory> filmList, String id){
         int inventorIid = IoConverter.stringToInteger(id);
         Inventory inventory = daOmanager.getInventoryDAO().readInventory(inventorIid);
@@ -117,5 +111,15 @@ public class PosManager {
         if(amount > 0) {
             newPayment(customer, staff, rental, amount);
         }
+    }
+    public ObservableList<Payment> seePayments(LocalDateTime from, LocalDateTime to){
+        Timestamp fromStamp = Timestamp.valueOf(from);
+        Timestamp toStamp = Timestamp.valueOf(to);
+        List<Payment> resultList = daOmanager.getPaymentDAO().getInventoryByFilmAndStore(fromStamp, toStamp);
+        return FXCollections.observableList(resultList);
+    }
+    public ObservableList<Rental> seeRentals(){
+        List<Rental> resultList = daOmanager.getRentalDAO().getInventoryByFilmAndStore();
+        return FXCollections.observableList(resultList);
     }
 }

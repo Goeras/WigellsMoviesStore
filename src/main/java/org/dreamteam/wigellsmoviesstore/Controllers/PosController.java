@@ -2,6 +2,7 @@ package org.dreamteam.wigellsmoviesstore.Controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -172,5 +173,9 @@ public class PosController {
     @FXML
     private void onReturnButtonClick() throws IOException {
         viewManager.showReturnRentalView((Stage) topLabel.getScene().getWindow());
+    }
+
+    public void onSeeTransactionsClick() throws IOException {
+        viewManager.showTransactionView((Stage) topLabel.getScene().getWindow());
     }
 }

@@ -1,10 +1,12 @@
 
 package org.dreamteam.wigellsmoviesstore.DAO;
+import org.dreamteam.wigellsmoviesstore.Entitys.Inventory;
 import org.dreamteam.wigellsmoviesstore.Entitys.Payment;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,4 +102,19 @@ public class PaymentDAO {
             session.close();
         }
     }
+
+    public List<Payment> getInventoryByFilmAndStore(Timestamp fromDate, Timestamp toDate){
+        Session session = DatabaseSessionFactory.getSessionFactory().openSession();
+        session.beginTransaction();
+        String queryString = "FROM Payment WHERE paymentDate <:toDate AND paymentDate > :fromDate";
+        System.out.println(queryString);
+        Query<Payment> query = session.createQuery(queryString, Payment.class);
+        query.setParameter("toDate", toDate);
+        query.setParameter("fromDate", fromDate);
+        List<Payment> resultList = query.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return resultList;
+    }
+
 }
