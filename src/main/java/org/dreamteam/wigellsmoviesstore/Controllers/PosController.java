@@ -10,6 +10,7 @@ import org.dreamteam.wigellsmoviesstore.Entitys.Film;
 import org.dreamteam.wigellsmoviesstore.Entitys.Inventory;
 import org.dreamteam.wigellsmoviesstore.Entitys.Staff;
 import org.dreamteam.wigellsmoviesstore.IoConverter;
+import org.dreamteam.wigellsmoviesstore.IoValidator;
 import org.dreamteam.wigellsmoviesstore.Managers.PosManager;
 import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
 
@@ -61,6 +62,11 @@ public class PosController {
     private TextField searchCustomerField;
     @FXML
     private ChoiceBox<Staff> staffBox;
+    @FXML
+    private Button okButton;
+    @FXML
+    private Button addToCartButton;
+
     ObservableList<Staff> staffList;
     String inventoryId;
 
@@ -79,10 +85,16 @@ public class PosController {
     }
     @FXML
     private void onSearchCustomerButton(){
-        String id = searchCustomerField.getText();
-        String[] info = posManager.searchCustomer(id);
-        confirmCustId.setText(info[0]);
-        confirmCustName.setText(info[1]);
+        if(IoValidator.validateInteger(searchCustomerField.getText())) {
+            String id = searchCustomerField.getText();
+            String[] info = posManager.searchCustomer(id);
+            confirmCustId.setText(info[0]);
+            confirmCustName.setText(info[1]);
+            okButton.setVisible(true);
+        }
+        else{
+            IoValidator.displayAlert("Ingen träff", "Kontrollera Kund-ID");
+        }
     }
     @FXML
     private void onConfirmCustomerButton(){
@@ -106,6 +118,7 @@ public class PosController {
         confirmCustomer.setVisible(true);
         chosenCustInfo.setManaged(false);
         chosenCustInfo.setVisible(false);
+        okButton.setVisible(false);
     }
     private void initializeTable(){
         filmId.setCellValueFactory(cellData -> IoConverter.integerToSimpleIntegerProperty(cellData.getValue().getFilm().getFilmId()).asObject());
@@ -122,23 +135,39 @@ public class PosController {
     @FXML
     private void searchFilm(){
         if(!filmIdField.getText().isBlank()) {
-            String id = filmIdField.getText();
-            String[] info = posManager.searchFilm(id);
-            filmIdLabel.setText(info[0]);
-            filmTitleLabel.setText(info[1]);
+            if(IoValidator.validateInteger(filmIdField.getText())) {
+                String id = filmIdField.getText();
+                String[] info = posManager.searchFilm(id);
+                filmIdLabel.setText(info[0]);
+                filmTitleLabel.setText(info[1]);
+                addToCartButton.setVisible(true);
+            }
+            else{
+                IoValidator.displayAlert("Ingen träff", "kontrollera Film-ID");
+            }
+        }
+        else{
+            IoValidator.displayAlert("Tomt sökfält", "Sökfältet är tomt");
         }
     }
     @FXML
     private void onConfirmRentalButtons(){
-        int staff = staffBox.getValue().getId();
-        posManager.confirmRentals(cart, chosenCustId.getText(), staff);
+        if(!(staffBox.getValue() == null)) {
+            int staff = staffBox.getValue().getId();
+            posManager.confirmRentals(cart, chosenCustId.getText(), staff);
 
-        cart.removeAll(cart);
-        tableView.setItems(cart);
-        chosenCustName.setText("");
-        chosenCustId.setText("");
-        filmIdLabel.setText("");
-        filmTitleLabel.setText("");
+            cart.removeAll(cart);
+            tableView.setItems(cart);
+            //chosenCustName.setText("");
+            //chosenCustId.setText("");
+            filmIdLabel.setText("");
+            filmTitleLabel.setText("");
+            addToCartButton.setVisible(false);
+
+        }
+        else{
+            IoValidator.displayAlert("Ingen anställd vald","Välj butiksanställd i dropdown menyn");
+        }
     }
     @FXML
     private void onReturnButtonClick() throws IOException {

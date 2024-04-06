@@ -19,30 +19,30 @@
             <ChoiceBox fx:id="staffBox"/>
             <VBox styleClass="boxes">
                 <Button text="Lämna tillbaka film" onAction="#onReturnButtonClick"/>
-                <HBox fx:id="searchCustomer">
+                <HBox fx:id="searchCustomer" alignment="CENTER">
                     <TextField fx:id="searchCustomerField" promptText="Kundnummer"/>
                     <Button text="Sök" onAction="#onSearchCustomerButton"/>
                 </HBox>
-                <HBox fx:id="confirmCustomer">
-                    <Label fx:id="confirmCustId" text="Kund id"/>
-                    <Label fx:id="confirmCustName" text="Kundnamn"/>
-                    <Button text="OK" onAction="#onConfirmCustomerButton"/>
+                <HBox fx:id="confirmCustomer" spacing="5" alignment="CENTER">
+                    <Label fx:id="confirmCustId"/>
+                    <Label fx:id="confirmCustName"/>
+                    <Button fx:id="okButton" text="OK" onAction="#onConfirmCustomerButton" visible="false"/>
                 </HBox>
-                <HBox fx:id="chosenCustInfo" visible="false" managed="false">
+                <HBox fx:id="chosenCustInfo" visible="false" managed="false" spacing="5" alignment="CENTER">
                     <Label fx:id="chosenCustId" text="Kund id"/>
                     <Label fx:id="chosenCustName" text="Kundnamn"/>
                     <Button text="Byt kund" onAction="#onChangeCustomerButton"/>
                 </HBox>
             </VBox>
             <VBox styleClass="boxes">
-                <HBox>
+                <HBox alignment="CENTER">
                     <TextField fx:id="filmIdField" promptText="FilmId"/>
                     <Button text="Sök" onAction="#searchFilm"/>
                 </HBox>
-                <HBox>
-                    <Label fx:id="filmIdLabel" text="FilmId"/>
-                    <Label fx:id="filmTitleLabel" text="Filmtitel"/>
-                    <Button text="Lägg till" onAction="#addToCart"/>
+                <HBox spacing="5" alignment="CENTER">
+                    <Label fx:id="filmIdLabel"/>
+                    <Label fx:id="filmTitleLabel"/>
+                    <Button fx:id="addToCartButton" text="Lägg till" onAction="#addToCart" visible="false"/>
                 </HBox>
             </VBox>
             <TableView fx:id="tableView">
