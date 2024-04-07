@@ -118,7 +118,7 @@
     -fx-text-fill: black;
  }
 .table-row-cell:selected   {
-    -fx-text-fill: black !important;
+    -fx-background-color: #7f9f7c;;
 }
 .staffTable{
     -fx-min-width: 525;
