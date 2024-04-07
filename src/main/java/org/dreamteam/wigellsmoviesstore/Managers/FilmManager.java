@@ -16,7 +16,6 @@ import java.util.List;
 public class FilmManager {
   DAOmanager daoManager = new DAOmanager();
 
-//  public void addFilm(List<String> infoList, List<Category>categoryList, List<Actor> actorList) {
   public void addFilm(String title, String description, String releaseYear, String rentalDuration, String length, String replacementCost, String rentalRate, String rating, String specialFeaturesString, Language language, Language originalLanguage, List<Category> categoryList)  {
   Film film = new Film();
 
@@ -76,27 +75,9 @@ public class FilmManager {
   }
 
 
-
-
-
-//    film.setTitle(infoList.get(0));
-//    film.setDescription(infoList.get(1));
-//    film.setReleaseYear(IoConverter.stringToShort(infoList.get(2)));
-//    film.setLanguage(daoManager.getLanguageDAO().readLanguage(IoConverter.stringToInteger(infoList.get(3))));
-//    film.setOriginalLanguage(daoManager.getLanguageDAO().readLanguage(IoConverter.stringToInteger(infoList.get(4))));
-//    film.setRentalDuration(IoConverter.stringToByte(infoList.get(5)));
-//    film.setLength(IoConverter.stringToShort(infoList.get(6)));
-//    film.setReplacementCost(IoConverter.stringToDouble(infoList.get(7)));
-//    film.setRentalRate(IoConverter.stringToDouble(infoList.get(8)));
-//    film.setSpecialFeatures(infoList.get(9));
-//    film.setRating(infoList.get(10));
-//    film.setCategoryList(categoryList);
-//    film.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
-//    film.setActors(actorList);
   if(validTitle && validLanguage && validRentalDuration && validRentalRate && validReplacementCost){
       daoManager.getFilmDAO().createFilm(film);
     IoValidator.displayConfirmation("Film Skapad", film.getTitle() + ": Tillagd i databasen");
     }
-
   }
 }

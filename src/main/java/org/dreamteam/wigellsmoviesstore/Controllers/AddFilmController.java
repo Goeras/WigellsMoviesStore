@@ -133,45 +133,11 @@ public class AddFilmController {
         }
         String specialFeaturesString = IoConverter.specialFeaturesToString(specialFeaturesList);
 
-
         List<Category> categoryList = categoryBox.getSelectionModel().getSelectedItems();
 
-//        if(selectedActors == null) {
-//            IoValidator.displayAlert("Missing Actors", "Vänligen fyll i Skådespelare");
-//        } else if
-//        (categoryList == null || categoryList.isEmpty()) {
-//            IoValidator.displayAlert("Missing Categories", "Vänligen fyll i Kategori");
-//        } else if
-//        (title.getText() == null || title.getText().isEmpty()) {
-//            IoValidator.displayAlert("Missing Title", "Vänligen fyll i Filmtitel");
-//        } else if
-//        (languageBox.getValue() == null) {
-//            IoValidator.displayAlert("Missing Language", "Vänligen fyll i Språk");
-//        } else if
-//        (originalLanguage.getValue() == null) {
-//            IoValidator.displayAlert("Missing Originallanguage", "Vänligen fyll Ursprungsspråk");
-//        } else if (releaseYear.getText() == null) {
-//            IoValidator.displayAlert("Missing releaseYear", "Vänligen fyll i releaseyear");
-//        } else if (rentalDuration.getText() == null) {
-//            IoValidator.displayAlert("Missing rentalDuration", "Vänligen fyll i Hyrperiod");
-//        }else {
-//            List<String> infoList = new ArrayList<>();
-//            infoList.add(title.getText());
-//            infoList.add(description.getText());
-//            infoList.add(releaseYear.getText());
-//            infoList.add(IoConverter.integerToString(languageBox.getValue().getId()));
-//            infoList.add(IoConverter.integerToString(originalLanguage.getValue().getId()));
-//            infoList.add(rentalDuration.getText());
-//            infoList.add(length.getText());
-//            infoList.add(replacementCost.getText());
-//            infoList.add(rentalRate.getText());
-//            infoList.add(specialFeaturesString);
-//            infoList.add(ratingBox.getValue());
-
         filmManager.addFilm(title.getText(), description.getText(), releaseYear.getText(), rentalDuration.getText(), length.getText(), replacementCost.getText(), rentalRate.getText(), ratingBox.getValue(), specialFeaturesString, languageBox.getValue(), originalLanguage.getValue(), categoryList);
-//            filmManager.addFilm(infoList, categoryList, selectedActors);
     }
-//}
+
     @FXML
     private void onOpenActorView() throws IOException {
         Stage stage = new Stage();
