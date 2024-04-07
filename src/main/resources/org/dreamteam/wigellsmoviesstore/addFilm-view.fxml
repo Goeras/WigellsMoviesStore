@@ -36,9 +36,12 @@
                     <TextField fx:id="length" promptText="Längd (minuter)"/>
                     <TextField fx:id="replacementCost" promptText="Ersättningskostnad"/>
                     <TextField fx:id="rentalRate" promptText="Hyrkostnad"/>
-                    <ChoiceBox fx:id="languageBox" value="Språk" minWidth="120"/>
-                    <ChoiceBox fx:id="originalLanguage" value="OriginalSpråk" minWidth="120"/>
-                    <ChoiceBox fx:id="ratingBox" value="Rating" minWidth="120"/>
+                    <Label text = "Språk"/>
+                    <ChoiceBox fx:id="languageBox" minWidth="120"/>
+                    <Label text = "Ursprungs Språk"/>
+                    <ChoiceBox fx:id="originalLanguage" minWidth="120"/>
+                    <Label text = "Rating"/>
+                    <ChoiceBox fx:id="ratingBox" minWidth="120"/>
                     <CheckBox fx:id="behindTheScenes" text="Behind The Scenes"/>
                     <CheckBox fx:id="deletedScenes" text="Deleted Scenes"/>
                     <CheckBox fx:id="trailers" text="Trailers"/>
