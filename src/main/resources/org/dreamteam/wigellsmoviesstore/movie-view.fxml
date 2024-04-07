@@ -22,7 +22,7 @@
             <Button text="OK" onAction="#onSearchByIdButton"/>
             <Button text="Ny film" onAction="#onNewFilmButton"/>
         </HBox>
-        <HBox>
+        <HBox styleClass="hboxes">
             <VBox>
                 <Label fx:id="titleLabel" text="Titel"/>
                 <Label fx:id="rentalCostLabel" text="Hyrkostnad"/>

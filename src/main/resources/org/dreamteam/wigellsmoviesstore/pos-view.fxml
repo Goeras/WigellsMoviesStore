@@ -59,6 +59,7 @@
             </HBox>
             <HBox styleClass="hboxes">
                 <Button text="Tillbaka" onAction="#onBackButtonClick"/>
+                <Button text="Se transaktioner" onAction="#onSeeTransactionsClick"/>
             </HBox>
         </VBox>
     </VBox>

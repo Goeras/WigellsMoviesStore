@@ -38,10 +38,10 @@
                 </HBox>
                 <TableView fx:id="posTable" maxHeight="200">
                     <columns>
-                        <TableColumn fx:id="rentalId"/>
-                        <TableColumn fx:id="filmIdColumn"/>
-                        <TableColumn fx:id="filmtitle"/>
-                        <TableColumn fx:id="price"/>
+                        <TableColumn fx:id="rentalId" text="UthyrningsId"/>
+                        <TableColumn fx:id="filmIdColumn" text="filmId"/>
+                        <TableColumn fx:id="filmtitle" text="filmTitel"/>
+                        <TableColumn fx:id="price" text="Avgifter"/>
                     </columns>
                 </TableView>
                 <HBox styleClass="hboxes">
