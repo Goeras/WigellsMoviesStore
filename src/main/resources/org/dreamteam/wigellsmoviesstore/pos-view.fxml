@@ -17,8 +17,8 @@
                 <Label fx:id="topLabel" text="Kassa"/>
             </HBox>
             <ChoiceBox fx:id="staffBox"/>
+            <Button text="Lämna tillbaka film" onAction="#onReturnButtonClick"/>
             <VBox styleClass="boxes">
-                <Button text="Lämna tillbaka film" onAction="#onReturnButtonClick"/>
                 <HBox fx:id="searchCustomer" alignment="CENTER">
                     <TextField fx:id="searchCustomerField" promptText="Kundnummer"/>
                     <Button text="Sök" onAction="#onSearchCustomerButton"/>
@@ -29,7 +29,7 @@
                     <Button fx:id="okButton" text="OK" onAction="#onConfirmCustomerButton" visible="false"/>
                 </HBox>
                 <HBox fx:id="chosenCustInfo" visible="false" managed="false" spacing="5" alignment="CENTER">
-                    <Label fx:id="chosenCustId" text="Kund id"/>
+                    <Label fx:id="chosenCustId"/>
                     <Label fx:id="chosenCustName" text="Kundnamn"/>
                     <Button text="Byt kund" onAction="#onChangeCustomerButton"/>
                 </HBox>

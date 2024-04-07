@@ -22,15 +22,25 @@ public class PosManager {
     public ObservableList addFilmToCart(ObservableList<Inventory> filmList, String id){
         int inventorIid = IoConverter.stringToInteger(id);
         Inventory inventory = daOmanager.getInventoryDAO().readInventory(inventorIid);
-        filmList.add(inventory);
+        if(inventory.getStore().getId() == CurrentStore.getInstance().getCurrentStore().getId()){
+            filmList.add(inventory);
+        }
         return filmList;
     }
     public String[] searchFilm(String id){
         int inventoryId = IoConverter.stringToInteger(id);
         Inventory inventory = daOmanager.getInventoryDAO().readInventory(inventoryId);
+        if(inventory.getStore().getId() == CurrentStore.getInstance().getCurrentStore().getId()){
         Film film = inventory.getFilm();
         String[] strings = {Integer.toString(film.getFilmId()), film.getTitle()};
-        return strings;
+            return strings;
+        }
+        else{
+            String[] strings = new String[2];
+            strings[0] = "Okänd film";
+            strings[1] = "Okänd film";
+            return strings;
+        }
     }
     public String[] searchCustomer(String id){
         int custId = IoConverter.stringToInteger(id);
@@ -57,7 +67,6 @@ public class PosManager {
 
         for(Inventory inventory : cart){
             Rental rental = newRental(inventory, customer, staff);
-            System.out.println(rental.getRentalId());
             newPayment(customer, staff, rental, inventory.getFilm().getRentalRate());
         }
     }
@@ -71,7 +80,8 @@ public class PosManager {
         daOmanager.getPaymentDAO().createPayment(payment);
     }
     public void replaceFilm(Rental rental){
-        daOmanager.getInventoryDAO().deleteInventory(rental.getInventory());
+        rental.setReturnDate(new Date(System.currentTimeMillis()));
+        daOmanager.getRentalDAO().updateRental(rental);
     }
     public ObservableList<Rental> getObservableRentals(String custId){
         int customerId = IoConverter.stringToInteger(custId);
@@ -120,7 +130,7 @@ public class PosManager {
         List<Payment> resultList = daOmanager.getPaymentDAO().getInventoryByFilmAndStore(fromStamp, toStamp);
         return FXCollections.observableList(resultList);
     }
-    public ObservableList<Rental> seeRentals(){
+    public ObservableList<Rental> seeRentals() {
         List<Rental> resultList = daOmanager.getRentalDAO().getInventoryByFilmAndStore();
         return FXCollections.observableList(resultList);
     }

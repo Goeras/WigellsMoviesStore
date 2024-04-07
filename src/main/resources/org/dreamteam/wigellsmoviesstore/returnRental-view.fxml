@@ -14,15 +14,19 @@
     <VBox styleClass="background">
         <VBox styleClass="body">
             <HBox styleClass="header">
-
+            <Label text="Lämna tillbaka film"/>
             </HBox>
             <VBox styleClass="boxes">
-                <HBox styleClass="hboxes">
+                <VBox styleClass="boxes">
+                    <HBox styleClass="hboxes">
                     <TextField fx:id="customerNumber" promptText="Kundnummer"/>
                     <Button text="Sök kund" onAction="#onSearchCustomer"/>
                 </HBox>
-                <Label fx:id="custId" text="Kundid"/>
-                <Label fx:id="lastName" text="Efternamn"/>
+                <HBox styleClass="hboxes">
+                    <Label fx:id="custId" text="Kundid"/>
+                    <Label fx:id="lastName" text="Efternamn"/>
+                </HBox>
+                </VBox>
                 <TableView fx:id="rentalTableView" maxHeight="200">
                     <columns>
                         <TableColumn fx:id="rentalIdColumn" text="Nummer"/>
