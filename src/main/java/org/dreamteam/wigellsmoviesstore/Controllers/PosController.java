@@ -40,8 +40,6 @@ public class PosController {
     @FXML
     private TableColumn<Inventory, String> title;
     @FXML
-    private TableColumn<Inventory, String> returnDate;
-    @FXML
     private TableColumn<Inventory, Double> price;
     private List<Inventory> filmList;
     private ObservableList<Inventory> cart;
@@ -131,7 +129,6 @@ public class PosController {
         posManager.addFilmToCart(cart, filmIdField.getText());
         tableView.setItems(cart);
         inventoryId = filmIdField.getText();
-        //filmIdField.setText("");
     }
     @FXML
     private void searchFilm(){
@@ -153,21 +150,24 @@ public class PosController {
     }
     @FXML
     private void onConfirmRentalButtons(){
-        if(!(staffBox.getValue() == null)) {
+        if(!(staffBox.getValue() == null) && !chosenCustId.getText().isBlank()) {
             int staff = staffBox.getValue().getId();
             posManager.confirmRentals(cart, chosenCustId.getText(), staff);
-
+            filmIdField.setText("");
             cart.removeAll(cart);
             tableView.setItems(cart);
-            //chosenCustName.setText("");
-            //chosenCustId.setText("");
+            chosenCustName.setText("");
+            chosenCustId.setText("");
             filmIdLabel.setText("");
             filmTitleLabel.setText("");
             addToCartButton.setVisible(false);
 
         }
-        else{
+        else if(staffBox.getValue() == null){
             IoValidator.displayAlert("Ingen anställd vald","Välj butiksanställd i dropdown menyn");
+        }
+        else if(chosenCustId.getText().isBlank()){
+            IoValidator.displayAlert("Kontrollera kund","Bekräfta kunduppgifter genom att trycka på OK");
         }
     }
     @FXML

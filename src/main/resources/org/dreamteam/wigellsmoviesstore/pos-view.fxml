@@ -47,10 +47,9 @@
             </VBox>
             <TableView fx:id="tableView">
                 <columns>
-                    <TableColumn fx:id="filmId" text="FilmId"/>
-                    <TableColumn fx:id="title" text="Titel"/>
-                    <TableColumn fx:id="price" text="Pris"/>
-                    <TableColumn fx:id="returnDate" text="Returdatum"/>
+                    <TableColumn fx:id="filmId" text="FilmId" minWidth="150"/>
+                    <TableColumn fx:id="title" text="Titel" minWidth="150"/>
+                    <TableColumn fx:id="price" text="Pris" minWidth="150"/>
                 </columns>
             </TableView>
             <HBox styleClass="hboxes">

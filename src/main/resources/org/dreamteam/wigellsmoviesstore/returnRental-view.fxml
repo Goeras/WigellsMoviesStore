@@ -29,11 +29,10 @@
                 </VBox>
                 <TableView fx:id="rentalTableView" maxHeight="200">
                     <columns>
-                        <TableColumn fx:id="rentalIdColumn" text="Nummer" maxWidth="60"/>
-                        <TableColumn fx:id="dateColumn" text="Datum"/>
-                        <TableColumn fx:id="filmId" text="Id" maxWidth="40"/>
-                        <TableColumn fx:id="filmTitle" text="Titel"/>
-                        <TableColumn fx:id="returnDate" text="Tillbakalämnad" minWidth="120"/>
+                        <TableColumn fx:id="rentalIdColumn" text="Nummer" maxWidth="100"/>
+                        <TableColumn fx:id="dateColumn" text="Datum" minWidth="150"/>
+                        <TableColumn fx:id="filmId" text="Id" maxWidth="100"/>
+                        <TableColumn fx:id="filmTitle" text="Titel" minWidth="150"/>
                     </columns>
                 </TableView>
                 <HBox styleClass="hboxes">
@@ -42,10 +41,10 @@
                 </HBox>
                 <TableView fx:id="posTable" maxHeight="200">
                     <columns>
-                        <TableColumn fx:id="rentalId" text="UthyrningsId"/>
-                        <TableColumn fx:id="filmIdColumn" text="filmId"/>
-                        <TableColumn fx:id="filmtitle" text="filmTitel"/>
-                        <TableColumn fx:id="price" text="Avgifter"/>
+                        <TableColumn fx:id="rentalId" text="UthyrningsId" minWidth="140"/>
+                        <TableColumn fx:id="filmIdColumn" text="Id" minWidth="60"/>
+                        <TableColumn fx:id="filmtitle" text="Titel" minWidth="100"/>
+                        <TableColumn fx:id="price" text="Avgifter" minWidth="100"/>
                     </columns>
                 </TableView>
                 <HBox styleClass="hboxes">

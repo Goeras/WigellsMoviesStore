@@ -55,7 +55,7 @@
             <VBox styleClass="boxes">
                 <Button text="Visa alla" onAction="#onSearchAllStaffButtonClicked"/>
                 <HBox styleClass="hboxes">
-                    <TextField fx:id="filterStaff"/>
+                    <TextField fx:id="filterStaff" promptText="Filtrera på namn"/>
                     <Button text="Filtrera på namn" onAction="#onFilterByNameButtonClicked"/>
                 </HBox>
                 <TableView fx:id="staffTable" styleClass="staffTable">

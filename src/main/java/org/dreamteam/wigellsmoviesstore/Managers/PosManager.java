@@ -64,10 +64,11 @@ public class PosManager {
         int customerId = IoConverter.stringToInteger(custId);
         Customer customer = daOmanager.getCustomerDAO().readCustomer(customerId);
         Staff staff = daOmanager.getStaffDAO().getStaffById(staffId);
-
-        for(Inventory inventory : cart){
-            Rental rental = newRental(inventory, customer, staff);
-            newPayment(customer, staff, rental, inventory.getFilm().getRentalRate());
+        if(cart.size() > 0) {
+            for (Inventory inventory : cart) {
+                Rental rental = newRental(inventory, customer, staff);
+                newPayment(customer, staff, rental, inventory.getFilm().getRentalRate());
+            }
         }
     }
     public void newPayment(Customer customer, Staff staff, Rental rental, double amount){

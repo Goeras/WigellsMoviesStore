@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import org.dreamteam.wigellsmoviesstore.Entitys.Film;
 import org.dreamteam.wigellsmoviesstore.Entitys.Rental;
 import org.dreamteam.wigellsmoviesstore.IoConverter;
+import org.dreamteam.wigellsmoviesstore.IoValidator;
 import org.dreamteam.wigellsmoviesstore.Managers.PosManager;
 import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
 
@@ -42,8 +43,6 @@ public class ReturnRentalController {
     private TableColumn<Rental, Integer> filmIdColumn;
     @FXML
     private TableColumn<Rental, String> filmTitle;
-    @FXML
-    private TableColumn<Rental, String> returnDate;
     private ObservableList<Rental> rentals;
     private ObservableList<Rental> returnList;
     @FXML
@@ -72,7 +71,6 @@ public class ReturnRentalController {
         dateColumn.setCellValueFactory(cellData -> IoConverter.stringToSimpleStringProperty(cellData.getValue().getRentalDate().toString()));
         filmIdColumn.setCellValueFactory(cellData -> IoConverter.integerToSimpleIntegerProperty(cellData.getValue().getInventory().getFilm().getFilmId()).asObject());
         filmTitle.setCellValueFactory(cellData -> IoConverter.stringToSimpleStringProperty(cellData.getValue().getInventory().getFilm().getTitle()));
-        returnDate.setCellValueFactory(cellData -> IoConverter.stringToSimpleStringProperty(cellData.getValue().getReturnDate().toString()));
         rentalTableView.setItems(rentals);
     }
     private void setPosTableView(){
@@ -83,18 +81,23 @@ public class ReturnRentalController {
 
         price.setCellValueFactory(cellData -> {
             Rental rental = cellData.getValue();
-            String priceString = String.valueOf(posManager.checkDate(rental) ? 1 : 0);
+            String priceString = String.valueOf(posManager.checkDate(rental) ? 2.50 : 0.00);
             return new SimpleStringProperty(priceString);
         });
         posTable.setItems(returnList);
     }
     @FXML
     private void onSearchCustomer(){
-        String[] info = posManager.searchCustomer(customerNumber.getText());
-        custId.setText(info[0]);
-        lastName.setText(info[1]);
-        rentals = posManager.getObservableRentals(custId.getText());
-        rentalTableView.setItems(rentals);
+        if(!customerNumber.getText().isBlank()) {
+            String[] info = posManager.searchCustomer(customerNumber.getText());
+            custId.setText(info[0]);
+            lastName.setText(info[1]);
+            rentals = posManager.getObservableRentals(custId.getText());
+            rentalTableView.setItems(rentals);
+        }
+        else{
+            IoValidator.displayAlert("Sökfältet tomt","Skriv in kundnummer i sökfältet");
+        }
     }
     @FXML
     private void onReturnButtonClick() {
