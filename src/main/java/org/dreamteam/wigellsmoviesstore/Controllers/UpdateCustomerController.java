@@ -90,7 +90,7 @@ public class UpdateCustomerController {
         boolean validEmail = ioValidator.validateEmail(email.getText());
         //boolean uniqueEmail = customerManager.validateUniqueEmail(email.getText()) || email.getText().isEmpty();
         boolean phoneNotEmpty = ioValidator.validateStringNotEmpty(phone.getText());
-        boolean validPhoneNum = ioValidator.validateInteger(phone.getText()) || phone.getText().isEmpty();
+        boolean validPhoneNum = ioValidator.validateLong(phone.getText()) || phone.getText().isEmpty();
         boolean validAddress = ioValidator.validateStringNotEmpty(address1.getText());
         boolean validDistrict = ioValidator.validateStringNotEmpty(district.getText());
         boolean validPostCode = ioValidator.validatePostNum(postalCode.getText());

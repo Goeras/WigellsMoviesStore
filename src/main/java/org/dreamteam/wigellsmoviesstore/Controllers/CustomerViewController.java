@@ -96,7 +96,7 @@ private void onBackButtonClick() throws IOException {
     viewManager.showNewCustomerView((Stage) topLabel.getScene().getWindow());
 }
 @FXML
-    private void onUpdateCustomerClick() throws IOException {  //grejat är med current customer
+    private void onUpdateCustomerClick() throws IOException {  // Sätter current customer till objektet man sökt på.
     CurrentCustomer.getInstance().setCurrentCustomer(customer);
     viewManager.showUpdateCustomerView((Stage) topLabel.getScene().getWindow());
 
@@ -122,18 +122,16 @@ private void onBackButtonClick() throws IOException {
         rentalHistoryTable.setItems(rentalHistory);
         boolean isInteger = IoValidator.validateInteger(searchCustomer.getText());
         if (isInteger) {
-            //customer = customerManager.searchByName(Integer.parseInt(idToSearch.getText()));
-            customer = customerManager.getCustomer(customerId);
+            customer = customerManager.getCustomer(customerId);   // hämtar customerobject per id
             if (customer != null) {
                 setCustomerInfo(customer);
-                //updateButton.setVisible(true);
                 System.out.println("set customer info update has ran");
             }
         }
     }
 
 }
-    private void setCustomerInfo(Customer customer) {
+    private void setCustomerInfo(Customer customer) {  // sätter customerinfo
         Address address = customer.getAdress();
 
         firstName.setText(customer.getFirstName());
