@@ -151,5 +151,17 @@ public class ActorController {
         actorManager.updateActor(selectedActors.get(0).getId(), firstNameField.getText(), lastNameField.getText());
         firstNameField.setText("");
         lastNameField.setText("");
+        upDateActor.setManaged(false);
+        upDateActor.setVisible(false);
+    }
+    @FXML
+    private void onDeleteActorButton(){
+        actorManager.deleteActor(selectedActors.get(0).getId());
+        actorList.remove(selectedActors.get(0));
+        selectedActors.remove(selectedActors.get(0));
+        firstNameField.setText("");
+        lastNameField.setText("");
+        upDateActor.setManaged(false);
+        upDateActor.setVisible(false);
     }
 }

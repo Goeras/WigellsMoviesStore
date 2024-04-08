@@ -41,6 +41,7 @@
                     <TextField fx:id="firstNameField"/>
                     <TextField fx:id="lastNameField"/>
                     <Button text="OK" onAction="#onSaveUpdate"/>
+                    <Button text="Ta bort skådespelare" onAction="#onDeleteActorButton"/>
                 </HBox>
             </VBox>
         </VBox>

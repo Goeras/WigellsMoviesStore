@@ -24,4 +24,9 @@ public class ActorManager {
         actor.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
         daOmanager.getActorDao().updateActor(actor);
     }
+    public void deleteActor(int actorId){
+        Actor actor = daOmanager.getActorDao().getActorById(actorId);
+        daOmanager.getActorDao().deleteActor(actor);
+
+    }
 }
