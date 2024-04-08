@@ -50,7 +50,7 @@
                     <Label text="Registrerad:"/>
                     <Label fx:id="createDate" minWidth="100"/>
                 </HBox>
-                <Button text="Ändra kund" onAction="#onUpdateCustomerClick"/>
+                <Button fx:id="updateButton" text="Ändra kund" onAction="#onUpdateCustomerClick" managed="false" visible="false"/>
                 </VBox>
                 <VBox spacing="2">
                     <HBox>

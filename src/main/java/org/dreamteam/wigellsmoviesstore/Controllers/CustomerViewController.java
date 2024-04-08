@@ -73,6 +73,8 @@ public class CustomerViewController {
     @FXML
     private TextField searchByName;
     Customer customer;
+    @FXML
+    private Button updateButton;
 
 
     public void initialize(){
@@ -120,6 +122,8 @@ private void onBackButtonClick() throws IOException {
         country.setText(info[10]);
         rentalHistory = customerManager.getCustomerRentals(customerId);
         rentalHistoryTable.setItems(rentalHistory);
+        updateButton.setVisible(true);
+        updateButton.setManaged(true);
         boolean isInteger = IoValidator.validateInteger(searchCustomer.getText());
         if (isInteger) {
             customer = customerManager.getCustomer(customerId);   // hämtar customerobject per id

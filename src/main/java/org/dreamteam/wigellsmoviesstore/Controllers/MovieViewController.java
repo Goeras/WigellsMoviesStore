@@ -63,6 +63,9 @@ public class MovieViewController {
     FilmManager filmManager;
     private ViewManager viewManager;
     private ObservableList<Film> filmList;
+    @FXML
+    private Button updateButton;
+
     Film film;
     Store store;
 
@@ -144,5 +147,8 @@ public class MovieViewController {
         releaseLabel.setText(String.valueOf(film.getReleaseYear()));
         languageLabel.setText(film.getLanguage().getName());
         lengthLabel.setText(String.valueOf(film.getLength()));
+        updateButton.setVisible(true);
+        updateButton.setManaged(true);
+
     }
 }

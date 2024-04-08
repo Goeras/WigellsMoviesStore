@@ -48,7 +48,7 @@
                 <Label fx:id="lengthLabel"/>
             </VBox>
         </HBox>
-            <Button text="Uppdatera information" onAction="#onUpdateFilmButton"/>
+            <Button fx:id="updateButton" text="Uppdatera information" onAction="#onUpdateFilmButton" visible="false" managed="false"/>
         </VBox>
             <VBox styleClass="boxes">
                 <Button text="Se alla" onAction="#onSearchAllButton"/>
