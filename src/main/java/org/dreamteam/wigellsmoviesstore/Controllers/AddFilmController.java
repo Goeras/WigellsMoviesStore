@@ -59,7 +59,6 @@ public class AddFilmController {
     @FXML
     private ListView<Actor> actorList;
 
-
     DAOmanager daoManager = new DAOmanager();
     FilmManager filmManager = new FilmManager();
 

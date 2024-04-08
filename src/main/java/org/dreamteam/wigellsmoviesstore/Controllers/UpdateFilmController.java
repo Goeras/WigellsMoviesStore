@@ -85,29 +85,25 @@ public class UpdateFilmController {
         languageBox.getSelectionModel().select(film.getLanguage());
 
         List<Language> originalLanguageList = daoManager.getLanguageDAO().readAllLanguages();
-        ObservableList originalLanguageNames = FXCollections.observableArrayList();
+        ObservableList<Language> originalLanguageNames = FXCollections.observableArrayList();
         originalLanguageNames.addAll(originalLanguageList);
         originalLanguageBox.setItems(originalLanguageNames);
         originalLanguageBox.getSelectionModel().select(film.getOriginalLanguage());
 
         List<Category> categoryList = daoManager.getCategoryDAO().readAllCategories();
-        ObservableList categoryNames = FXCollections.observableArrayList();
+        ObservableList<Category> categoryNames = FXCollections.observableArrayList();
         categoryNames.addAll(categoryList);
         categoryBox.setItems(categoryNames);
         categoryBox.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-
-
         List<Film> filmList = daoManager.getFilmDAO().getAllFilms();
-        ObservableList ratingNames = FXCollections.observableArrayList();
+        ObservableList<String> ratingNames = FXCollections.observableArrayList();
         for(Film film:filmList){
             String rating = film.getRating();
             ratingNames.add(rating);
         }
         ratingBox.setItems(ratingNames);
         ratingBox.getSelectionModel().select(film.getRating());
-
-
     }
     @FXML
     private void onBackButtonClick() throws IOException {
