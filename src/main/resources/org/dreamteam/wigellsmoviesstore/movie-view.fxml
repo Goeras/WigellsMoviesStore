@@ -31,7 +31,7 @@
                 <Button text="Uppdatera information" onAction="#onUpdateFilmButton"/>
             </VBox>
             <VBox>
-                <Label fx:id="actorLabel" text="Skådespelare"/>
+                <ChoiceBox fx:id="actorBox" value="Skådespelare" minWidth="150"/>
                 <Label fx:id="releaseLabel" text="Release"/>
                 <Label fx:id="languageLabel" text="Språk"/>
                 <Label fx:id="lengthLabel" text="Längd"/>
@@ -47,7 +47,7 @@
                 <TableView fx:id="movieTable" maxWidth="300" maxHeight="200">
                     <columns>
                         <TableColumn fx:id="idColumn" text="Id"/>
-                        <TableColumn fx:id="titleColumn" text="Titel"/>
+                        <TableColumn fx:id="titleColumn" text="Titel" minWidth="150"/>
                         <TableColumn fx:id="categoryColumn" text="Kategori"/>
                         <TableColumn fx:id="languageColumn" text="Språk"/>
                     </columns>
