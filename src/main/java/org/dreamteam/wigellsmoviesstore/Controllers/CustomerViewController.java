@@ -137,7 +137,7 @@ private void onBackButtonClick() throws IOException {
 
         firstName.setText(customer.getFirstName());
         lastName.setText(customer.getLastName());
-        phone.setText(address.getPhone());
+        //phone.setText(address.getPhone());
         email.setText(customer.getEmail());
         active.setText(customerManager.isActiveStringFromBoolean(customer.getActive()));
         address1.setText(address.getAddress());
