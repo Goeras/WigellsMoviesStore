@@ -137,7 +137,6 @@ private void onBackButtonClick() throws IOException {
 
         firstName.setText(customer.getFirstName());
         lastName.setText(customer.getLastName());
-        //phone.setText(address.getPhone());
         email.setText(customer.getEmail());
         active.setText(customerManager.isActiveStringFromBoolean(customer.getActive()));
         address1.setText(address.getAddress());
@@ -170,7 +169,6 @@ private void onBackButtonClick() throws IOException {
     rentalId.setCellValueFactory(cellData -> IoConverter.integerToSimpleIntegerProperty(cellData.getValue().getRentalId()).asObject());
     rentalDate.setCellValueFactory(cellData -> IoConverter.stringToSimpleStringProperty(cellData.getValue().getRentalDate().toString()));
     returnDate.setCellValueFactory(cellData -> IoConverter.dateToSimpleStringProperty(cellData.getValue().getReturnDate()));
-    store.setCellValueFactory(cellData -> IoConverter.stringToSimpleStringProperty(cellData.getValue().getCustomer().getStore().toString()));
     filmId.setCellValueFactory(cellData -> IoConverter.integerToSimpleIntegerProperty(cellData.getValue().getInventory().getFilm().getFilmId()).asObject());
     filmTitle.setCellValueFactory(cellData -> IoConverter.stringToSimpleStringProperty(cellData.getValue().getInventory().getFilm().getTitle()));
     rentalHistoryTable.setItems(rentalHistory);

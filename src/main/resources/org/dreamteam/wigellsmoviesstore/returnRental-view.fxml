@@ -29,11 +29,11 @@
                 </VBox>
                 <TableView fx:id="rentalTableView" maxHeight="200">
                     <columns>
-                        <TableColumn fx:id="rentalIdColumn" text="Nummer"/>
+                        <TableColumn fx:id="rentalIdColumn" text="Nummer" maxWidth="60"/>
                         <TableColumn fx:id="dateColumn" text="Datum"/>
-                        <TableColumn fx:id="filmId" text="FilmId"/>
-                        <TableColumn fx:id="filmTitle" text="FilmTitel"/>
-                        <TableColumn fx:id="returnDate" text="Tillbakalämnad"/>
+                        <TableColumn fx:id="filmId" text="Id" maxWidth="40"/>
+                        <TableColumn fx:id="filmTitle" text="Titel"/>
+                        <TableColumn fx:id="returnDate" text="Tillbakalämnad" minWidth="120"/>
                     </columns>
                 </TableView>
                 <HBox styleClass="hboxes">

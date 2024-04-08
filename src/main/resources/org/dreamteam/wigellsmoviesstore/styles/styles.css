@@ -14,7 +14,6 @@
     -fx-padding: 10;
     -fx-font-family: "Roboto Light";
     -fx-alignment: Center;
-
 }
 .background {
     -fx-spacing: 10px;
@@ -53,7 +52,7 @@
 
 }
 .table-view {
-    -fx-max-width: 400px;
+    -fx-max-width: 450px;
 }
 .header {
     -fx-background-color:  #f0f0f0;
