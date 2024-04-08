@@ -71,7 +71,6 @@
     -fx-alignment: CENTER;
 }
 .hboxes .label {
-    -fx-min-width: 150;
 }
 .swishButton{
     -fx-background-color: white;
