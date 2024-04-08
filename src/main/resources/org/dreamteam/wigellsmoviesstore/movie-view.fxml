@@ -23,20 +23,32 @@
             <Button text="Ny film" onAction="#onNewFilmButton"/>
         </HBox>
         <HBox styleClass="hboxes">
-            <VBox>
-                <Label fx:id="titleLabel" text="Titel"/>
-                <Label fx:id="rentalCostLabel" text="Hyrkostnad"/>
-                <Label fx:id="replacementFeeLabel" text="Ersättningskostnad"/>
-                <Label fx:id="categoryLabel" text="Kategori"/>
-                <Button text="Uppdatera information" onAction="#onUpdateFilmButton"/>
+            <VBox maxWidth="100">
+                <Label text="Titel"/>
+                <Label text="Hyrpris"/>
+                <Label text="Ersättningspris"/>
+                <Label text="Kategori"/>
             </VBox>
-            <VBox>
-                <ChoiceBox fx:id="actorBox" value="Skådespelare" minWidth="150"/>
-                <Label fx:id="releaseLabel" text="Release"/>
-                <Label fx:id="languageLabel" text="Språk"/>
-                <Label fx:id="lengthLabel" text="Längd"/>
+            <VBox maxWidth="100">
+                <Label fx:id="titleLabel"/>
+                <Label fx:id="rentalCostLabel"/>
+                <Label fx:id="replacementFeeLabel"/>
+                <Label fx:id="categoryLabel"/>
+            </VBox>
+            <VBox maxWidth="100">
+                <Label text="Skådespelare" styleClass="choiceboxLabel"/>
+                <Label text="Release"/>
+                <Label text="Språk"/>
+                <Label text="Längd"/>
+            </VBox>
+            <VBox maxWidth="100">
+                <ChoiceBox fx:id="actorBox" minWidth="150"/>
+                <Label fx:id="releaseLabel"/>
+                <Label fx:id="languageLabel"/>
+                <Label fx:id="lengthLabel"/>
             </VBox>
         </HBox>
+            <Button text="Uppdatera information" onAction="#onUpdateFilmButton"/>
         </VBox>
             <VBox styleClass="boxes">
                 <Button text="Se alla" onAction="#onSearchAllButton"/>

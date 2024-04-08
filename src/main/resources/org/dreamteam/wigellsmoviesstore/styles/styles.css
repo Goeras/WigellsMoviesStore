@@ -165,3 +165,6 @@
 .date-picker-popup .calendar-grid{
     -fx-background-color: #d6e2cf;
 }
+.choiceboxLabel {
+    -fx-padding: 0px, 10px, 0px, 10px;
+}
