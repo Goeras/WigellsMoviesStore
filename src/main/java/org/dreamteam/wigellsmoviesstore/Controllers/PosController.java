@@ -178,4 +178,8 @@ public class PosController {
     public void onSeeTransactionsClick() throws IOException {
         viewManager.showTransactionView((Stage) topLabel.getScene().getWindow());
     }
+    public void onRegretFilmButtonClick(){
+        cart.remove(tableView.getSelectionModel().getSelectedItem());
+        tableView.setItems(cart);
+    }
 }
