@@ -95,7 +95,7 @@ public class IoValidator {
     }
 
     public static void displayConfirmation(String title, String contentText) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(contentText);

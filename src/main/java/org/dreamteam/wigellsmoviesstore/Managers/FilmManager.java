@@ -83,24 +83,24 @@ public class FilmManager {
 
   public void updateFilm(String title, String description, short releaseYear, Language language, Language originalLanguage, byte rentalDuration, double rentalRate, short length, double replacementCost, String rating, String specialFeatures, List<Category> categoryList){
     Film updateFilm = CurrentFilm.getInstance().getCurrentFilm();
-    Language updateLanguage = updateFilm.getLanguage();
-    Language updateOriginalLanguage =  updateFilm.getOriginalLanguage();
+//    Language updateLanguage = updateFilm.getLanguage();
+//    Language updateOriginalLanguage =  updateFilm.getOriginalLanguage();
 
-    if(!updateLanguage.getName().equals(language.getName())){
-      Language newLanguage = new Language();
-      newLanguage.setName(language.getName());
-      newLanguage.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
+//    if(!updateLanguage.getName().equals(language.getName())){
+//      Language newLanguage = new Language();
+//      newLanguage.setName(language.getName());
+//      newLanguage.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
+//
+//      daoManager.getLanguageDAO().createLanguage(newLanguage);
+//    }
 
-      daoManager.getLanguageDAO().createLanguage(newLanguage);
-    }
-
-    if(!updateOriginalLanguage.getName().equals(originalLanguage.getName())){
-      Language newOriginalLanguage = new Language();
-      newOriginalLanguage.setName(language.getName());
-      newOriginalLanguage.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
-
-      daoManager.getLanguageDAO().createLanguage(newOriginalLanguage);
-    }
+//    if(!updateOriginalLanguage.getName().equals(originalLanguage.getName())){
+//      Language newOriginalLanguage = new Language();
+//      newOriginalLanguage.setName(language.getName());
+//      newOriginalLanguage.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
+//
+//      daoManager.getLanguageDAO().createLanguage(newOriginalLanguage);
+//    }
 
     updateFilm.setTitle(title);
     updateFilm.setDescription(description);

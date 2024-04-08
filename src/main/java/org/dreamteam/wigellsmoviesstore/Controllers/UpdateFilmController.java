@@ -53,7 +53,7 @@ public class UpdateFilmController {
     @FXML
     private ChoiceBox<Language> originalLanguageBox;
     @FXML
-    private ChoiceBox<Category> categoryBox;
+    private ListView<Category> categoryBox;
     @FXML
     private ChoiceBox<String> ratingBox;
     @FXML
@@ -79,19 +79,24 @@ public class UpdateFilmController {
         rentalRate.setText(String.valueOf(film.getRentalRate()));
 
         List<Language> languageList = daoManager.getLanguageDAO().readAllLanguages();
-        ObservableList languageNames = FXCollections.observableArrayList();
+        ObservableList<Language> languageNames = FXCollections.observableArrayList();
         languageNames.addAll(languageList);
         languageBox.setItems(languageNames);
+        languageBox.getSelectionModel().select(film.getLanguage());
 
         List<Language> originalLanguageList = daoManager.getLanguageDAO().readAllLanguages();
         ObservableList originalLanguageNames = FXCollections.observableArrayList();
         originalLanguageNames.addAll(originalLanguageList);
         originalLanguageBox.setItems(originalLanguageNames);
+        originalLanguageBox.getSelectionModel().select(film.getOriginalLanguage());
 
         List<Category> categoryList = daoManager.getCategoryDAO().readAllCategories();
         ObservableList categoryNames = FXCollections.observableArrayList();
         categoryNames.addAll(categoryList);
         categoryBox.setItems(categoryNames);
+        categoryBox.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+
 
         List<Film> filmList = daoManager.getFilmDAO().getAllFilms();
         ObservableList ratingNames = FXCollections.observableArrayList();
@@ -100,6 +105,7 @@ public class UpdateFilmController {
             ratingNames.add(rating);
         }
         ratingBox.setItems(ratingNames);
+        ratingBox.getSelectionModel().select(film.getRating());
 
 
     }
@@ -163,7 +169,7 @@ public class UpdateFilmController {
             ioValidator.displayAlert("Error","Du måste fylla i titel");
         }
         if(validTitle && validLanguage){
-            filmManager.updateFilm(title.getText(), description.getText(), Short.parseShort(releaseYear.getText()), languageBox.getValue(), originalLanguageBox.getValue(), Byte.parseByte(rentalDuration.getText()), Short.parseShort(rentalRate.getText()), Short.parseShort(length.getText()), Double.parseDouble(replacementCost.getText()), ratingBox.getValue(), selectedSpecialFeatures.toString(), categoryBox.getItems());
+            filmManager.updateFilm(title.getText(), description.getText(), Short.parseShort(releaseYear.getText()), languageBox.getValue(), originalLanguageBox.getValue(), Byte.parseByte(rentalDuration.getText()), Double.parseDouble(rentalRate.getText()), Short.parseShort(length.getText()), Double.parseDouble(replacementCost.getText()), ratingBox.getValue(), IoConverter.specialFeaturesToString(selectedSpecialFeatures), categoryBox.getSelectionModel().getSelectedItems());
 
             IoValidator.displayConfirmation("Sparat","Information uppdaterad");
         } else {
