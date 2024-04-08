@@ -47,7 +47,7 @@ public class ViewManager {
     public void showStaffView(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("staff-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 600);
-        stage.setTitle("Pos!");
+        stage.setTitle("Personal!");
         stage.setScene(scene);
         stage.show();
     }
@@ -103,7 +103,7 @@ public class ViewManager {
     public void showTransactionView(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("rental-payment-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 600);
-        stage.setTitle("Lämna tillbaka film!");
+        stage.setTitle("Se transaktioner!");
         stage.setScene(scene);
         stage.show();
     }

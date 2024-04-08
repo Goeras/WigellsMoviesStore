@@ -143,7 +143,7 @@ public class AddFilmController {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("actor-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 500, 600);
-        stage.setTitle("Lämna tillbaka film!");
+        stage.setTitle("Lägg till skådespelare!");
         ActorController controller = (ActorController) fxmlLoader.getController();
         controller.initialize(stage, this);
         stage.setScene(scene);
