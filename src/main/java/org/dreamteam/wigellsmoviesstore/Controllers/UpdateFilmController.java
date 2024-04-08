@@ -55,6 +55,8 @@ public class UpdateFilmController {
     @FXML
     private TextField userNotice;
     private IoValidator ioValidator;
+    @FXML
+    private TextField inventories;
 
     private List<String> selectedSpecialFeatures = new ArrayList<>();
     DAOmanager daoManager = new DAOmanager();
@@ -64,6 +66,8 @@ public class UpdateFilmController {
     private ObservableList<Actor> selectedActors;
     @FXML
     private ListView<Actor> actorList;
+
+    private List<Inventory> inventoryList;
 
     public void initialize() {
         CurrentStore.getInstance().updateCurrentStore();
@@ -95,6 +99,8 @@ public class UpdateFilmController {
         categoryBox.setItems(categoryNames);
         categoryBox.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
+        inventoryList = daoManager.getInventoryDAO().getInventoryByFilmAndStore(film.getFilmId(), store.getId());
+        inventories.setText(IoConverter.integerToString(inventoryList.size()));
 
 
         List<Film> filmList = daoManager.getFilmDAO().getAllFilms();
@@ -140,6 +146,8 @@ public class UpdateFilmController {
         categoryBox.setItems(categoryNames);
         categoryBox.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
+        inventoryList = daoManager.getInventoryDAO().getInventoryByFilmAndStore(film.getFilmId(), store.getId());
+        inventories.setText(IoConverter.integerToString(inventoryList.size()));
 
 
         List<Film> filmList = daoManager.getFilmDAO().getAllFilms();
@@ -213,7 +221,7 @@ public class UpdateFilmController {
             ioValidator.displayAlert("Error","Du måste fylla i titel");
         }
         if(validTitle && validLanguage){
-            filmManager.updateFilm(title.getText(), description.getText(), Short.parseShort(releaseYear.getText()), languageBox.getValue(), originalLanguageBox.getValue(), Byte.parseByte(rentalDuration.getText()), Double.parseDouble(rentalRate.getText()), Short.parseShort(length.getText()), Double.parseDouble(replacementCost.getText()), ratingBox.getValue(), IoConverter.specialFeaturesToString(selectedSpecialFeatures), categoryBox.getSelectionModel().getSelectedItems(), selectedActors);
+            filmManager.updateFilm(title.getText(), description.getText(), Short.parseShort(releaseYear.getText()), languageBox.getValue(), originalLanguageBox.getValue(), Byte.parseByte(rentalDuration.getText()), Double.parseDouble(rentalRate.getText()), Short.parseShort(length.getText()), Double.parseDouble(replacementCost.getText()), ratingBox.getValue(), IoConverter.specialFeaturesToString(selectedSpecialFeatures), categoryBox.getSelectionModel().getSelectedItems(), selectedActors, inventoryList, IoConverter.stringToInteger(inventories.getText()));
 
             IoValidator.displayConfirmation("Sparat","Information uppdaterad");
         } else {
