@@ -26,13 +26,14 @@
                   <TextField fx:id="description" promptText="Beskrivning" />
                   <Label text="Utgivningsår"/>
                   <TextField fx:id="releaseYear" promptText="Utgivningsår"/>
-                  <Label text="Kategorier"/>
-                  <ListView fx:id="categoryBox" minHeight="150" maxHeight="180"/>
                   <HBox styleClass="hboxes">
                       <Label text="Skådespelare" maxWidth="60"/>
-                      <Button text="Lägg till skådespelare"/>
+                      <Button text="Lägg till skådespelare" onAction="#onOpenActorView"/>
                   </HBox>
-                  <ListView fx:id="actorBox" minHeight="150" maxHeight="180"/>
+                  <ListView fx:id="actorList" minHeight="150" maxHeight="180"/>
+                  <Label text="Kategorier"/>
+                  <ListView fx:id="categoryBox" minHeight="150" maxHeight="180"/>
+
               </VBox>
               <VBox spacing="2">
                   <Label text="Hyrperiod(dagar)"/>

@@ -40,6 +40,7 @@ public class ActorController {
     @FXML
     private VBox upDateActor;
     private AddFilmController addFilmController;
+    private UpdateFilmController updateFilmController;
 
     public void initialize(){
         actorManager = new ActorManager();
@@ -122,6 +123,55 @@ public class ActorController {
         });
     }
 
+    public void initialize(Stage stage, UpdateFilmController controller){
+        updateFilmController = controller;
+
+        actorManager = new ActorManager();
+        DAOmanager daOmanager = new DAOmanager();
+        List<Actor> actors = daOmanager.getActorDao().getAllActors();
+        actorList = FXCollections.observableList(actors);
+        actorListView.setItems(actorList);
+        selectedActors = new ArrayList<>();
+        actorListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        actorListView.setCellFactory(param -> new ListCell<>() {
+            private final CheckBox checkBox = new CheckBox();
+
+            {
+                checkBox.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                    // Hantera CheckBox-händelse
+                    Actor actor = getItem();
+                    if (newVal) {
+                        // Om CheckBox är markerad, lägg till aktören i listan för markerade objekt
+                        selectedActors.add(actor);
+                    } else {
+                        // Om CheckBox är avmarkerad, ta bort aktören från listan för markerade objekt
+                        selectedActors.remove(actor);
+                    }
+                    System.out.println("CheckBox " + (newVal ? "selected" : "deselected"));
+                });
+            }
+
+            @Override
+            protected void updateItem(Actor actor, boolean empty) {
+                super.updateItem(actor, empty);
+                if (empty || actor == null) {
+                    setGraphic(null);
+                } else {
+                    checkBox.setSelected(selectedActors.contains(actor));
+                    checkBox.setText(actor.toString());
+                    setGraphic(checkBox);
+                }
+            }
+        });
+    }
+    @FXML
+    private void onOpenUpdateFilmView() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("addFilm-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+        updateFilmController.initialize(selectedActors);
+        Stage stage = (Stage) newActor.getScene().getWindow();
+        stage.close();
+    }
     @FXML
     private void onOpenAddFilmView() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("addFilm-view.fxml"));
