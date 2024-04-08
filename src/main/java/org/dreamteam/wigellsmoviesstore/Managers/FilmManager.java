@@ -123,10 +123,6 @@ public class FilmManager {
     newInventoryList.addAll(inventoryList);
 
     for(int i = 0; i < (inventorySize - inventoryList.size()); i++) {
-      System.out.println(newInventoryList.size());
-      System.out.println(inventoryList.size());
-      System.out.println(inventorySize);
-      System.out.println(i);
       Inventory inventory = new Inventory();
       inventory.setFilm(updateFilm);
       inventory.setStore(CurrentStore.getInstance().getCurrentStore());
@@ -135,7 +131,6 @@ public class FilmManager {
       newInventoryList.add(inventory);
     }
     updateFilm.setInventories(newInventoryList);
-    System.out.println(updateFilm.getInventories().size());
     daoManager.getFilmDAO().updateFilm(updateFilm);
   }
 
