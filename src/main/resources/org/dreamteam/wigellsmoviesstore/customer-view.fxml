@@ -79,7 +79,8 @@
                     </HBox>
                 </VBox>
             </HBox>
-            <TableView fx:id="rentalHistoryTable" minHeight="200">
+            <Label text="Hyrhistorik"/>
+            <TableView fx:id="rentalHistoryTable" maxHeight="200">
                 <columns>
                     <TableColumn fx:id="rentalId" text="Id"/>
                     <TableColumn fx:id="rentalDate" text="Datum"/>

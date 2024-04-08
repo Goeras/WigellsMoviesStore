@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 import org.dreamteam.wigellsmoviesstore.Entitys.Payment;
 import org.dreamteam.wigellsmoviesstore.Entitys.Rental;
 import org.dreamteam.wigellsmoviesstore.IoConverter;
@@ -13,6 +14,7 @@ import org.dreamteam.wigellsmoviesstore.Managers.PosManager;
 import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
 import org.geolatte.geom.V;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -89,5 +91,9 @@ public class TransactionController {
     private void onSeeRentalsClick(){
         rentalList = posManager.seeRentals();
         rentals.setItems(rentalList);
+    }
+    @FXML
+    private void onBackButtonClick() throws IOException {
+        viewManager.showPosView((Stage) payments.getScene().getWindow());
     }
 }

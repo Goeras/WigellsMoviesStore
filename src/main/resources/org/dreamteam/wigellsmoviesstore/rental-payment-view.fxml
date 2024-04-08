@@ -20,28 +20,29 @@
             <Button text="Se aktuella uthyrningar" onAction="#onSeeRentalsClick"/>
             <TableView fx:id="rentals">
                 <columns>
-                    <TableColumn fx:id="rentalId" text="Uthyrningsnummer"/>
-                    <TableColumn fx:id="inventoryId" text="Inventarienummer"/>
-                    <TableColumn fx:id="filmTitle" text="Filmtitel"/>
+                    <TableColumn fx:id="rentalId" text="Uthyrningsnummer" minWidth="140"/>
+                    <TableColumn fx:id="inventoryId" text="Inventarienummer" minWidth="120"/>
+                    <TableColumn fx:id="filmTitle" text="Titel"/>
                     <TableColumn fx:id="customer" text="Kundnamn"/>
                 </columns>
             </TableView>
-            <HBox>
-                <DatePicker fx:id="fromPicker" promptText="Datum från och med"/>
-                <DatePicker fx:id="toPicker" promptText="Datum till och med"/>
+            <HBox styleClass="hboxes">
+                <DatePicker fx:id="fromPicker" promptText="Datum från och med" maxWidth="160"/>
+                <DatePicker fx:id="toPicker" promptText="Datum till och med" maxWidth="160"/>
                 <Button text="Sök betalningar" onAction="#onSeePaymentsClick"/>
             </HBox>
 
             <TableView fx:id="payments">
                 <columns>
-                    <TableColumn fx:id="paymentId"/>
-                    <TableColumn fx:id="rentalIdColumn"/>
-                    <TableColumn fx:id="customerColumn"/>
-                    <TableColumn fx:id="amount"/>
-                    <TableColumn fx:id="timeStamp"/>
+                    <TableColumn fx:id="paymentId" text="TransaktionsId" minWidth="120"/>
+                    <TableColumn fx:id="rentalIdColumn" text="Uthyrning"/>
+                    <TableColumn fx:id="customerColumn" text="Kund"/>
+                    <TableColumn fx:id="amount" text="Summa"/>
+                    <TableColumn fx:id="timeStamp" text="Datum"/>
                 </columns>
             </TableView>
         </VBox>
+        <Button text="Tillbaka" onAction="#onBackButtonClick"/>
     </VBox>
 </VBox>
 </ScrollPane>
