@@ -129,6 +129,8 @@ public class MovieViewController {
 
                 if (searchedFilm != null) {
                     setFilmInfo(searchedFilm);
+                    film = searchedFilm;
+                    CurrentFilm.getInstance().setCurrentFilm(searchedFilm);
                 }
             }
         }
