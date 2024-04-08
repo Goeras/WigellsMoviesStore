@@ -105,6 +105,7 @@ private void onBackButtonClick() throws IOException {
 @FXML
     private void onSearchButtonClick(){
         String customerId = searchCustomer.getText();
+        if(!customerId.isBlank()){
         String[] info = customerManager.getCustomerInfo(customerId);
         firstName.setText(info[0]);
         lastName.setText(info[1]);
@@ -120,15 +121,15 @@ private void onBackButtonClick() throws IOException {
         rentalHistory = customerManager.getCustomerRentals(customerId);
         rentalHistoryTable.setItems(rentalHistory);
         boolean isInteger = IoValidator.validateInteger(searchCustomer.getText());
-        if (isInteger){
+        if (isInteger) {
             //customer = customerManager.searchByName(Integer.parseInt(idToSearch.getText()));
             customer = customerManager.getCustomer(customerId);
-            if(customer != null){
+            if (customer != null) {
                 setCustomerInfo(customer);
                 //updateButton.setVisible(true);
                 System.out.println("set customer info update has ran");
             }
-
+        }
     }
 
 }
