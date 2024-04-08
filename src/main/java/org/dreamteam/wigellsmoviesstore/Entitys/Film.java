@@ -116,7 +116,7 @@ public class Film {
         this.description = description;
     }
 
-    public int getReleaseYear() {
+    public short getReleaseYear() {
         return releaseYear;
     }
 

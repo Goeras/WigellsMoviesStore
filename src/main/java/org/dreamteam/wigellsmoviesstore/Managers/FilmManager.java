@@ -1,20 +1,20 @@
 package org.dreamteam.wigellsmoviesstore.Managers;
 
+import org.dreamteam.wigellsmoviesstore.CurrentFilm;
+import org.dreamteam.wigellsmoviesstore.CurrentStore;
 import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
-import org.dreamteam.wigellsmoviesstore.Entitys.Actor;
-import org.dreamteam.wigellsmoviesstore.Entitys.Category;
-import org.dreamteam.wigellsmoviesstore.Entitys.Film;
-import org.dreamteam.wigellsmoviesstore.Entitys.Language;
+import org.dreamteam.wigellsmoviesstore.Entitys.*;
 import org.dreamteam.wigellsmoviesstore.IoConverter;
 import org.dreamteam.wigellsmoviesstore.IoValidator;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FilmManager {
-  DAOmanager daoManager = new DAOmanager();
+  private DAOmanager daoManager = new DAOmanager();
 
   public void addFilm(String title, String description, String releaseYear, String rentalDuration, String length, String replacementCost, String rentalRate, String rating, String specialFeaturesString, Language language, Language originalLanguage, List<Category> categoryList)  {
   Film film = new Film();
@@ -80,4 +80,65 @@ public class FilmManager {
     IoValidator.displayConfirmation("Film Skapad", film.getTitle() + ": Tillagd i databasen");
     }
   }
+
+  public void updateFilm(String title, String description, short releaseYear, Language language, Language originalLanguage, byte rentalDuration, double rentalRate, short length, double replacementCost, String rating, String specialFeatures, List<Category> categoryList){
+    Film updateFilm = CurrentFilm.getInstance().getCurrentFilm();
+    Language updateLanguage = updateFilm.getLanguage();
+    Language updateOriginalLanguage =  updateFilm.getOriginalLanguage();
+
+    if(!updateLanguage.getName().equals(language.getName())){
+      Language newLanguage = new Language();
+      newLanguage.setName(language.getName());
+      newLanguage.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
+
+      daoManager.getLanguageDAO().createLanguage(newLanguage);
+    }
+
+    if(!updateOriginalLanguage.getName().equals(originalLanguage.getName())){
+      Language newOriginalLanguage = new Language();
+      newOriginalLanguage.setName(language.getName());
+      newOriginalLanguage.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
+
+      daoManager.getLanguageDAO().createLanguage(newOriginalLanguage);
+    }
+
+    updateFilm.setTitle(title);
+    updateFilm.setDescription(description);
+    updateFilm.setReleaseYear(releaseYear);
+    updateFilm.setLanguage(language);
+    updateFilm.setOriginalLanguage(originalLanguage);
+    updateFilm.setRentalDuration(rentalDuration);
+    updateFilm.setRentalRate(rentalRate);
+    updateFilm.setLength(length);
+    updateFilm.setReplacementCost(replacementCost);
+    updateFilm.setRating(rating);
+    updateFilm.setSpecialFeatures(specialFeatures);
+    updateFilm.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
+    updateFilm.setCategoryList(categoryList);
+
+    daoManager.getFilmDAO().updateFilm(updateFilm);
+
+
+  }
+  /*
+  public String[] getFilmInfo(String filmId){
+    int filmIdNbr = IoConverter.stringToInteger(filmId);
+    String[] info = new String[12];
+    Film film = daoManager.getFilmDAO().getFilmById(filmIdNbr);
+
+    info[0] = film.getTitle();
+    info[1] = film.getDescription();
+    info[2] = Short.toString(film.getReleaseYear());
+    info[3] = film.getLanguage().getName();
+    info[4] = film.getOriginalLanguage().getName();
+    info[5] = Byte.toString(film.getRentalDuration());
+    info[6] = Double.toString(film.getRentalRate());
+    info[7] = Short.toString(film.getLength());
+    info[8] = Double.toString(film.getReplacementCost());
+    info[9] = film.getRating();
+    info[10] = film.getSpecialFeatures();
+    info[11] = film.getLastUpdate().toString();
+    info[12] = film.getCategoryList().toString();
+    return info;
+  } */
 }

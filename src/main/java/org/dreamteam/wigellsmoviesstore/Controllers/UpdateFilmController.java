@@ -9,14 +9,15 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
+import org.dreamteam.wigellsmoviesstore.CurrentFilm;
+import org.dreamteam.wigellsmoviesstore.CurrentStore;
 import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
 import org.dreamteam.wigellsmoviesstore.Entitys.Category;
 import org.dreamteam.wigellsmoviesstore.Entitys.Film;
 import org.dreamteam.wigellsmoviesstore.Entitys.Language;
+import org.dreamteam.wigellsmoviesstore.Entitys.Store;
+import org.dreamteam.wigellsmoviesstore.Managers.FilmManager;
 import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
-import org.hibernate.annotations.View;
-import javafx.scene.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -55,25 +56,27 @@ public class UpdateFilmController {
     @FXML
     private ChoiceBox<Category> categoryBox;
     @FXML
-    private ChoiceBox<Film> ratingBox;
+    private ChoiceBox<String> ratingBox;
     @FXML
     private TextField userNotice;
 
     private List<String> selectedSpecialFeatures = new ArrayList<>();
     DAOmanager daoManager = new DAOmanager();
+    Store store = CurrentStore.getInstance().getCurrentStore();
+    Film film = CurrentFilm.getInstance().getCurrentFilm();
+    FilmManager filmManager = new FilmManager();
 
     public void initialize() {
+        CurrentStore.getInstance().updateCurrentStore();
         viewManager = new ViewManager();
 
-        Film currentFilm = new Film();
-
-        title.setText(currentFilm.getTitle());
-        description.setText(currentFilm.getDescription());
-        releaseYear.setText(String.valueOf(currentFilm.getReleaseYear()));
-        rentalDuration.setText(String.valueOf(currentFilm.getRentalDuration()));
-        length.setText(String.valueOf(currentFilm.getLength()));
-        replacementCost.setText(String.valueOf(currentFilm.getReplacementCost()));
-        rentalRate.setText(String.valueOf(currentFilm.getRentalRate()));
+        title.setText(film.getTitle());
+        description.setText(film.getDescription());
+        releaseYear.setText(String.valueOf(film.getReleaseYear()));
+        rentalDuration.setText(String.valueOf(film.getRentalDuration()));
+        length.setText(String.valueOf(film.getLength()));
+        replacementCost.setText(String.valueOf(film.getReplacementCost()));
+        rentalRate.setText(String.valueOf(film.getRentalRate()));
 
         List<Language> languageList = daoManager.getLanguageDAO().readAllLanguages();
         ObservableList languageNames = FXCollections.observableArrayList();
@@ -105,45 +108,49 @@ public class UpdateFilmController {
         viewManager.showMovieView((Stage) topLabel.getScene().getWindow());
     }
 
+   /*
     @FXML
-   private void onSaveButtonClick(){
-    ViewManager viewmanager = new ViewManager();
-    String titleText = title.getText();
-    boolean updateSuccessful = false;
+   private void onSaveButtonClick() {
+        ViewManager viewmanager = new ViewManager();
+        String titleText = title.getText();
+        boolean updateSuccessful = false;
 
-    Film updatedFilm = new Film();
+        Film updatedFilm = new Film();
 
-    if(titleText == null || titleText.isEmpty()){
-        userNotice.setVisible(true);
-        userNotice.setText("Du måste ange titeln för filmen.");
-        return;
-    }
+        if (titleText == null || titleText.isEmpty()) {
+            userNotice.setVisible(true);
+            userNotice.setText("Du måste ange titeln för filmen.");
+            return;
+        }
 
-       try {
-           updatedFilm.setTitle(title.getText());
-           updatedFilm.setDescription(description.getText());
-           updatedFilm.setReleaseYear(Short.parseShort((releaseYear.getText())));
-           updatedFilm.setRentalDuration(Byte.parseByte((releaseYear.getText())));
-           updatedFilm.setLength(Short.parseShort((length.getText())));
-           updatedFilm.setReplacementCost(Short.parseShort((releaseYear.getText())));
-           updatedFilm.setRentalRate(Short.parseShort((releaseYear.getText())));
+        try {
+            updatedFilm.setTitle(title.getText());
+            updatedFilm.setDescription(description.getText());
+            updatedFilm.setReleaseYear(Short.parseShort((releaseYear.getText())));
+            updatedFilm.setRentalDuration(Byte.parseByte((releaseYear.getText())));
+            updatedFilm.setLength(Short.parseShort((length.getText())));
+            updatedFilm.setReplacementCost(Short.parseShort((releaseYear.getText())));
+            updatedFilm.setRentalRate(Short.parseShort((releaseYear.getText())));
 
-           String specialFeaturesString = String.join(",", selectedSpecialFeatures);
-           updatedFilm.setSpecialFeatures(specialFeaturesString);
+            String specialFeaturesString = String.join(",", selectedSpecialFeatures);
+            updatedFilm.setSpecialFeatures(specialFeaturesString);
 
-           updateSuccessful = true;
-       }
-       catch (NumberFormatException e){
+            updateSuccessful = true;
+        } catch (NumberFormatException e) {
             e.printStackTrace();
-           userNotice.setVisible(true);
-           userNotice.setText("Kontrollera inmatningarna");
-       }
-       if(updateSuccessful){
-           userNotice.setVisible(true);
-           userNotice.setText("Uppdateringen sparad");
-       }
+            userNotice.setVisible(true);
+            userNotice.setText("Kontrollera inmatningarna");
+        }
+        if (updateSuccessful) {
+            userNotice.setVisible(true);
+            userNotice.setText("Uppdateringen sparad");
+        }
+    } */
 
-       }
+    @FXML
+    private void onSaveButtonClick(){
+        filmManager.updateFilm(title.getText(), description.getText(), Short.parseShort(releaseYear.getText()), languageBox.getValue(), originalLanguageBox.getValue(), Byte.parseByte(rentalDuration.getText()), Short.parseShort(rentalRate.getText()), Short.parseShort(length.getText()), Double.parseDouble(replacementCost.getText()), ratingBox.getValue(), selectedSpecialFeatures.toString(), categoryBox.getItems());
+    }
     @FXML
     private void onCheckBoxClicked(){
         selectedSpecialFeatures.clear();

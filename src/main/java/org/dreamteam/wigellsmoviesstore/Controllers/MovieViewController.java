@@ -10,10 +10,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.dreamteam.wigellsmoviesstore.CurrentFilm;
+import org.dreamteam.wigellsmoviesstore.CurrentStaff;
+import org.dreamteam.wigellsmoviesstore.CurrentStore;
 import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
 import org.dreamteam.wigellsmoviesstore.Entitys.Category;
 import org.dreamteam.wigellsmoviesstore.Entitys.Film;
 
+import org.dreamteam.wigellsmoviesstore.Entitys.Store;
 import org.dreamteam.wigellsmoviesstore.IoValidator;
 
 import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
@@ -60,23 +64,30 @@ public class MovieViewController {
     private TableColumn<Film, String> languageColumn;
     private ViewManager viewManager;
     private ObservableList<Film> filmList;
+    Film film;
+    Store store;
 
     public void initialize(){
-
+        CurrentStore.getInstance().updateCurrentStore();
+        viewManager = new ViewManager();
+        store = CurrentStore.getInstance().getCurrentStore();
         List<Film> list = new ArrayList<>();
         filmList = FXCollections.observableList(list);
         setTable(filmList);
-        viewManager = new ViewManager();
+
 
     }
     @FXML
     private void onBackButtonClick() throws IOException {
         viewManager.showMenuView((Stage) topLabel.getScene().getWindow());
     }
+    @FXML
     public void onNewFilmButton() throws IOException{
         viewManager.showNewFilmView((Stage) topLabel.getScene().getWindow());
     }
+    @FXML
     public void onUpdateFilmButton() throws IOException {
+        CurrentFilm.getInstance().setCurrentFilm(film);
         viewManager.showUpdateFilmView((Stage) topLabel.getScene().getWindow());
     }
     public void setTable(ObservableList<Film> observableList) {
@@ -87,6 +98,7 @@ public class MovieViewController {
         languageColumn.setCellValueFactory(cellData -> stringToSimpleStringProperty(cellData.getValue().getLanguage().getName()));
         movieTable.setItems(observableList);
     }
+    @FXML
     public void onSearchAllButton(){
         filmList.clear();
 
@@ -97,14 +109,17 @@ public class MovieViewController {
         movieTable.setItems(filmList);
     }
 
+    @FXML
     public void onFilterByNameButton(){
-    String filterText = filterField.getText().trim().toLowerCase();
-    ObservableList<Film> filteredList = FXCollections.observableArrayList(filmList);
-    filteredList.setAll(filmList.filtered(film -> film.getTitle().toLowerCase().contains(filterText)));
 
-    movieTable.setItems(filteredList);
+        String filterText = filterField.getText().trim().toLowerCase();
+        ObservableList<Film> filteredList = FXCollections.observableArrayList(filmList);
+        filteredList.setAll(filmList.filtered(film -> film.getTitle().toLowerCase().contains(filterText)));
+
+        movieTable.setItems(filteredList);
     }
-    public void onSearchByIdButton(){
+    @FXML
+    public void onSearchByIdButton() throws IOException{
         String inputText = searchField.getText();
         if(IoValidator.validateInteger(inputText)){
             int filmId = Integer.parseInt(inputText);
