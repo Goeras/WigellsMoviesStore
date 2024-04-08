@@ -17,11 +17,11 @@
             <Label fx:id="menuLabel" text="Meny"/>
         </HBox>
         <VBox styleClass="boxes" minHeight="270">
-            <Button text="Sök kunder" onAction="#onCustomerButtonClick"/>
-            <Button text="Sök filmer" onAction="#onMovieButtonClick"/>
-            <Button text="Hyr ut film" onAction="#onPosButtonClick"/>
-            <Button text="Personal" onAction="#onStaffButtonClick"/>
-            <Button text="Logga ut" onAction="#onBackButton"/>
+            <Button text="Hyr ut film" onAction="#onPosButtonClick" prefWidth="130"/>
+            <Button text="Sök kunder" onAction="#onCustomerButtonClick" prefWidth="130"/>
+            <Button text="Sök filmer" onAction="#onMovieButtonClick" prefWidth="130"/>
+            <Button text="Personal" onAction="#onStaffButtonClick" prefWidth="130"/>
+            <Button text="Logga ut" onAction="#onBackButton" prefWidth="130"/>
         </VBox>
     </VBox>
 </VBox>
