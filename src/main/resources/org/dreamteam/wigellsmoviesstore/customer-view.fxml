@@ -82,18 +82,18 @@
             <Label text="Hyrhistorik"/>
             <TableView fx:id="rentalHistoryTable" maxHeight="200">
                 <columns>
-                    <TableColumn fx:id="rentalId" text="Id"/>
-                    <TableColumn fx:id="rentalDate" text="Datum"/>
-                    <TableColumn fx:id="returnDate" text="Returdatum"/>
-                    <TableColumn fx:id="filmId" text="FilmId"/>
-                    <TableColumn fx:id="filmTitle" text="Titel"/>
+                    <TableColumn fx:id="rentalId" text="Id" maxWidth="50"/>
+                    <TableColumn fx:id="rentalDate" text="Datum" minWidth="130"/>
+                    <TableColumn fx:id="returnDate" text="Returdatum" minWidth="130"/>
+                    <TableColumn fx:id="filmId" text="FilmId" maxWidth="50"/>
+                    <TableColumn fx:id="filmTitle" text="Titel" minWidth="150"/>
                 </columns>
             </TableView>
         </VBox>
         <VBox styleClass="boxes">
             <Button text="Sök alla kunder" onAction="#onSeeAllCustomers"/>
             <HBox alignment="CENTER" spacing="10">
-                <TextField fx:id="searchByName" promptText="Sök id"/>
+                <TextField fx:id="searchByName" promptText="Sök namn"/>
                 <Button text="Filtrera på namn" onAction="#filterOnName"/>
             </HBox>
             <TableView fx:id="customerTable" minHeight="200">
