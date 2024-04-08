@@ -83,7 +83,7 @@ public class FilmManager {
     }
   }
 
-  public void updateFilm(String title, String description, short releaseYear, Language language, Language originalLanguage, byte rentalDuration, double rentalRate, short length, double replacementCost, String rating, String specialFeatures, List<Category> categoryList, List<Actor> actorList){
+  public void updateFilm(String title, String description, short releaseYear, Language language, Language originalLanguage, byte rentalDuration, double rentalRate, short length, double replacementCost, String rating, String specialFeatures, List<Category> categoryList, List<Actor> actorList, List<Inventory> inventoryList, int inventorySize){
     Film updateFilm = CurrentFilm.getInstance().getCurrentFilm();
 
     updateFilm.setTitle(title);
@@ -101,6 +101,18 @@ public class FilmManager {
     updateFilm.setCategoryList(categoryList);
     updateFilm.setActors(actorList);
 
+    List<Inventory> newInventoryList = new ArrayList<>();
+    newInventoryList.addAll(inventoryList);
+
+    for(int i = 0; i < (inventorySize - inventoryList.size()); i++) {
+      Inventory inventory = new Inventory();
+      inventory.setFilm(updateFilm);
+      inventory.setStore(CurrentStore.getInstance().getCurrentStore());
+      inventory.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
+      daoManager.getInventoryDAO().updateInventory(inventory);
+      newInventoryList.add(inventory);
+    }
+    updateFilm.setInventories(newInventoryList);
     daoManager.getFilmDAO().updateFilm(updateFilm);
   }
 

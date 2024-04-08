@@ -57,6 +57,7 @@
                   <CheckBox fx:id="deletedScenes" text="Deleted Scenes"/>
                   <CheckBox fx:id="trailers" text="Trailers"/>
                   <CheckBox fx:id="commentaries" text="Kommentarer"/>
+
               </VBox>
           </HBox>
           <Button text="Spara uppdatering" onAction="#onSaveButtonClick"/>
