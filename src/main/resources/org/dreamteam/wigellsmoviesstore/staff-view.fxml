@@ -24,7 +24,7 @@
             </HBox>
             <VBox styleClass="boxes">
                 <HBox styleClass="hboxes">
-                    <TextField fx:id="idToSearch" text="Ange ett Id"/>
+                    <TextField fx:id="idToSearch" promptText="Ange ett Id"/>
                     <Button text="Sök medarbetare" onAction="#onSearchStaffButtonClick"/>
                     <Button text="Ny medarbetare" onAction="#onNewStaffButtonClick"/>
                 </HBox>
