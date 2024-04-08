@@ -14,12 +14,11 @@ import org.dreamteam.wigellsmoviesstore.CurrentFilm;
 import org.dreamteam.wigellsmoviesstore.CurrentStaff;
 import org.dreamteam.wigellsmoviesstore.CurrentStore;
 import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
-import org.dreamteam.wigellsmoviesstore.Entitys.Category;
-import org.dreamteam.wigellsmoviesstore.Entitys.Film;
+import org.dreamteam.wigellsmoviesstore.Entitys.*;
 
-import org.dreamteam.wigellsmoviesstore.Entitys.Store;
 import org.dreamteam.wigellsmoviesstore.IoValidator;
 
+import org.dreamteam.wigellsmoviesstore.Managers.FilmManager;
 import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
 
 
@@ -62,6 +61,7 @@ public class MovieViewController {
     private TableColumn<Film, String> categoryColumn;
     @FXML
     private TableColumn<Film, String> languageColumn;
+    FilmManager filmManager;
     private ViewManager viewManager;
     private ObservableList<Film> filmList;
     Film film;
@@ -70,6 +70,7 @@ public class MovieViewController {
     public void initialize(){
         CurrentStore.getInstance().updateCurrentStore();
         viewManager = new ViewManager();
+        filmManager = new FilmManager();
         store = CurrentStore.getInstance().getCurrentStore();
         List<Film> list = new ArrayList<>();
         filmList = FXCollections.observableList(list);
@@ -119,25 +120,60 @@ public class MovieViewController {
         movieTable.setItems(filteredList);
     }
     @FXML
-    public void onSearchByIdButton() throws IOException{
+    public void onSearchByIdButton() throws IOException {
         String inputText = searchField.getText();
-        if(IoValidator.validateInteger(inputText)){
-            int filmId = Integer.parseInt(inputText);
+        String[] info = filmManager.getFilmInfo(inputText);
 
-            DAOmanager daoManager = new DAOmanager();
-            Film searchedFilm =daoManager.getFilmDAO().getFilmById(filmId);
+        titleLabel.setText(info[0]);
+        rentalCostLabel.setText(info[1]);
+        replacementFeeLabel.setText(info[2]);
+        categoryLabel.setText(info[3]);
+        actorLabel.setText(info[4]);
+        releaseLabel.setText(info[5]);
+        languageLabel.setText(info[6]);
+        lengthLabel.setText(info[7]);
 
-            if(searchedFilm != null){
-                titleLabel.setText(searchedFilm.getTitle());
-                rentalCostLabel.setText(String.valueOf(searchedFilm.getRentalRate()));
-                replacementFeeLabel.setText(String.valueOf(searchedFilm.getReplacementCost()));
-                categoryLabel.setText(searchedFilm.getCategoryList().toString());
-                actorLabel.setText(searchedFilm.getActors().toString());
-                releaseLabel.setText(String.valueOf(searchedFilm.getReleaseYear()));
-                languageLabel.setText(searchedFilm.getLanguage().getName());
-                lengthLabel.setText(String.valueOf(searchedFilm.getLength()));
+        boolean isInteger = IoValidator.validateInteger(searchField.getText());
+        if (isInteger) {
+
+            film = filmManager.getFilm(inputText);
+            if (film != null) {
+                setFilmInfo(film);
+
+
             }
-        }
 
+            if (IoValidator.validateInteger(inputText)) {
+                int filmId = Integer.parseInt(inputText);
+
+                DAOmanager daoManager = new DAOmanager();
+                Film searchedFilm = daoManager.getFilmDAO().getFilmById(filmId);
+
+                if (searchedFilm != null) {
+                    setFilmInfo(searchedFilm);
+                    titleLabel.setText(searchedFilm.getTitle());
+                    rentalCostLabel.setText(String.valueOf(searchedFilm.getRentalRate()));
+                    replacementFeeLabel.setText(String.valueOf(searchedFilm.getReplacementCost()));
+                    categoryLabel.setText(searchedFilm.getCategoryList().toString());
+                    actorLabel.setText(searchedFilm.getActors().toString());
+                    releaseLabel.setText(String.valueOf(searchedFilm.getReleaseYear()));
+                    languageLabel.setText(searchedFilm.getLanguage().getName());
+                    lengthLabel.setText(String.valueOf(searchedFilm.getLength()));
+                }
+
+            }
+
+        }
+    }
+    private void setFilmInfo(Film film) {
+
+        titleLabel.setText(film.getTitle());
+        rentalCostLabel.setText(String.valueOf(film.getRentalRate()));
+        replacementFeeLabel.setText(String.valueOf(film.getReplacementCost()));
+        categoryLabel.setText(film.getCategoryList().toString());
+        actorLabel.setText(film.getActors().toString());
+        releaseLabel.setText(String.valueOf(film.getReleaseYear()));
+        languageLabel.setText(film.getLanguage().getName());
+        lengthLabel.setText(String.valueOf(film.getLength()));
     }
 }

@@ -117,28 +117,27 @@ public class FilmManager {
     updateFilm.setCategoryList(categoryList);
 
     daoManager.getFilmDAO().updateFilm(updateFilm);
-
-
   }
-  /*
+
   public String[] getFilmInfo(String filmId){
     int filmIdNbr = IoConverter.stringToInteger(filmId);
-    String[] info = new String[12];
+    String[] info = new String[13];
     Film film = daoManager.getFilmDAO().getFilmById(filmIdNbr);
 
     info[0] = film.getTitle();
-    info[1] = film.getDescription();
-    info[2] = Short.toString(film.getReleaseYear());
-    info[3] = film.getLanguage().getName();
-    info[4] = film.getOriginalLanguage().getName();
-    info[5] = Byte.toString(film.getRentalDuration());
-    info[6] = Double.toString(film.getRentalRate());
+    info[1] = Double.toString(film.getRentalRate());
+    info[2] = Double.toString(film.getReplacementCost());
+    info[3] = film.getCategoryList().toString();
+    info[4] = film.getActors().toString();
+    info[5] = Short.toString(film.getReleaseYear());
+    info[6] = film.getLanguage().getName();
     info[7] = Short.toString(film.getLength());
-    info[8] = Double.toString(film.getReplacementCost());
-    info[9] = film.getRating();
-    info[10] = film.getSpecialFeatures();
-    info[11] = film.getLastUpdate().toString();
-    info[12] = film.getCategoryList().toString();
+
     return info;
-  } */
+  }
+  public Film getFilm(String filmId){
+    int filmID = IoConverter.stringToInteger(filmId);
+    Film film = daoManager.getFilmDAO().getFilmById(filmID);
+    return film;
+  }
 }

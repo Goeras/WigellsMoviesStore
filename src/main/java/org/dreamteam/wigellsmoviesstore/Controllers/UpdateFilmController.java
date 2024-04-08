@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.dreamteam.wigellsmoviesstore.CurrentFilm;
 import org.dreamteam.wigellsmoviesstore.CurrentStore;
@@ -16,6 +13,8 @@ import org.dreamteam.wigellsmoviesstore.Entitys.Category;
 import org.dreamteam.wigellsmoviesstore.Entitys.Film;
 import org.dreamteam.wigellsmoviesstore.Entitys.Language;
 import org.dreamteam.wigellsmoviesstore.Entitys.Store;
+import org.dreamteam.wigellsmoviesstore.IoConverter;
+import org.dreamteam.wigellsmoviesstore.IoValidator;
 import org.dreamteam.wigellsmoviesstore.Managers.FilmManager;
 import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
 
@@ -59,6 +58,7 @@ public class UpdateFilmController {
     private ChoiceBox<String> ratingBox;
     @FXML
     private TextField userNotice;
+    private IoValidator ioValidator;
 
     private List<String> selectedSpecialFeatures = new ArrayList<>();
     DAOmanager daoManager = new DAOmanager();
@@ -107,8 +107,7 @@ public class UpdateFilmController {
     private void onBackButtonClick() throws IOException {
         viewManager.showMovieView((Stage) topLabel.getScene().getWindow());
     }
-
-   /*
+    /*
     @FXML
    private void onSaveButtonClick() {
         ViewManager viewmanager = new ViewManager();
@@ -145,12 +144,34 @@ public class UpdateFilmController {
             userNotice.setVisible(true);
             userNotice.setText("Uppdateringen sparad");
         }
-    } */
+    }
 
     @FXML
     private void onSaveButtonClick(){
         filmManager.updateFilm(title.getText(), description.getText(), Short.parseShort(releaseYear.getText()), languageBox.getValue(), originalLanguageBox.getValue(), Byte.parseByte(rentalDuration.getText()), Short.parseShort(rentalRate.getText()), Short.parseShort(length.getText()), Double.parseDouble(replacementCost.getText()), ratingBox.getValue(), selectedSpecialFeatures.toString(), categoryBox.getItems());
     }
+    */
+    @FXML
+    private void onSaveButtonClick(){
+        boolean validTitle = ioValidator.validateStringNotEmpty(title.getText());
+        boolean validLanguage = languageBox != null;
+
+        if(!validTitle){
+            ioValidator.displayAlert("Error","Du måste fylla i titel");
+        }
+        if(!validLanguage){
+            ioValidator.displayAlert("Error","Du måste fylla i titel");
+        }
+        if(validTitle && validLanguage){
+            filmManager.updateFilm(title.getText(), description.getText(), Short.parseShort(releaseYear.getText()), languageBox.getValue(), originalLanguageBox.getValue(), Byte.parseByte(rentalDuration.getText()), Short.parseShort(rentalRate.getText()), Short.parseShort(length.getText()), Double.parseDouble(replacementCost.getText()), ratingBox.getValue(), selectedSpecialFeatures.toString(), categoryBox.getItems());
+
+            IoValidator.displayConfirmation("Sparat","Information uppdaterad");
+        } else {
+            System.out.println("fel");
+        }
+
+    }
+
     @FXML
     private void onCheckBoxClicked(){
         selectedSpecialFeatures.clear();

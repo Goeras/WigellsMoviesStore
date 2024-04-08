@@ -85,6 +85,6 @@ public class Actor {
 
     @Override
     public String toString() {
-        return firstName.toLowerCase() + " " + lastName.toLowerCase();
+        return firstName + " " + lastName;
     }
 }
