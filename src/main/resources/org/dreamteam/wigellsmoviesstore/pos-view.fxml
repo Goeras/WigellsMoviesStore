@@ -52,6 +52,7 @@
                     <TableColumn fx:id="price" text="Pris" minWidth="150"/>
                 </columns>
             </TableView>
+            <Button text="Ångra film" onAction="#onRegretFilmButtonClick"/>
             <HBox styleClass="hboxes">
                 <Button text="Swish" styleClass="swishButton" onAction="#onConfirmRentalButtons"/>
                 <Button text="Kort" styleClass="cardButton" onAction="#onConfirmRentalButtons"/>

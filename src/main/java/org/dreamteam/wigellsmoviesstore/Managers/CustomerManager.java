@@ -27,19 +27,19 @@ public class CustomerManager {
         country.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
         daoManager.getCountryDAO().updateCountry(country);
 
-        City newCity = daoManager.getCityDAO().getCityByName(city);
+        City newCity = daoManager.getCityDAO().getCityByName(city);  // hämtar stad baserat på namn
 
-        if(newCity == null){
+        if(newCity == null){  //om inte staden finns så görs en ny stad.
             newCity = new City();
             newCity.setName(city);
             newCity.setCountry(country);
             newCity.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
             daoManager.getCityDAO().updateCity(newCity);
         }
-        City dataBaseCity = daoManager.getCityDAO().getCityByName(city);   // vet ej om detta hjälper än men hämtar från dbs
+        City dataBaseCity = daoManager.getCityDAO().getCityByName(city);   // Hämtar staden från databasen och lägger in den i landet.
         country.addCity(dataBaseCity);
 
-        Address newAddress = new Address();
+        Address newAddress = new Address();  //skapar en ny adress med timestamp och dummy-geolocation
         newAddress.setCity(dataBaseCity);
         newAddress.setAddress(address1);
         newAddress.setAddress2(address2);
@@ -49,7 +49,7 @@ public class CustomerManager {
         newAddress.setLocation(getDefaultGeometry());
         newAddress.setPhone(phoneNumber);
 
-        daoManager.getAddressDAO().createAddress(newAddress);
+        daoManager.getAddressDAO().createAddress(newAddress);   // skapar adressen och hämtar den igen för att få med id.
         Address dataBaseAddress = daoManager.getAddressDAO().getAddressByName(address1);
 
         Store store = currentStore.getInstance().getCurrentStore();
@@ -64,14 +64,12 @@ public class CustomerManager {
         newCustomer.setLast_update(Timestamp.valueOf(LocalDateTime.now()));
         newCustomer.setStore(store);
         daoManager.getCustomerDAO().updateCustomer(newCustomer);
-
     }
     public void updateCustomer(String firstName, String lastName, String email, String phoneNumber, String address1, String address2, String district, String postalCode, String city, Country country, boolean active) {
 
         Customer updateCustomer = CurrentCustomer.getInstance().getCurrentCustomer();
 
         Address updateAddress = updateCustomer.getAdress();
-
 
         City newCity = daoManager.getCityDAO().getCityByName(city);
 
@@ -111,13 +109,7 @@ public class CustomerManager {
 
         daoManager.getCustomerDAO().updateCustomer(updateCustomer);
     }
-    public void updateCustomerValues(String firstName,String lastName,String email,Address dataBaseAddress, boolean active, Customer updateCustomer){
-
-
-
-    }
-
-    public List<Country> getCountryList(){
+    public List<Country> getCountryList(){  // hämtar en lista med country objekt
 
     List<Country> countryList = daoManager.getCountryDAO().getAllCountries();
 
@@ -175,7 +167,7 @@ public class CustomerManager {
     public ObservableList<Customer> getAllCustomer(){
         return FXCollections.observableList(daoManager.getCustomerDAO().readAllCustomers());
     }
-    public Geometry getDefaultGeometry() { // Skapar och returnerar default geometry punkt.
+    public Geometry getDefaultGeometry() { // Skapar och returnerar dummy geometri punkt.
 
         org.locationtech.jts.geom.Coordinate coordinate = new org.locationtech.jts.geom.Coordinate(1.0, 2.0);
 

@@ -73,6 +73,8 @@ public class CustomerViewController {
     @FXML
     private TextField searchByName;
     Customer customer;
+    @FXML
+    private Button updateButton;
 
 
     public void initialize(){
@@ -96,7 +98,7 @@ private void onBackButtonClick() throws IOException {
     viewManager.showNewCustomerView((Stage) topLabel.getScene().getWindow());
 }
 @FXML
-    private void onUpdateCustomerClick() throws IOException {  //grejat är med current customer
+    private void onUpdateCustomerClick() throws IOException {  // Sätter current customer till objektet man sökt på.
     CurrentCustomer.getInstance().setCurrentCustomer(customer);
     viewManager.showUpdateCustomerView((Stage) topLabel.getScene().getWindow());
 
@@ -120,20 +122,20 @@ private void onBackButtonClick() throws IOException {
         country.setText(info[10]);
         rentalHistory = customerManager.getCustomerRentals(customerId);
         rentalHistoryTable.setItems(rentalHistory);
+        updateButton.setVisible(true);
+        updateButton.setManaged(true);
         boolean isInteger = IoValidator.validateInteger(searchCustomer.getText());
         if (isInteger) {
-            //customer = customerManager.searchByName(Integer.parseInt(idToSearch.getText()));
-            customer = customerManager.getCustomer(customerId);
+            customer = customerManager.getCustomer(customerId);   // hämtar customerobject per id
             if (customer != null) {
                 setCustomerInfo(customer);
-                //updateButton.setVisible(true);
                 System.out.println("set customer info update has ran");
             }
         }
     }
 
 }
-    private void setCustomerInfo(Customer customer) {
+    private void setCustomerInfo(Customer customer) {  // sätter customerinfo
         Address address = customer.getAdress();
 
         firstName.setText(customer.getFirstName());

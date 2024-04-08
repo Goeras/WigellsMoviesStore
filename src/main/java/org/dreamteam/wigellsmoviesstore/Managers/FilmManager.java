@@ -16,7 +16,7 @@ import java.util.List;
 public class FilmManager {
   private DAOmanager daoManager = new DAOmanager();
 
-  public void addFilm(String title, String description, String releaseYear, String rentalDuration, String length, String replacementCost, String rentalRate, String rating, String specialFeaturesString, Language language, Language originalLanguage, List<Category> categoryList)  {
+  public void addFilm(String title, String description, String releaseYear, String rentalDuration, String length, String replacementCost, String rentalRate, String rating, String specialFeaturesString, Language language, Language originalLanguage, List<Category> categoryList, List<Actor> actorList)  {
   Film film = new Film();
 
 
@@ -73,6 +73,8 @@ public class FilmManager {
   if(IoValidator.validateStringNotEmpty(specialFeaturesString)) {
     film.setSpecialFeatures(specialFeaturesString);
   }
+  film.setActors(actorList);
+  film.setCategoryList(categoryList);
 
 
   if(validTitle && validLanguage && validRentalDuration && validRentalRate && validReplacementCost){
@@ -81,7 +83,7 @@ public class FilmManager {
     }
   }
 
-  public void updateFilm(String title, String description, short releaseYear, Language language, Language originalLanguage, byte rentalDuration, double rentalRate, short length, double replacementCost, String rating, String specialFeatures, List<Category> categoryList){
+  public void updateFilm(String title, String description, short releaseYear, Language language, Language originalLanguage, byte rentalDuration, double rentalRate, short length, double replacementCost, String rating, String specialFeatures, List<Category> categoryList, List<Actor> actorList){
     Film updateFilm = CurrentFilm.getInstance().getCurrentFilm();
 
     updateFilm.setTitle(title);
@@ -97,6 +99,7 @@ public class FilmManager {
     updateFilm.setSpecialFeatures(specialFeatures);
     updateFilm.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
     updateFilm.setCategoryList(categoryList);
+    updateFilm.setActors(actorList);
 
     daoManager.getFilmDAO().updateFilm(updateFilm);
   }

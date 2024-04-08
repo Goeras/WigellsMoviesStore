@@ -22,7 +22,7 @@
                 <columns>
                     <TableColumn fx:id="rentalId" text="Uthyrningsnummer" minWidth="140"/>
                     <TableColumn fx:id="inventoryId" text="Inventarienummer" minWidth="120"/>
-                    <TableColumn fx:id="filmTitle" text="Titel"/>
+                    <TableColumn fx:id="filmTitle" text="Titel" minWidth="130"/>
                     <TableColumn fx:id="customer" text="Kundnamn"/>
                 </columns>
             </TableView>

@@ -4,17 +4,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import org.dreamteam.wigellsmoviesstore.CurrentFilm;
-import org.dreamteam.wigellsmoviesstore.CurrentStore;
+import org.dreamteam.wigellsmoviesstore.*;
 import org.dreamteam.wigellsmoviesstore.DAO.DAOmanager;
-import org.dreamteam.wigellsmoviesstore.Entitys.Category;
-import org.dreamteam.wigellsmoviesstore.Entitys.Film;
-import org.dreamteam.wigellsmoviesstore.Entitys.Language;
-import org.dreamteam.wigellsmoviesstore.Entitys.Store;
-import org.dreamteam.wigellsmoviesstore.IoConverter;
-import org.dreamteam.wigellsmoviesstore.IoValidator;
+import org.dreamteam.wigellsmoviesstore.Entitys.*;
 import org.dreamteam.wigellsmoviesstore.Managers.FilmManager;
 import org.dreamteam.wigellsmoviesstore.Managers.ViewManager;
 
@@ -65,6 +61,9 @@ public class UpdateFilmController {
     Store store = CurrentStore.getInstance().getCurrentStore();
     Film film = CurrentFilm.getInstance().getCurrentFilm();
     FilmManager filmManager = new FilmManager();
+    private ObservableList<Actor> selectedActors;
+    @FXML
+    private ListView<Actor> actorList;
 
     public void initialize() {
         CurrentStore.getInstance().updateCurrentStore();
@@ -104,6 +103,51 @@ public class UpdateFilmController {
         }
         ratingBox.setItems(ratingNames);
         ratingBox.getSelectionModel().select(film.getRating());
+    }
+
+    public void initialize(List<Actor> actors) {
+        selectedActors = FXCollections.observableList(actors);
+        CurrentStore.getInstance().updateCurrentStore();
+        viewManager = new ViewManager();
+
+        title.setText(film.getTitle());
+        description.setText(film.getDescription());
+        releaseYear.setText(String.valueOf(film.getReleaseYear()));
+        rentalDuration.setText(String.valueOf(film.getRentalDuration()));
+        length.setText(String.valueOf(film.getLength()));
+        replacementCost.setText(String.valueOf(film.getReplacementCost()));
+        rentalRate.setText(String.valueOf(film.getRentalRate()));
+
+        List<Language> languageList = daoManager.getLanguageDAO().readAllLanguages();
+        ObservableList<Language> languageNames = FXCollections.observableArrayList();
+        languageNames.addAll(languageList);
+        languageBox.setItems(languageNames);
+        languageBox.getSelectionModel().select(film.getLanguage());
+
+        List<Language> originalLanguageList = daoManager.getLanguageDAO().readAllLanguages();
+        ObservableList originalLanguageNames = FXCollections.observableArrayList();
+        originalLanguageNames.addAll(originalLanguageList);
+        originalLanguageBox.setItems(originalLanguageNames);
+        originalLanguageBox.getSelectionModel().select(film.getOriginalLanguage());
+
+        List<Category> categoryList = daoManager.getCategoryDAO().readAllCategories();
+        ObservableList categoryNames = FXCollections.observableArrayList();
+        categoryNames.addAll(categoryList);
+        categoryBox.setItems(categoryNames);
+        categoryBox.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+
+
+        List<Film> filmList = daoManager.getFilmDAO().getAllFilms();
+        ObservableList ratingNames = FXCollections.observableArrayList();
+        for(Film film:filmList){
+            String rating = film.getRating();
+            ratingNames.add(rating);
+        }
+        ratingBox.setItems(ratingNames);
+        ratingBox.getSelectionModel().select(film.getRating());
+
+        actorList.setItems(selectedActors);
     }
     @FXML
     private void onBackButtonClick() throws IOException {
@@ -165,7 +209,7 @@ public class UpdateFilmController {
             ioValidator.displayAlert("Error","Du måste fylla i titel");
         }
         if(validTitle && validLanguage){
-            filmManager.updateFilm(title.getText(), description.getText(), Short.parseShort(releaseYear.getText()), languageBox.getValue(), originalLanguageBox.getValue(), Byte.parseByte(rentalDuration.getText()), Double.parseDouble(rentalRate.getText()), Short.parseShort(length.getText()), Double.parseDouble(replacementCost.getText()), ratingBox.getValue(), IoConverter.specialFeaturesToString(selectedSpecialFeatures), categoryBox.getSelectionModel().getSelectedItems());
+            filmManager.updateFilm(title.getText(), description.getText(), Short.parseShort(releaseYear.getText()), languageBox.getValue(), originalLanguageBox.getValue(), Byte.parseByte(rentalDuration.getText()), Double.parseDouble(rentalRate.getText()), Short.parseShort(length.getText()), Double.parseDouble(replacementCost.getText()), ratingBox.getValue(), IoConverter.specialFeaturesToString(selectedSpecialFeatures), categoryBox.getSelectionModel().getSelectedItems(), selectedActors);
 
             IoValidator.displayConfirmation("Sparat","Information uppdaterad");
         } else {
@@ -191,5 +235,17 @@ public class UpdateFilmController {
             selectedSpecialFeatures.add("Commentaries");
         }
 
+    }
+
+    @FXML
+    private void onOpenActorView() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("updateActor-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 500, 600);
+        stage.setTitle("Lägg till skådespelare!");
+        ActorController controller = (ActorController) fxmlLoader.getController();
+        controller.initialize(stage, this);
+        stage.setScene(scene);
+        stage.show();
     }
 }

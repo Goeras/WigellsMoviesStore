@@ -71,7 +71,6 @@
     -fx-alignment: CENTER;
 }
 .hboxes .label {
-    -fx-min-width: 150;
 }
 .swishButton{
     -fx-background-color: white;
@@ -142,4 +141,30 @@
 .check-box > .box{
     -fx-border-color:  #aec6a9;
     -fx-border-width: 2px;
+}
+.date-picker {
+    -fx-background-color: #aec6a9;
+}
+.date-picker .date-cell {
+    -fx-border-width: 1px;
+    -fx-border-color: #d6e2cf;
+}
+ .date-picker .date-cell:hover {
+    -fx-background-color: #92b58a;
+    }
+.date-picker .arrow-button {
+    -fx-background-color: #aec6a9;
+    -fx-border-width: 1px;
+    -fx-border-color: #92b58a;
+}
+.date-picker-popup .month-year-pane{
+    -fx-background-color: #aec6a9;
+    -fx-border-width: 1px;
+    -fx-border-color: #aec6a9;
+}
+.date-picker-popup .calendar-grid{
+    -fx-background-color: #d6e2cf;
+}
+.choiceboxLabel {
+    -fx-padding: 0px, 10px, 0px, 10px;
 }

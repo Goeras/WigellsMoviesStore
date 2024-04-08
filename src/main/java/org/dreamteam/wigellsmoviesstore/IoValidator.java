@@ -21,6 +21,20 @@ public class IoValidator {
 
         return isValidInt;
     }
+    public static boolean validateLong(String input){
+        boolean isValidLong = false;
+
+        try {
+            Long tempLong = Long.parseLong(input);
+            isValidLong = true;
+            return isValidLong;
+
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        return isValidLong;
+    }
     public static boolean validateMovieYear(String input){
         final int FIRST_MOVIE_EVER_YEAR = 1901;
         final int CURRENT_YEAR = LocalDate.now().getYear();

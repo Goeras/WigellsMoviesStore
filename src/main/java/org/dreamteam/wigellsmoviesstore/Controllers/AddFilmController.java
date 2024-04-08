@@ -134,7 +134,7 @@ public class AddFilmController {
 
         List<Category> categoryList = categoryBox.getSelectionModel().getSelectedItems();
 
-        filmManager.addFilm(title.getText(), description.getText(), releaseYear.getText(), rentalDuration.getText(), length.getText(), replacementCost.getText(), rentalRate.getText(), ratingBox.getValue(), specialFeaturesString, languageBox.getValue(), originalLanguage.getValue(), categoryList);
+        filmManager.addFilm(title.getText(), description.getText(), releaseYear.getText(), rentalDuration.getText(), length.getText(), replacementCost.getText(), rentalRate.getText(), ratingBox.getValue(), specialFeaturesString, languageBox.getValue(), originalLanguage.getValue(), categoryList, selectedActors);
     }
 
     @FXML

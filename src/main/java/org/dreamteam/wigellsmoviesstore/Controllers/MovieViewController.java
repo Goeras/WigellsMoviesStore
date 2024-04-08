@@ -4,10 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.dreamteam.wigellsmoviesstore.CurrentFilm;
@@ -40,6 +37,8 @@ public class MovieViewController {
     @FXML
     private Label actorLabel;
     @FXML
+    private ChoiceBox<Actor> actorBox;
+    @FXML
     private Label releaseLabel;
     @FXML
     private Label languageLabel;
@@ -64,6 +63,9 @@ public class MovieViewController {
     FilmManager filmManager;
     private ViewManager viewManager;
     private ObservableList<Film> filmList;
+    @FXML
+    private Button updateButton;
+
     Film film;
     Store store;
 
@@ -122,58 +124,31 @@ public class MovieViewController {
     @FXML
     public void onSearchByIdButton() throws IOException {
         String inputText = searchField.getText();
-        String[] info = filmManager.getFilmInfo(inputText);
-
-        titleLabel.setText(info[0]);
-        rentalCostLabel.setText(info[1]);
-        replacementFeeLabel.setText(info[2]);
-        categoryLabel.setText(info[3]);
-        actorLabel.setText(info[4]);
-        releaseLabel.setText(info[5]);
-        languageLabel.setText(info[6]);
-        lengthLabel.setText(info[7]);
-
-        boolean isInteger = IoValidator.validateInteger(searchField.getText());
-        if (isInteger) {
-
-            film = filmManager.getFilm(inputText);
-            if (film != null) {
-                setFilmInfo(film);
-
-
-            }
 
             if (IoValidator.validateInteger(inputText)) {
                 int filmId = Integer.parseInt(inputText);
-
                 DAOmanager daoManager = new DAOmanager();
                 Film searchedFilm = daoManager.getFilmDAO().getFilmById(filmId);
 
                 if (searchedFilm != null) {
                     setFilmInfo(searchedFilm);
-                    titleLabel.setText(searchedFilm.getTitle());
-                    rentalCostLabel.setText(String.valueOf(searchedFilm.getRentalRate()));
-                    replacementFeeLabel.setText(String.valueOf(searchedFilm.getReplacementCost()));
-                    categoryLabel.setText(searchedFilm.getCategoryList().toString());
-                    actorLabel.setText(searchedFilm.getActors().toString());
-                    releaseLabel.setText(String.valueOf(searchedFilm.getReleaseYear()));
-                    languageLabel.setText(searchedFilm.getLanguage().getName());
-                    lengthLabel.setText(String.valueOf(searchedFilm.getLength()));
+                    film = searchedFilm;
+                    CurrentFilm.getInstance().setCurrentFilm(searchedFilm);
                 }
-
             }
-
         }
-    }
     private void setFilmInfo(Film film) {
 
         titleLabel.setText(film.getTitle());
         rentalCostLabel.setText(String.valueOf(film.getRentalRate()));
         replacementFeeLabel.setText(String.valueOf(film.getReplacementCost()));
         categoryLabel.setText(film.getCategoryList().toString());
-        actorLabel.setText(film.getActors().toString());
+        actorBox.setItems(FXCollections.observableList(film.getActors()));
         releaseLabel.setText(String.valueOf(film.getReleaseYear()));
         languageLabel.setText(film.getLanguage().getName());
         lengthLabel.setText(String.valueOf(film.getLength()));
+        updateButton.setVisible(true);
+        updateButton.setManaged(true);
+
     }
 }

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
-<StackPane xmlns="http://javafx.com/javafx"
+<ScrollPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.dreamteam.wigellsmoviesstore.Controllers.UpdateFilmController"
             prefHeight="400.0" prefWidth="600.0"
@@ -18,21 +18,41 @@
           <Label fx:id="topLabel" text="Uppdatera film" style="-fx-font-size: 20px"/>
       </HBox>
       <VBox styleClass="boxes">
-          <HBox>
+          <HBox styleClass="hboxes">
               <VBox spacing="2">
+                  <Label text="Titel"/>
                   <TextField fx:id="title" promptText="Titel"/>
-                  <TextField fx:id="description" promptText="Beskrivning"/>
+                  <Label text="Beskrivning"/>
+                  <TextField fx:id="description" promptText="Beskrivning" />
+                  <Label text="Utgivningsår"/>
                   <TextField fx:id="releaseYear" promptText="Utgivningsår"/>
-                  <ChoiceBox fx:id="languageBox" value="Språk" minWidth="120"/>
-                  <ChoiceBox fx:id="originalLanguageBox" value="OriginalSpråk" minWidth="120"/>
-                  <ChoiceBox fx:id="ratingBox" value="Rating" minWidth="120"/>
-                  <ListView fx:id="categoryBox" minWidth="120"/>
+                  <HBox styleClass="hboxes">
+                      <Label text="Skådespelare" maxWidth="60"/>
+                      <Button text="Lägg till skådespelare" onAction="#onOpenActorView"/>
+                  </HBox>
+                  <ListView fx:id="actorList" minHeight="150" maxHeight="180"/>
+                  <Label text="Kategorier"/>
+                  <ListView fx:id="categoryBox" minHeight="150" maxHeight="180"/>
+
               </VBox>
               <VBox spacing="2">
+                  <Label text="Hyrperiod(dagar)"/>
                   <TextField fx:id="rentalDuration" promptText="Hyrperiod dagar"/>
+                  <Label text="Längd(minuter)"/>
                   <TextField fx:id="length" promptText="Längd (minuter)"/>
+                  <Label text="Lagersaldo"/>
+                  <TextField fx:id="inventories"/>
+                  <Label text="Ersättningskostnad"/>
                   <TextField fx:id="replacementCost" promptText="Ersättningskostnad"/>
+                  <Label text="Hyrkostnad"/>
                   <TextField fx:id="rentalRate" promptText="Hyrkostnad"/>
+                  <Label text="Språk"/>
+                  <ChoiceBox fx:id="languageBox" value="Språk"/>
+                  <Label text="Originalspråk"/>
+                  <ChoiceBox fx:id="originalLanguageBox" value="Originalspråk"/>
+                  <Label text="Ratings"/>
+                  <ChoiceBox fx:id="ratingBox" value="Rating" minWidth="120"/>
+                  <Label text="Egenskaper"/>
                   <CheckBox fx:id="behindTheScenes" text="Behind The Scenes"/>
                   <CheckBox fx:id="deletedScenes" text="Deleted Scenes"/>
                   <CheckBox fx:id="trailers" text="Trailers"/>
@@ -45,4 +65,4 @@
       <Button text="Tillbaka" onAction="#onBackButtonClick"/>
   </VBox>
 </VBox>
-</StackPane>
+</ScrollPane>

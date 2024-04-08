@@ -26,19 +26,22 @@
                     <TextField fx:id="title" promptText="Titel"/>
                     <TextField fx:id="description" promptText="Beskrivning"/>
                     <TextField fx:id="releaseYear" promptText="Utgivningsår"/>
-                    <ListView fx:id="categoryBox" minWidth="120" maxHeight="80"/>
+                    <Label text="Skådespelare"/>
                     <ListView fx:id="actorList" minWidth="120" maxHeight="80"/>
                     <Button text="Lägg till skådespelare" onAction="#onOpenActorView"/>
+                    <Label text="Kategorier"/>
+                    <ListView fx:id="categoryBox" minWidth="120" maxHeight="80"/>
 
                 </VBox>
                 <VBox spacing="2">
+
                     <TextField fx:id="rentalDuration" promptText="Hyrperiod dagar"/>
                     <TextField fx:id="length" promptText="Längd (minuter)"/>
                     <TextField fx:id="replacementCost" promptText="Ersättningskostnad"/>
                     <TextField fx:id="rentalRate" promptText="Hyrkostnad"/>
                     <Label text = "Språk"/>
-                    <ChoiceBox fx:id="languageBox" minWidth="120"/>
-                    <Label text = "Ursprungs Språk"/>
+                    <ChoiceBox  fx:id="languageBox" minWidth="120"/>
+                    <Label text = "Ursprungsspråk"/>
                     <ChoiceBox fx:id="originalLanguage" minWidth="120"/>
                     <Label text = "Rating"/>
                     <ChoiceBox fx:id="ratingBox" minWidth="120"/>
